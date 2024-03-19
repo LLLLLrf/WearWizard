@@ -1,11 +1,14 @@
 // ignore_for_file: unused_import
 
+import 'dart:math';
+
 import 'package:wearwizard/wear_wizard/models/tabIcon_data.dart';
 import 'package:wearwizard/wear_wizard/training/training_screen.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'wearwizard_theme.dart';
 import 'my_clothes/my_clothes_screen.dart';
+import 'components/camera_page.dart';
 
 class WearWizardHomeScreen extends StatefulWidget {
   const WearWizardHomeScreen({super.key});
@@ -81,7 +84,9 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
         ),
         BottomBarView(
           tabIconsList: tabIconsList,
-          addClick: () {},
+          addClick: () {
+            navigateToNewPage();
+          },
           changeIndex: (int index) {
             if (index == 0 || index == 2) {
               animationController?.reverse().then<dynamic>((data) {
@@ -107,6 +112,14 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
           },
         ),
       ],
+    );
+  }
+
+  // 导航方法，处理点击加号按钮后的导航操作
+  void navigateToNewPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CameraApp()),
     );
   }
 }
