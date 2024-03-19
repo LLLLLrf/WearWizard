@@ -1,0 +1,3 @@
+[submodule "plugins/ncnn_yolov8seg"]
+	path = plugins/ncnn_yolov8seg
+	url = https://github.com/FaterYU/flutter_ncnn_yolov8_seg.git
