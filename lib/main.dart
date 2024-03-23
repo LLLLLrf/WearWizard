@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: WearWizardHomeScreen(),
+      home: const WearWizardHomeScreen(),
     );
   }
 }

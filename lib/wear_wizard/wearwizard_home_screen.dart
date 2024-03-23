@@ -1,14 +1,17 @@
 // ignore_for_file: unused_import
 
 import 'dart:math';
-
 import 'package:wearwizard/wear_wizard/models/tabIcon_data.dart';
 import 'package:wearwizard/wear_wizard/training/training_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:wearwizard/wear_wizard/user/user_page.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
+import 'recommendation/recommendation.dart';
 import 'wearwizard_theme.dart';
 import 'my_clothes/my_clothes_screen.dart';
 import 'components/camera_page.dart';
+
+// import 'components/full_camera.dart';
 
 class WearWizardHomeScreen extends StatefulWidget {
   const WearWizardHomeScreen({super.key});
@@ -24,7 +27,7 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
-    color: FitnessAppTheme.background,
+    color: WearWizardTheme.background,
   );
 
   @override
@@ -36,7 +39,7 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = MyClothes(animationController: animationController);
+    tabBody = RecommendScreen(animationController: animationController);
     super.initState();
   }
 
@@ -49,7 +52,7 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: FitnessAppTheme.background,
+      color: WearWizardTheme.background,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder<bool>(
@@ -88,17 +91,16 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
             navigateToNewPage();
           },
           changeIndex: (int index) {
-            if (index == 0 || index == 2) {
+            if (index == 0) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      MyClothes(animationController: animationController);
+                  tabBody = RecommendScreen(animationController: animationController);
                 });
               });
-            } else if (index == 1 || index == 3) {
+            } else if (index == 1) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
@@ -106,6 +108,26 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
                 setState(() {
                   tabBody =
                       TrainingScreen(animationController: animationController);
+                });
+              });
+            }else if (index == 2){
+              animationController?.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody =
+                      MyCloset(animationController: animationController);
+                });
+              });
+            }else if (index == 3) {
+              animationController?.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody =
+                      UserScreen(animationController: animationController);
                 });
               });
             }
@@ -119,7 +141,9 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
   void navigateToNewPage() {
     Navigator.push(
       context,
+      // MaterialPageRoute(builder: (context) => const CameraExampleHome()),
       MaterialPageRoute(builder: (context) => const CameraApp()),
     );
+    
   }
 }
