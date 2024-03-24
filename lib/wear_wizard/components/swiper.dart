@@ -15,8 +15,8 @@ class MyCarousel extends StatelessWidget {
     ClipRRect(
       borderRadius: borderRadius,
       child: SizedBox(
-        height: screenHeight*0.54, // 设置轮播图高度
-        width: screenWidth*0.9, // 设置轮播图宽度
+        height: screenWidth*1.25-50, // 设置轮播图高度
+        width: screenWidth-40, // 设置轮播图宽度
         child: Stack(
           children: [
             Swiper(
