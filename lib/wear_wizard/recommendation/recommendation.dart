@@ -16,11 +16,12 @@ class RecommendScreen extends StatelessWidget {
     return 
     SafeArea(
       child: Scaffold(
+      backgroundColor: WearWizardTheme.background,
       body: ContainedTabBarView(
       
         tabs: const [
           Text(
-            '今日推荐',
+            '今日搭配',
           ),
           Text(
             '我的搭配',
@@ -31,13 +32,13 @@ class RecommendScreen extends StatelessWidget {
             decoration: const BoxDecoration(
             ),
           ),
-          height: 60.0,
+          height: 50.0,
           indicatorColor: Colors.blue[400],
 
           // indicatorWeight: 6.0,
           labelColor: Colors.black,
           labelStyle: const TextStyle(
-            fontSize: 22.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
           unselectedLabelColor: Colors.grey[400],
