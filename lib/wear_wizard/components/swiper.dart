@@ -22,9 +22,28 @@ class MyCarousel extends StatelessWidget {
             Swiper(
               itemCount: imageUrls.length,
               itemBuilder: (BuildContext context, int index) {
-                return Image.network(
-                  imageUrls[index],
-                  fit: BoxFit.cover,
+                return 
+                Stack(
+                  children: [
+                    Image.network(
+                      imageUrls[index],
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned.fill(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.black.withOpacity(0.4), // 渐变起始色
+                              Colors.transparent, // 渐变结束色
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]
                 );
               },
               // 添加其他参数，比如自动播放、循环、等等
@@ -42,20 +61,7 @@ class MyCarousel extends StatelessWidget {
                   padding: EdgeInsets.all(12.0),
               ),
             ),
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      Colors.black.withOpacity(0.4), // 渐变起始色
-                      Colors.transparent, // 渐变结束色
-                    ],
-                  ),
-                ),
-              ),
-            ),
+
             Positioned(
               left: 18,
               bottom: 20,
@@ -72,7 +78,7 @@ class MyCarousel extends StatelessWidget {
                         color: Colors.white,
                       ),
                       // child: Image.asset('assets/button_image.png', width: 24, height: 24),
-                      child: Image.network('https://via.placeholder.com/42x42/0000FF/FFFFFF'),
+                      child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -87,7 +93,7 @@ class MyCarousel extends StatelessWidget {
                         color: Colors.white,
                       ),
                       // child: Image.asset('assets/button_image.png', width: 24, height: 24),
-                      child: Image.network('https://via.placeholder.com/42x42/0000FF/FFFFFF'),
+                      child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
                     ),
                   ),
                 ],
