@@ -14,16 +14,17 @@ class MyPostItem extends StatelessWidget {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
+
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
+          childAspectRatio: 2.2/3,
         ),
         itemCount: imageUrlList.length,
         itemBuilder: (BuildContext context, int index) {
           return SizedBox(
-            height: 150,
-            width: 100,
+            height: 130,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.network(
@@ -37,14 +38,30 @@ class MyPostItem extends StatelessWidget {
     );
   }
 }
-
-class UserScreen extends StatelessWidget {
+class UserScreen extends StatefulWidget {
   final AnimationController? animationController;
-
   const UserScreen({Key? key, this.animationController}) : super(key: key);
+
+  @override
+  _UserScreenState createState() => _UserScreenState();
+}
+
+class _UserScreenState extends State<UserScreen> {
+    
+  setting() {
+    print("setting");
+  }
 
   Future<bool> getData() {
     return Future.value(true);
+  }
+
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    scrollController.addListener(() {});
+    super.initState();
   }
 
   @override
@@ -60,12 +77,12 @@ class UserScreen extends StatelessWidget {
               return const SizedBox();
             } else {
               return ListView(
+                controller: scrollController,
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   // 背景图片
                   Stack(
                     children: [
-
                       Positioned.fill(
                         child: Image.network(
                           "https://via.placeholder.com/300x300/FF0000/FFFFFF",
@@ -171,50 +188,20 @@ class UserScreen extends StatelessWidget {
                               children: [
                                 Column(
                                   children: [
-                                    Text(
-                                      "发布",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      "0",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                    Text("发布",style: TextStyle(fontSize: 16,),),
+                                    Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Text(
-                                      "关注",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      "0",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                    Text("关注",style: TextStyle(fontSize: 16,),),
+                                    Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Text(
-                                      "粉丝",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Text(
-                                      "0",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                    Text("粉丝",style: TextStyle(fontSize: 16,),),
+                                    Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                               ],
@@ -254,6 +241,18 @@ class UserScreen extends StatelessWidget {
                             "https://via.placeholder.com/150/FFFF00/000000",
                             "https://via.placeholder.com/150/00FFFF/000000",
                             "https://via.placeholder.com/150/FF00FF/000000",
+                            "https://via.placeholder.com/150x100/FF0000/000000",
+                            "https://via.placeholder.com/150x200/00FF00/000000",
+                            "https://via.placeholder.com/200x150/0000FF/000000",
+                            "https://via.placeholder.com/300x150/FFFF00/000000",
+                            "https://via.placeholder.com/100/00FFFF/000000",
+                            "https://via.placeholder.com/200x100/FF00FF/000000",
+                            "https://via.placeholder.com/150/FF0000/000000",
+                            "https://via.placeholder.com/150/00FF00/000000",
+                            "https://via.placeholder.com/150/0000FF/000000",
+                            "https://via.placeholder.com/150/FFFF00/000000",
+                            "https://via.placeholder.com/150/00FFFF/000000",
+                            "https://via.placeholder.com/150/FF00FF/000000",
                           ],
                         ),
                       ],
@@ -267,8 +266,6 @@ class UserScreen extends StatelessWidget {
       ),
     );
   }
-  
-  setting() {
-    print("setting");
-  }
+
 }
+
