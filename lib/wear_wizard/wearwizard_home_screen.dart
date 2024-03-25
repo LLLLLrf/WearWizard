@@ -10,6 +10,7 @@ import 'recommendation/recommendation.dart';
 import 'wearwizard_theme.dart';
 import 'my_clothes/my_clothes_screen.dart';
 import 'components/camera_page.dart';
+import 'ideas/ideas_home.dart';
 
 // import 'components/full_camera.dart';
 
@@ -107,7 +108,7 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
                 }
                 setState(() {
                   tabBody =
-                      TrainingScreen(animationController: animationController);
+                      MyCloset(animationController: animationController);
                 });
               });
             }else if (index == 2){
@@ -117,7 +118,7 @@ class _WearWizardHomeScreenState extends State<WearWizardHomeScreen>
                 }
                 setState(() {
                   tabBody =
-                      MyCloset(animationController: animationController);
+                      IdeasHome(animationController: animationController);
                 });
               });
             }else if (index == 3) {

@@ -161,6 +161,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.9"
+  extended_list:
+    dependency: transitive
+    description:
+      name: extended_list
+      sha256: b27a2f0f55dadbf5b273bdaaf9307a7e0098a9fc0c4b8eb60ae98c319af596bc
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
+  extended_list_library:
+    dependency: transitive
+    description:
+      name: extended_list_library
+      sha256: cb424a04464e89bd6737f9ae025029bd8e913c7bf37101ad10c2defe0238d842
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -169,6 +185,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.1"
+  ff_annotation_route_core:
+    dependency: transitive
+    description:
+      name: ff_annotation_route_core
+      sha256: c34f49f91982e7e92aa327b76a8db4c0bfae6242ff6029adfc8dea456c3dd504
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.7"
+  ff_annotation_route_library:
+    dependency: "direct main"
+    description:
+      name: ff_annotation_route_library
+      sha256: "79e9f2b9986071893e8c3557391e1605a51fda9f9970bb183b5bfd0de83e18c8"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   ffi:
     dependency: "direct main"
     description:
@@ -304,6 +336,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  loading_more_list:
+    dependency: "direct main"
+    description:
+      name: loading_more_list
+      sha256: "6b49eb935345d6cf291e0367d3c238ef0a525a08b671ee41e09ee67d41888a7a"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.0"
+  loading_more_list_library:
+    dependency: transitive
+    description:
+      name: loading_more_list_library
+      sha256: de6b57edbab83022180f053ec3f598dd5e1192cfd6a285882b8155e3cb5dc581
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   matcher:
     dependency: transitive
     description:
@@ -360,6 +408,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.7.4"
+  pull_to_refresh_notification:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh_notification
+      sha256: "5a06c242a6c3264bac3a7facbe2c6d317a5f54fc10c20b556dbd34ceee32c9aa"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
+  searchbar_animation:
+    dependency: "direct main"
+    description:
+      name: searchbar_animation
+      sha256: "8c9b82e666dae343f8ec34137da18f0de3f019da42691ec8b2c492ee434cc0ba"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
   simple_html_css:
     dependency: "direct main"
     description:
@@ -493,6 +557,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "13.0.0"
+  waterfall_flow:
+    dependency: "direct main"
+    description:
+      name: waterfall_flow
+      sha256: "11538b0d890458e55e6248b177732495d20893cfc7e85d7e8dbf4fdce61c9f10"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.3"
   web:
     dependency: transitive
     description:

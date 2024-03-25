@@ -42,6 +42,11 @@ dependencies:
   flutter_swiper_plus: ^2.0.4
   contained_tab_bar_view: ^0.8.0
   ffi: ^2.0.2
+  waterfall_flow: ^3.0.3
+  ff_annotation_route_library: ^3.0.0
+  loading_more_list: ^6.0.0
+  pull_to_refresh_notification: ^3.1.0
+  searchbar_animation: ^0.0.4
   # flutter_ncnn_yolov8_seg:
   #   path: ./plugins/flutter_ncnn_yolov8_seg
 

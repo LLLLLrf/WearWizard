@@ -7,6 +7,8 @@ class WearWizardTheme {
   static const Color background = Color(0xFFF2F3F8);
   static const Color nearlyDarkBlue = Color(0xFF2633C5);
 
+  static const Color blueButton = Color.fromARGB(255, 182, 200, 238);
+  
   static const Color nearlyBlue = Color(0xFF00B6F0);
   static const Color nearlyBlack = Color(0xFF213333);
   static const Color grey = Color(0xFF3A5160);
