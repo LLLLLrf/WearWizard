@@ -1,294 +1,100 @@
-import 'package:wearwizard/wear_wizard/ui_view/body_measurement.dart';
-import 'package:wearwizard/wear_wizard/ui_view/glass_view.dart';
-import 'package:wearwizard/wear_wizard/ui_view/mediterranean_diet_view.dart';
-import 'package:wearwizard/wear_wizard/ui_view/title_view.dart';
-import 'package:wearwizard/wear_wizard/wearwizard_theme.dart';
-import 'package:wearwizard/wear_wizard/my_clothes/meals_list_view.dart';
-import 'package:wearwizard/wear_wizard/my_clothes/water_view.dart';
+import 'clothes_card.dart';
 import 'package:flutter/material.dart';
 
-class MyCloset extends StatefulWidget {
-  const MyCloset({Key? key, this.animationController}) : super(key: key);
-
+class MyCloset extends StatelessWidget {
   final AnimationController? animationController;
-  @override
-  _MyClosetState createState() => _MyClosetState();
-}
+  final double screenWidth =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  final double screenHeight =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
-class _MyClosetState extends State<MyCloset>
-    with TickerProviderStateMixin {
-  Animation<double>? topBarAnimation;
-
-  List<Widget> listViews = <Widget>[];
-  final ScrollController scrollController = ScrollController();
-  double topBarOpacity = 0.0;
-
-  @override
-  void initState() {
-    topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: widget.animationController!,
-            curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
-    addAllListData();
-
-    scrollController.addListener(() {
-      if (scrollController.offset >= 24) {
-        if (topBarOpacity != 1.0) {
-          setState(() {
-            topBarOpacity = 1.0;
-          });
-        }
-      } else if (scrollController.offset <= 24 &&
-          scrollController.offset >= 0) {
-        if (topBarOpacity != scrollController.offset / 24) {
-          setState(() {
-            topBarOpacity = scrollController.offset / 24;
-          });
-        }
-      } else if (scrollController.offset <= 0) {
-        if (topBarOpacity != 0.0) {
-          setState(() {
-            topBarOpacity = 0.0;
-          });
-        }
-      }
-    });
-    super.initState();
-  }
-
-  void addAllListData() {
-    const int count = 9;
-
-    listViews.add(
-      TitleView(
-        titleTxt: 'Mediterranean diet',
-        subTxt: 'Details',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-    listViews.add(
-      MediterranesnDietView(
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-    listViews.add(
-      TitleView(
-        titleTxt: 'My Closets',
-        subTxt: 'More Detail',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-
-    listViews.add(
-      MealsListView(
-        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-                parent: widget.animationController!,
-                curve: const Interval((1 / count) * 3, 1.0,
-                    curve: Curves.fastOutSlowIn))),
-        mainScreenAnimationController: widget.animationController,
-      ),
-    );
-
-    listViews.add(
-      TitleView(
-        titleTxt: 'Body measurement',
-        subTxt: 'Today',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-
-    listViews.add(
-      BodyMeasurementView(
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-    listViews.add(
-      TitleView(
-        titleTxt: 'Water',
-        subTxt: 'Aqua SmartBottle',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController!,
-            curve:
-                const Interval((1 / count) * 6, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController!,
-      ),
-    );
-
-    listViews.add(
-      WaterView(
-        mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(
-                parent: widget.animationController!,
-                curve: const Interval((1 / count) * 7, 1.0,
-                    curve: Curves.fastOutSlowIn))),
-        mainScreenAnimationController: widget.animationController!,
-      ),
-    );
-    listViews.add(
-      GlassView(
-          animation: Tween<double>(begin: 0.0, end: 1.0).animate(
-              CurvedAnimation(
-                  parent: widget.animationController!,
-                  curve: const Interval((1 / count) * 8, 1.0,
-                      curve: Curves.fastOutSlowIn))),
-          animationController: widget.animationController!),
-    );
-  }
-
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
-  }
+  MyCloset({Key? key, this.animationController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: WearWizardTheme.background,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: <Widget>[
-            getMainListViewUI(),
-            getAppBarUI(),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget getMainListViewUI() {
-    return FutureBuilder<bool>(
-      future: getData(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        } else {
-          return ListView.builder(
-            controller: scrollController,
-            padding: EdgeInsets.only(
-              top: AppBar().preferredSize.height +
-                  MediaQuery.of(context).padding.top +
-                  24,
-              bottom: 62 + MediaQuery.of(context).padding.bottom,
-            ),
-            itemCount: listViews.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, int index) {
-              widget.animationController?.forward();
-              return listViews[index];
-            },
-          );
-        }
-      },
-    );
-  }
-
-  Widget getAppBarUI() {
-    return Column(
-      children: <Widget>[
-        AnimatedBuilder(
-          animation: widget.animationController!,
-          builder: (BuildContext context, Widget? child) {
-            return FadeTransition(
-              opacity: topBarAnimation!,
-              child: Transform(
-                transform: Matrix4.translationValues(
-                    0.0, 30 * (1.0 - topBarAnimation!.value), 0.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: WearWizardTheme.white.withOpacity(topBarOpacity),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(32.0),
-                    ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: WearWizardTheme.grey
-                              .withOpacity(0.4 * topBarOpacity),
-                          offset: const Offset(1.1, 1.1),
-                          blurRadius: 10.0),
-                    ],
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: MediaQuery.of(context).padding.top,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 16 - 8.0 * topBarOpacity,
-                            bottom: 12 - 8.0 * topBarOpacity),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'My Closet',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontFamily: WearWizardTheme.fontName,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 22 + 6 - 6 * topBarOpacity,
-                                    letterSpacing: 1.2,
-                                    color: WearWizardTheme.darkerText,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const Padding(
-                              padding: EdgeInsets.only(
-                                left: 8,
-                                right: 8,
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8),
-                                  ),
-
-                                ],
-                              ),
-                            ),
-                            
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+    return SafeArea(
+      child: Column(
+        children: [
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '我的衣橱',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            );
-          },
-        )
-      ],
+            ],
+          ),
+          const SizedBox(height: 10.0),
+          SizedBox(
+            height: screenHeight - 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomWidget(
+                  backgroundImagePath: 'assets/closet/base.webp',
+                  leftImagePath: 'assets/closet/Base.png',
+                  mainTitle: 'Base',
+                  subTitle: '内搭',
+                  clothesNum: 10,
+                  clothesWidth: 118,
+                  clothesHeight: 118,
+                  gradientColor: const [
+                    Color.fromRGBO(91, 214, 97, 0.448),
+                    Color.fromARGB(114, 105, 230, 136),
+                    Color.fromARGB(44, 234, 222, 131)
+                  ],
+                ),
+                CustomWidget(
+                  backgroundImagePath: 'assets/closet/bottom.jpg',
+                  leftImagePath: 'assets/closet/Bottom.png',
+                  mainTitle: 'Bottom',
+                  subTitle: '下装',
+                  clothesNum: 15,
+                  clothesWidth: 94,
+                  clothesHeight: 130,
+                  gradientColor: const [
+                    Color.fromRGBO(82, 109, 156, 0.333),
+                    Color.fromARGB(91, 88, 170, 237),
+                    Color.fromARGB(44, 54, 139, 214)
+                  ],
+                ),
+                CustomWidget(
+                  backgroundImagePath: 'assets/closet/outerwear.jpg',
+                  leftImagePath: 'assets/closet/Outerwear.png',
+                  mainTitle: 'Outerwear',
+                  subTitle: '外套',
+                  clothesNum: 20,
+                  clothesWidth: 114,
+                  clothesHeight: 114,
+                  gradientColor: const [
+                    Color.fromRGBO(27, 137, 95, 0.337),
+                    Color.fromARGB(91, 114, 196, 113),
+                    Color.fromARGB(45, 147, 147, 147)
+                  ],
+                ),
+                CustomWidget(
+                  backgroundImagePath: 'assets/closet/accessories.jpeg',
+                  leftImagePath: 'assets/closet/Accessories.png',
+                  mainTitle: 'Accessories',
+                  subTitle: '饰品',
+                  clothesNum: 25,
+                  clothesWidth: 88,
+                  clothesHeight: 140,
+                  gradientColor: const [
+                    Color.fromRGBO(37, 37, 37, 0.414),
+                    Color.fromARGB(97, 72, 72, 72),
+                    Color.fromARGB(45, 147, 147, 147)
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

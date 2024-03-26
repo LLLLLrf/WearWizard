@@ -47,6 +47,7 @@ dependencies:
   loading_more_list: ^6.0.0
   pull_to_refresh_notification: ^3.1.0
   searchbar_animation: ^0.0.4
+  bordered_text: ^2.0.0
   # flutter_ncnn_yolov8_seg:
   #   path: ./plugins/flutter_ncnn_yolov8_seg
 
