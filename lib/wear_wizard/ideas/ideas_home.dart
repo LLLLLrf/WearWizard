@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
@@ -98,38 +99,64 @@ class IdeasList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WaterfallFlow.builder(
-      gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 5.0,
-        mainAxisSpacing: 5.0,
+    return Container(
+      color: WearWizardTheme.background,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
+      child: WaterfallFlow.builder(
+        gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          // Generate random text for demonstration
+          String text = 'Item $index aascdsa asdfasd asdf';
+          // Replace this with your actual image widget
+          Widget imageWidget = Container(
+            height: 40+70*(index%3),
+            decoration: BoxDecoration(
+              color: Colors.primaries[index % Colors.primaries.length],
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Text('Image $index'),
+          );
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Replace SizedBox with your image widget
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    // image: DecorationImage(
+                    //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  width: double.infinity, // Make image fill the width
+                  child: imageWidget,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4.0),
+                  color: Colors.white,
+                  child: Text(
+                      text
+
+                    ),
+                ),
+              ],
+            ),
+          );
+        },
+        itemCount: 100, // Change this to your actual item count
       ),
-      itemBuilder: (BuildContext context, int index) {
-        // Generate random text for demonstration
-        String text = 'Item $index';
-        // Replace this with your actual image widget
-        Widget imageWidget = Container(
-          color: Colors.primaries[index % Colors.primaries.length],
-          alignment: Alignment.center,
-          child: Text('Image $index'),
-        );
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Replace SizedBox with your image widget
-            SizedBox(
-              width: double.infinity, // Make image fill the width
-              child: imageWidget,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(text),
-            ),
-          ],
-        );
-      },
-      itemCount: 100, // Change this to your actual item count
     );
   }
-
 }
