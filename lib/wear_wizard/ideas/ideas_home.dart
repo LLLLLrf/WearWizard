@@ -45,9 +45,17 @@ class _IdeasHomeState extends State<IdeasHome> {
                   ),
                 ),
                 height: 42.0,
-                indicatorColor: Colors.blue[400],
-                  
-                indicatorWeight: 3.0,
+                indicatorColor: WearWizardTheme.nearlyBlue,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: WearWizardTheme.nearlyBlue,
+                      width: 4.0,
+                    ),
+                  ),
+                ),
                 labelColor: Colors.black,
                 labelStyle: const TextStyle(
                   fontSize: 17.0,
@@ -68,7 +76,7 @@ class _IdeasHomeState extends State<IdeasHome> {
           ),
           Container(
             // color: WearWizardTheme.background,
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(255, 255, 255, 255),
             margin: const EdgeInsets.only(top: 98.0),
             height: 2,
           )

@@ -107,7 +107,7 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
             width: 42,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: WearWizardTheme.blueButton,
+              color: WearWizardTheme.nearlyBlue,
             ),
             margin: EdgeInsets.only(left: screenWidth - 60, top: 12),
             child: IconButton(
