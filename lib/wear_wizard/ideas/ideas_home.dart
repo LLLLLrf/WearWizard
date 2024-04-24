@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:wearwizard/fitness_app/fitness_app_theme.dart';
 
 import 'search_bar.dart';
@@ -25,7 +25,7 @@ class _IdeasHomeState extends State<IdeasHome> {
     return SafeArea(
       child: Stack(
         children: [
-          SearchBarScreen(),
+          const SearchBarScreen(),
           Container(
             margin: const EdgeInsets.only(top: 58.0),
             child: ContainedTabBarView(
@@ -109,12 +109,12 @@ class IdeasList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: WearWizardTheme.background,
-      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: WaterfallFlow.builder(
         gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
+          // mainAxisSpacing: 8.0,
         ),
         itemBuilder: (BuildContext context, int index) {
           // Generate random text for demonstration
@@ -133,6 +133,7 @@ class IdeasList extends StatelessWidget {
             child: Text('Image $index'),
           );
           return Container(
+            margin:const EdgeInsets.only(top: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -153,10 +154,15 @@ class IdeasList extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4.0),
-                  color: Colors.white,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                  ),
                   child: Text(
                       text
-
                     ),
                 ),
               ],

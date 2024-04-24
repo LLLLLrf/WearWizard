@@ -28,11 +28,10 @@ class MyCloset extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10.0),
           SizedBox(
-            height: screenHeight - 200,
+            height: screenHeight - 168,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomWidget(
                   backgroundImagePath: 'assets/closet/base.webp',
@@ -40,8 +39,8 @@ class MyCloset extends StatelessWidget {
                   mainTitle: 'Base',
                   subTitle: '内搭',
                   clothesNum: 10,
-                  clothesWidth: 118,
-                  clothesHeight: 118,
+                  clothesWidth: 114,
+                  clothesHeight: 116,
                   gradientColor: const [
                     Color.fromRGBO(91, 214, 97, 0.448),
                     Color.fromARGB(114, 105, 230, 136),
@@ -82,8 +81,8 @@ class MyCloset extends StatelessWidget {
                   mainTitle: 'Accessories',
                   subTitle: '饰品',
                   clothesNum: 25,
-                  clothesWidth: 88,
-                  clothesHeight: 140,
+                  clothesWidth: 80,
+                  clothesHeight: 130,
                   gradientColor: const [
                     Color.fromRGBO(37, 37, 37, 0.414),
                     Color.fromARGB(97, 72, 72, 72),

@@ -34,8 +34,8 @@ class CustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: screenWidth * 0.9,
-      height: screenHeight * 0.18,
+      width: screenWidth-28,
+      height: 160,
       child: Stack(
         children: [
           ShaderMask(
@@ -63,7 +63,7 @@ class CustomWidget extends StatelessWidget {
           ),
           Positioned(
             left: 10.0,
-            top: 4,
+            top: 8,
             child: Container(
               width: clothesWidth.toDouble(),
               height: clothesHeight,
@@ -77,8 +77,8 @@ class CustomWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 60.0,
-            left: 130.0,
+            bottom: 62.0,
+            left: 126.0,
             child: BorderedText(
               strokeColor:Colors.black,
               strokeWidth: 2,
@@ -89,20 +89,14 @@ class CustomWidget extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 42.0,
                   fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 3.0,
-                      color: Colors.black,
-                      offset: Offset(0.2, 0.2),
-                    ),
-                  ],
+                  letterSpacing: BorderSide.strokeAlignInside,
                 ),
               ),
             ),
           ),
           Positioned(
-            bottom: 26.0,
-            left: 130.0,
+            bottom: 24.0,
+            left: 126.0,
             child: BorderedText(
               strokeColor:Colors.black,
               strokeWidth: 2,
@@ -126,7 +120,7 @@ class CustomWidget extends StatelessWidget {
           ),
           Positioned(
             bottom: 26.0,
-            left: 210.0,
+            left: 208.0,
             child: BorderedText(
               strokeColor:Colors.black,
               strokeWidth: 2,
@@ -136,7 +130,7 @@ class CustomWidget extends StatelessWidget {
                   letterSpacing: BorderSide.strokeAlignInside,
                   height: BorderSide.strokeAlignInside,
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.normal,
                 ),
               ),
