@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -216,20 +217,17 @@ class RecommendList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: WearWizardTheme.background,
-      padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: WaterfallFlow.builder(
         gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 14.0,
+          crossAxisSpacing: 0.0,
           // mainAxisSpacing: 8.0,
         ),
 
         itemBuilder: (BuildContext context, int index) {
-          // Generate random text for demonstration
-          String text = 'Item $index aascdsa asdfasd asdf';
           // Replace this with your actual image widget
           Widget imageWidget = Container(
-            height: 240,
+            height: 220,
             decoration: const BoxDecoration(
               // color: Colors.primaries[index % Colors.primaries.length],
               borderRadius: BorderRadius.only(
@@ -240,14 +238,24 @@ class RecommendList extends StatelessWidget {
               ),
             ),
             alignment: Alignment.center,
-            // child: Text('Image $index'),
           );
 
           return Container(
-            margin: const EdgeInsets.only(top: 10.0),
+            margin: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color.fromARGB(132, 190, 196, 196),
+                  offset: Offset(-2.0, 4.0),
+                  blurRadius: 6.0,
+                ),
+              ],
+              // border:Border.all(
+              //   color: Colors.white,
+              //   width: 1,
+              // ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,7 +268,7 @@ class RecommendList extends StatelessWidget {
                     //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
                     //   fit: BoxFit.cover,
                     // ),
-                    image:const DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('./assets/closet/outerwear.jpg'),
                       fit: BoxFit.cover,
                     ),
@@ -300,8 +308,8 @@ class RecommendList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: const Image(
-                                image: AssetImage(
-                                    './assets/closet/outerwear.jpg'),
+                                image:
+                                    AssetImage('./assets/closet/outerwear.jpg'),
                                 width: 46,
                                 height: 46,
                               ),
@@ -326,14 +334,13 @@ class RecommendList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: const Image(
-                                image: AssetImage(
-                                    './assets/closet/outerwear.jpg'),
+                                image:
+                                    AssetImage('./assets/closet/outerwear.jpg'),
                                 width: 46,
                                 height: 46,
                               ),
                             ),
                           ),
-                          
                         ])),
               ],
             ),
