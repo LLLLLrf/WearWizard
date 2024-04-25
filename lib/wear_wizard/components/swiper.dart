@@ -15,7 +15,7 @@ class MyCarousel extends StatelessWidget {
     ClipRRect(
       borderRadius: borderRadius,
       child: SizedBox(
-        height: screenWidth*1.25-50, // 设置轮播图高度
+        height: (screenWidth-40)*5/4, // 设置轮播图高度
         width: screenWidth-40, // 设置轮播图宽度
         child: Stack(
           children: [
@@ -25,9 +25,11 @@ class MyCarousel extends StatelessWidget {
                 return 
                 Stack(
                   children: [
-                    Image.network(
+                    Image.asset(
                       imageUrls[index],
                       fit: BoxFit.cover,
+                      height: (screenWidth-40)*5/4, // 设置轮播图高度
+                      width: screenWidth-40, // 设置轮播图宽度
                     ),
                     Positioned.fill(
                       child: DecoratedBox(

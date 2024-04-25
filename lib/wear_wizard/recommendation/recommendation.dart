@@ -3,11 +3,12 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/widgets.dart';
 import '../wearwizard_theme.dart';
 import 'today_recommend.dart';
+import 'my_recommend.dart';
 
 class RecommendScreen extends StatelessWidget {
   final AnimationController? animationController;
 
-  RecommendScreen({Key? key, this.animationController}) : super(key: key);
+  const RecommendScreen({Key? key, this.animationController}) : super(key: key);
   Future<bool> getData() {
     return Future.value(true);
   }
@@ -55,8 +56,8 @@ class RecommendScreen extends StatelessWidget {
                 ),
               ),
               views: [
-                const TodayRecommend(),
-                Container(color: const Color.fromARGB(255, 255, 255, 255)),
+                TodayRecommend(),
+                const MyRecommend(),
               ],
               onChange: (index) => print(index),
             ),

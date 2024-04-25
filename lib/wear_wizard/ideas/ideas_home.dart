@@ -69,7 +69,7 @@ class _IdeasHomeState extends State<IdeasHome> {
               ),
               views: [
                 const IdeasList(),
-                Container(color: const Color.fromARGB(255, 255, 255, 255)),
+                Container(color: const Color.fromARGB(255, 255, 255, 255),child:const Center(child: Text("这页还没写"))),
               ],
               onChange: (index) => print(index),
             ),

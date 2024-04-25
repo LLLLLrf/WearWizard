@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wearwizard/wear_wizard/components/camera_page.dart';
 import '../wearwizard_theme.dart';
 import '../components/swiper.dart';
 
 class TodayRecommend extends StatefulWidget{
-  const TodayRecommend({Key? key}) : super(key: key);
+  TodayRecommend({Key? key}) : super(key: key);
+  final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
   @override
   _TodayRecommendState createState() => _TodayRecommendState();
@@ -13,20 +16,21 @@ Future<bool> getData() {
   return Future.value(true);
 }
 class _TodayRecommendState extends State<TodayRecommend> {
-  final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-  final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
-
   final imageUrls= [
-    'https://via.placeholder.com/400x500/FF0000/FFFFFF',
-    'https://via.placeholder.com/400x500/00FF00/FFFFFF',
-    'https://via.placeholder.com/400x500/0000FF/FFFFFF',
+    './assets/closet/outerwear.jpg',
+    './assets/closet/base.webp',
+    // 'https://via.placeholder.com/400x500/FF0000/FFFFFF',
+    // 'https://via.placeholder.com/400x500/00FF00/FFFFFF',
+    // 'https://via.placeholder.com/400x500/0000FF/FFFFFF',
   ];
+  final double sizeBox = (screenHeight-((screenWidth-40)*5/4+100+158+90))/3;
 
   @override
   Widget build(BuildContext context) {
     return 
     Stack(
-      children: [Container(
+      children: [
+        Container(
         color: WearWizardTheme.background,
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -38,9 +42,9 @@ class _TodayRecommendState extends State<TodayRecommend> {
               } else {
                 return Column(
                   children: <Widget>[
-                    SizedBox(height: screenHeight*0.012,),
+                    SizedBox(height: sizeBox,),
                     MyCarousel(imageUrls: imageUrls),
-                    SizedBox(height: screenHeight*0.022,),
+                    SizedBox(height: sizeBox,),
                     Container(
                       height: 100,
                       // color: Colors.white,
@@ -145,6 +149,7 @@ class _TodayRecommendState extends State<TodayRecommend> {
       ),
       Positioned(
         bottom: 78,
+        height: 80,
         width: screenWidth,
         child:Container(
           color: WearWizardTheme.background,
