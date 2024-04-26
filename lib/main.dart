@@ -37,6 +37,9 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       home: const WearWizardHomeScreen(),
+      // routes:{
+
+      // },
     );
   }
 }

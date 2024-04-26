@@ -344,6 +344,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  ll_dropdown_menu:
+    dependency: "direct main"
+    description:
+      name: ll_dropdown_menu
+      sha256: e92ba2b4518cb2f85a5ff8b9266856d13787e24eac237c92337ff642ee11f40e
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.0"
   loading_more_list:
     dependency: "direct main"
     description:

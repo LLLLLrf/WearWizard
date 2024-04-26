@@ -27,7 +27,7 @@ class MyPostItem extends StatelessWidget {
             height: 130,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
+              child: Image.asset(
                 imageUrlList[index],
                 fit: BoxFit.cover,
               ),
@@ -84,8 +84,8 @@ class _UserScreenState extends State<UserScreen> {
                   Stack(
                     children: [
                       Positioned.fill(
-                        child: Image.network(
-                          "https://via.placeholder.com/300x300/FF0000/FFFFFF",
+                        child: Image.asset(
+                          "./assets/closet/bottom.jpg",
                           fit: BoxFit.cover,
                           height: 300,
                           width: double.infinity,
@@ -126,8 +126,8 @@ class _UserScreenState extends State<UserScreen> {
                                   children: [
                                     CircleAvatar(
                                       radius: 30,
-                                      backgroundImage: NetworkImage(
-                                        "https://via.placeholder.com/150/FF0000/FFFFFF",
+                                      backgroundImage: AssetImage(
+                                        "./assets/closet/outerwear.jpg",
                                       ),
                                     ),
                                     SizedBox(width: 20),
@@ -229,30 +229,14 @@ class _UserScreenState extends State<UserScreen> {
                         SizedBox(height: 10),
                         MyPostItem(
                           imageUrlList: [
-                            "https://via.placeholder.com/150x100/FF0000/000000",
-                            "https://via.placeholder.com/150x200/00FF00/000000",
-                            "https://via.placeholder.com/200x150/0000FF/000000",
-                            "https://via.placeholder.com/300x150/FFFF00/000000",
-                            "https://via.placeholder.com/100/00FFFF/000000",
-                            "https://via.placeholder.com/200x100/FF00FF/000000",
-                            "https://via.placeholder.com/150/FF0000/000000",
-                            "https://via.placeholder.com/150/00FF00/000000",
-                            "https://via.placeholder.com/150/0000FF/000000",
-                            "https://via.placeholder.com/150/FFFF00/000000",
-                            "https://via.placeholder.com/150/00FFFF/000000",
-                            "https://via.placeholder.com/150/FF00FF/000000",
-                            "https://via.placeholder.com/150x100/FF0000/000000",
-                            "https://via.placeholder.com/150x200/00FF00/000000",
-                            "https://via.placeholder.com/200x150/0000FF/000000",
-                            "https://via.placeholder.com/300x150/FFFF00/000000",
-                            "https://via.placeholder.com/100/00FFFF/000000",
-                            "https://via.placeholder.com/200x100/FF00FF/000000",
-                            "https://via.placeholder.com/150/FF0000/000000",
-                            "https://via.placeholder.com/150/00FF00/000000",
-                            "https://via.placeholder.com/150/0000FF/000000",
-                            "https://via.placeholder.com/150/FFFF00/000000",
-                            "https://via.placeholder.com/150/00FFFF/000000",
-                            "https://via.placeholder.com/150/FF00FF/000000",
+                            "./assets/closet/outerwear.jpg",
+                            "./assets/closet/bottom.jpg",
+                            "./assets/closet/outerwear.jpg",
+                            "./assets/closet/bottom.jpg",
+                            "./assets/closet/bottom.jpg",
+                            "./assets/closet/outerwear.jpg",
+                            "./assets/closet/bottom.jpg",
+                            "./assets/closet/outerwear.jpg",
                           ],
                         ),
                       ],
