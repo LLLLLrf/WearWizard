@@ -49,6 +49,8 @@ dependencies:
   searchbar_animation: ^0.0.4
   bordered_text: ^2.0.0
   ll_dropdown_menu: ^0.5.0
+  marvelous_carousel: ^0.0.16
+  expandable_widgets: ^1.0.3+1
 
   # flutter_ncnn_yolov8_seg:
   #   path: ./plugins/flutter_ncnn_yolov8_seg

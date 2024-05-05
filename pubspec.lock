@@ -169,6 +169,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.9"
+  expandable_widgets:
+    dependency: "direct main"
+    description:
+      name: expandable_widgets
+      sha256: "4c533af4056a529b341977566700a7fab34f76f33510c95e4416ab38451cfa12"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3+1"
   extended_list:
     dependency: transitive
     description:
@@ -368,6 +376,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
+  marvelous_carousel:
+    dependency: "direct main"
+    description:
+      name: marvelous_carousel
+      sha256: edeb604f17a3f332b5bc3c6267933429b35c4a348f5ecd116335e7756f2562b2
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.16"
   matcher:
     dependency: transitive
     description:

@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import '../wearwizard_theme.dart';
-import '../components/swiper.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 class MyRecommend extends StatefulWidget {
@@ -95,7 +94,7 @@ class _MyRecommendState extends State<MyRecommend> {
                 child: Column(
                   children: [
                     Icon(
-                      Icons.emoji_emotions_outlined,
+                      Icons.local_cafe_outlined,
                       color: id == 2 ? Colors.blue : Colors.grey,
                       size: 30,
                     ),
@@ -191,7 +190,7 @@ class _MyRecommendState extends State<MyRecommend> {
               ),
               IconButton(
                 onPressed: () {
-                  // 右上角按钮点击事件
+                  // 右上角筛选按钮
                 },
                 icon: const Icon(
                   Icons.filter_alt_outlined,

@@ -1,10 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ll_dropdown_menu/dropdown/drop_down_typedef.dart';
 import 'package:ll_dropdown_menu/ll_dropdown_menu.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import '../wearwizard_theme.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 class ClothesDetail extends StatefulWidget {
   final int index;
+  
   const ClothesDetail({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -13,15 +20,21 @@ class ClothesDetail extends StatefulWidget {
 
 class _ClothesDetailState extends State<ClothesDetail> {
   final DropDownController dropDownController = DropDownController();
-  final DropDownDisposeController dropDownDisposeController =
-      DropDownDisposeController();
-  List<DropDownItem> items1 = [];
+  final DropDownDisposeController dropDownDisposeController = DropDownDisposeController();
+  List<DropDownItem> items1 = [
+    DropDownItem(text: "内搭", data: 0),
+    DropDownItem(text: "下装", data: 1),
+    DropDownItem(text: "外套", data: 2),
+    DropDownItem(text: "饰品", data: 3)
+  ];
   List<DropDownItem> items2 = [];
   List<DropDownItem> items3 = [];
   List<DropDownItem> items4 = [];
 
   bool _landscape = false;
-  
+
+  final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
+
   @override
   void initState() {
     super.initState();
@@ -32,13 +45,13 @@ class _ClothesDetailState extends State<ClothesDetail> {
   }
 
   void setupData() {
-    items1 = List.generate(
-      6,
-      (index) => DropDownItem(
-        text: "Single Item $index",
-        data: index,
-      ),
-    );
+    // items1 = List.generate(
+    //   6,
+    //   (index) => DropDownItem(
+    //     text: "Single Item $index",
+    //     data: index,
+    //   ),
+    // );
     items2 = List.generate(
       8,
       (index) => DropDownItem(
@@ -64,7 +77,6 @@ class _ClothesDetailState extends State<ClothesDetail> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,12 +89,11 @@ class _ClothesDetailState extends State<ClothesDetail> {
             Container(
               height: 40,
               // color: Colors.amber,
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  '我的衣橱',
-                  style: TextStyle(
+                  '我的${ClothesList[widget.index]}',
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -103,127 +114,204 @@ class _ClothesDetailState extends State<ClothesDetail> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:40.0),
+              padding: const EdgeInsets.only(top: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Material(
-                  //   child: DropdownButtonHideUnderline(
-                  //     child: DropdownButton(
-                  //       value: '外套',
-                  //       items: const [
-                  //         DropdownMenuItem(
-                  //           value: '外套',
-                  //           child: Text('外套'),
-                  //         ),
-                  //         DropdownMenuItem(
-                  //           value: '上衣',
-                  //           child: Text('上衣'),
-                  //         ),
-                  //         DropdownMenuItem(
-                  //           value: '裤子',
-                  //           child: Text('裤子'),
-                  //         ),
-                  //       ],
-                  //       onChanged: (value) {
-                  //         setState(() {
-                  //           // _selectedValue = value;
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  // )
-        DropDownMenu(
-          controller: dropDownController,
-          disposeController: dropDownDisposeController,
-          headerItemStyle: const DropDownItemStyle(
-            activeIconColor: Colors.blue,
-            activeTextStyle: TextStyle(color: Colors.blue),
-          ),
-          headerItems: List.generate(
-            4,
-            (index) => DropDownItem<Tab>(
-              text: "Tab $index",
-              icon: const Icon(Icons.arrow_drop_down),
-              activeIcon: const Icon(Icons.arrow_drop_up),
-            ),
-          ),
-          viewOffsetY: MediaQuery.of(context).padding.top + 56,
-          viewBuilders: [
-            DropDownListView(
-              controller: dropDownController,
-              items: items1,
-              headerIndex: 0,
-              onDropDownHeaderUpdate: (List<DropDownItem> checkedItems) {
-                return DropDownHeaderStatus(
-                  text: checkedItems.map((e) => e.text).toList().join("、"),
-                  highlight: checkedItems.isNotEmpty,
-                );
-              },
-            ),
-            DropDownListView(
-              controller: dropDownController,
-              items: items2,
-              maxMultiChoiceSize: 2,
-              headerIndex: 1,
-              onDropDownHeaderUpdate: (List<DropDownItem> checkedItems) {
-                return DropDownHeaderStatus(
-                  text: checkedItems.map((e) => e.text).toList().join("、"),
-                  highlight: checkedItems.isNotEmpty,
-                );
-              },
-            ),
-            DropDownGridView(
-              controller: dropDownController,
-              crossAxisCount: 3,
-              boxStyle: const DropDownBoxStyle(
-                padding: EdgeInsets.all(16),
-              ),
-              itemStyle: DropDownItemStyle(
-                activeBackgroundColor: const Color(0xFFF5F5F5),
-                activeIconColor: Colors.blue,
-                activeTextStyle: const TextStyle(color: Colors.blue),
-                activeBorderRadius: BorderRadius.circular(6),
-              ),
-              items: items3,
-              headerIndex: 2,
-              onDropDownHeaderUpdate: (List<DropDownItem> checkedItems) {
-                return DropDownHeaderStatus(
-                  text: checkedItems.map((e) => e.text).toList().join("、"),
-                  highlight: checkedItems.isNotEmpty,
-                );
-              },
-            ),
-            DropDownGridView(
-              controller: dropDownController,
-              crossAxisCount: 3,
-              boxStyle: const DropDownBoxStyle(
-                padding: EdgeInsets.all(16),
-              ),
-              itemStyle: DropDownItemStyle(
-                activeBackgroundColor: const Color(0xFFF5F5F5),
-                activeIconColor: Colors.blue,
-                activeTextStyle: const TextStyle(color: Colors.blue),
-                activeBorderRadius: BorderRadius.circular(6),
-              ),
-              items: items4,
-              maxMultiChoiceSize: 2,
-              headerIndex: 3,
-              onDropDownHeaderUpdate: (List<DropDownItem> checkedItems) {
-                return DropDownHeaderStatus(
-                  text: checkedItems.map((e) => e.text).toList().join("、"),
-                  highlight: checkedItems.isNotEmpty,
-                );
-              },
-            ),
-          ],
-        ),
-
+                  DropDownMenu(
+                    controller: dropDownController,
+                    disposeController: dropDownDisposeController,
+                    headerItemStyle: const DropDownItemStyle(
+                      activeIconColor: Colors.blue,
+                      activeTextStyle: TextStyle(color: Colors.blue),
+                    ),
+                    headerItems: [
+                      DropDownItem<Tab>(
+                        text: ClothesList[widget.index],
+                        icon: const Icon(Icons.arrow_drop_down),
+                        activeIcon: const Icon(Icons.arrow_drop_up),
+                      ),
+                      DropDownItem<Tab>(
+                        text: "类型",
+                        icon: const Icon(Icons.arrow_drop_down),
+                        activeIcon: const Icon(Icons.arrow_drop_up),
+                      ),
+                      DropDownItem<Tab>(
+                        text: "季节",
+                        icon: const Icon(Icons.arrow_drop_down),
+                        activeIcon: const Icon(Icons.arrow_drop_up),
+                      ),
+                      DropDownItem<Tab>(
+                        text: "颜色",
+                        icon: const Icon(Icons.arrow_drop_down),
+                        activeIcon: const Icon(Icons.arrow_drop_up),
+                      ),
+                    ],
+                    viewOffsetY: MediaQuery.of(context).padding.top + 40,
+                    viewBuilders: [
+                      DropDownListView(
+                        controller: dropDownController,
+                        items: items1,
+                        headerIndex: 0,
+                        onDropDownHeaderUpdate:
+                            (List<DropDownItem> checkedItems) {
+                          return DropDownHeaderStatus(
+                            text: checkedItems
+                                .map((e) => e.text)
+                                .toList()
+                                .join("、"),
+                            highlight: checkedItems.isNotEmpty,
+                          );
+                        },
+                      ),
+                      DropDownListView(
+                        controller: dropDownController,
+                        items: items2,
+                        maxMultiChoiceSize: 2,
+                        headerIndex: 1,
+                        onDropDownHeaderUpdate:
+                            (List<DropDownItem> checkedItems) {
+                          return DropDownHeaderStatus(
+                            text: checkedItems
+                                .map((e) => e.text)
+                                .toList()
+                                .join("、"),
+                            highlight: checkedItems.isNotEmpty,
+                          );
+                        },
+                      ),
+                      DropDownGridView(
+                        controller: dropDownController,
+                        crossAxisCount: 3,
+                        boxStyle: const DropDownBoxStyle(
+                          padding: EdgeInsets.all(16),
+                        ),
+                        itemStyle: DropDownItemStyle(
+                          activeBackgroundColor: const Color(0xFFF5F5F5),
+                          activeIconColor: Colors.blue,
+                          activeTextStyle: const TextStyle(color: Colors.blue),
+                          activeBorderRadius: BorderRadius.circular(6),
+                        ),
+                        items: items3,
+                        headerIndex: 2,
+                        onDropDownHeaderUpdate:
+                            (List<DropDownItem> checkedItems) {
+                          return DropDownHeaderStatus(
+                            text: checkedItems
+                                .map((e) => e.text)
+                                .toList()
+                                .join("、"),
+                            highlight: checkedItems.isNotEmpty,
+                          );
+                        },
+                      ),
+                      DropDownGridView(
+                        controller: dropDownController,
+                        crossAxisCount: 3,
+                        boxStyle: const DropDownBoxStyle(
+                          padding: EdgeInsets.all(16),
+                        ),
+                        itemStyle: DropDownItemStyle(
+                          activeBackgroundColor: const Color(0xFFF5F5F5),
+                          activeIconColor: Colors.blue,
+                          activeTextStyle: const TextStyle(color: Colors.blue),
+                          activeBorderRadius: BorderRadius.circular(6),
+                        ),
+                        items: items4,
+                        maxMultiChoiceSize: 2,
+                        headerIndex: 3,
+                        onDropDownHeaderUpdate:
+                            (List<DropDownItem> checkedItems) {
+                          return DropDownHeaderStatus(
+                            text: checkedItems
+                                .map((e) => e.text)
+                                .toList()
+                                .join("、"),
+                            highlight: checkedItems.isNotEmpty,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 90.0,left:10,right:10),
+              child: ClothesItemList(),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+
+class ClothesItemList extends StatelessWidget {
+  final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
+  ClothesItemList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: WearWizardTheme.background,
+      child: WaterfallFlow.builder(
+        gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+        ),
+
+        itemBuilder: (BuildContext context, int index) {
+          // Replace this with your actual image widget
+          Widget imageWidget = Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              // color: Colors.primaries[index % Colors.primaries.length],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(12),
+              ),
+            ),
+            alignment: Alignment.center,
+          );
+
+          return Container(
+            height: 100,
+            width: 100,
+            // margin: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color.fromARGB(132, 190, 196, 196),
+                  offset: Offset(-2.0, 4.0),
+                  blurRadius: 6.0,
+                ),
+              ],
+              
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                image: const DecorationImage(
+                  image: AssetImage('./assets/closet/outerwear.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              // width: double.infinity, // Make image fill the width
+              child: imageWidget,
+            ),
+          );
+        },
+        itemCount: 10, // Change this to your actual item count
       ),
     );
   }
