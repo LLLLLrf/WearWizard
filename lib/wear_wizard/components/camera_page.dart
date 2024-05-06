@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image/image.dart' as img;
+import 'package:image/image.dart' as imglib;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -39,35 +39,7 @@ class _CameraAppState extends State<CameraApp> {
           return;
         }
         controller.startImageStream((CameraImage image) {
-          List<Plane> planes = image.planes;
-          Uint8List yPlaneBytes = planes[0].bytes;
-          Uint8List uPlaneBytes = planes[1].bytes;
-          Uint8List vPlaneBytes = planes[2].bytes;
-          int width = image.width;
-          int height = image.height;
-
-          List<int> bgrData = [];
-          for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-              int yIndex = i * width + j;
-              int uIndex = (i ~/ 2) * (width ~/ 2) + (j ~/ 2);
-              int vIndex = (i ~/ 2) * (width ~/ 2) + (j ~/ 2);
-
-              int Y = yPlaneBytes[yIndex];
-              int U = uPlaneBytes[uIndex];
-              int V = vPlaneBytes[vIndex];
-
-              int R = (Y + 1.402 * (V - 128)).round().clamp(0, 255);
-              int G = (Y - 0.344 * (U - 128) - 0.714 * (V - 128))
-                  .round()
-                  .clamp(0, 255);
-              int B = (Y + 1.772 * (U - 128)).round().clamp(0, 255);
-
-              bgrData.add(B);
-              bgrData.add(G);
-              bgrData.add(R);
-            }
-          }
+          debugPrint('Image Stream');
         });
         setState(() {
           _isCameraInitialized = true;
@@ -167,7 +139,8 @@ class _CameraAppState extends State<CameraApp> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(right: 10),
-                  width: MediaQuery.of(context).size.width * 0.6 * 0.52, // 宽度的20%
+                  width:
+                      MediaQuery.of(context).size.width * 0.6 * 0.52, // 宽度的20%
                   height: 26,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -180,10 +153,10 @@ class _CameraAppState extends State<CameraApp> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin:const EdgeInsets.only(left: 8),
+                        margin: const EdgeInsets.only(left: 8),
                         child: const Icon(
                           Icons.add_circle,
-                          size:24,
+                          size: 24,
                           color: Color.fromARGB(255, 106, 171, 225),
                         ),
                       ),
@@ -202,7 +175,7 @@ class _CameraAppState extends State<CameraApp> {
                     ],
                   ),
                 ),
-                ],
+              ],
             ),
           ),
         ),
@@ -245,11 +218,8 @@ class _CameraAppState extends State<CameraApp> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
                 GestureDetector(
-                  onTap: () => {
-                    
-                  },
+                  onTap: () => {},
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -272,9 +242,7 @@ class _CameraAppState extends State<CameraApp> {
                   ),
                 ),
                 GestureDetector(
-                  onTap:() => {
-
-                  },
+                  onTap: () => {},
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -287,29 +255,25 @@ class _CameraAppState extends State<CameraApp> {
                         ),
                       ),
                       Container(
-                        width: 66,
-                        height: 66,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 3,
-                          ),
-                        )
+                          width: 66,
+                          height: 66,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 3,
+                            ),
+                          )),
+                      const Icon(
+                        Icons.camera_alt,
+                        size: 30,
                       ),
-                    const Icon(
-                      Icons.camera_alt,
-                      size: 30,
-                    ),
-                    
                     ],
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => {
-                    
-                  },
+                  onTap: () => {},
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
