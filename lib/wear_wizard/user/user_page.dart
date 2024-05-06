@@ -66,6 +66,8 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+    // final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
     return Container(
       color: WearWizardTheme.nearlyWhite,
       child: Scaffold(

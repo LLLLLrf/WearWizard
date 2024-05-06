@@ -509,6 +509,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0"
+  tap_to_dismiss_keyboard:
+    dependency: "direct main"
+    description:
+      name: tap_to_dismiss_keyboard
+      sha256: "830e28c5796fa206544d296006e871c20620769d7e214da173c3c810fd762cd6"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
   term_glyph:
     dependency: transitive
     description:

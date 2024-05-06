@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:wearwizard/fitness_app/fitness_app_theme.dart';
+import 'package:wearwizard/wear_wizard/ideas/ideas_detail.dart';
 
 import 'search_bar.dart';
 
@@ -17,8 +18,10 @@ class IdeasHome extends StatefulWidget {
 }
 
 class _IdeasHomeState extends State<IdeasHome> {
-  final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-  final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
+  final double screenWidth =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  final double screenHeight =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class _IdeasHomeState extends State<IdeasHome> {
                 ),
               ],
               tabBarProperties: TabBarProperties(
-                width: screenWidth-260,
+                width: screenWidth - 260,
                 background: Container(
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(0, 255, 255, 255),
@@ -69,7 +72,9 @@ class _IdeasHomeState extends State<IdeasHome> {
               ),
               views: [
                 const IdeasList(),
-                Container(color: const Color.fromARGB(255, 255, 255, 255),child:const Center(child: Text("这页还没写"))),
+                Container(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    child: const Center(child: Text("这页还没写"))),
               ],
               onChange: (index) => print(index),
             ),
@@ -84,22 +89,23 @@ class _IdeasHomeState extends State<IdeasHome> {
       ),
     );
   }
-  bottonWidget(){
-    return IconButton(
-      icon: const Icon(Icons.search),
-      onPressed: () {
-        debugPrint('Search button pressed');
-      },
-    );
-  }
-  trailingWidget() {
-    return IconButton(
-      icon: const Icon(Icons.filter_list),
-      onPressed: () {
-        debugPrint('Filter button pressed');
-      },
-    );
-  }
+
+  // bottonWidget(){
+  //   return IconButton(
+  //     icon: const Icon(Icons.search),
+  //     onPressed: () {
+  //       debugPrint('Search button pressed');
+  //     },
+  //   );
+  // }
+  // trailingWidget() {
+  //   return IconButton(
+  //     icon: const Icon(Icons.filter_list),
+  //     onPressed: () {
+  //       debugPrint('Filter button pressed');
+  //     },
+  //   );
+  // }
 }
 
 class IdeasList extends StatelessWidget {
@@ -121,7 +127,7 @@ class IdeasList extends StatelessWidget {
           String text = 'Item $index aascdsa asdfasd asdf';
           // Replace this with your actual image widget
           Widget imageWidget = Container(
-            height: 40+70*(index%3),
+            height: 40 + 70 * (index % 3),
             decoration: BoxDecoration(
               color: Colors.primaries[index % Colors.primaries.length],
               borderRadius: const BorderRadius.only(
@@ -132,40 +138,51 @@ class IdeasList extends StatelessWidget {
             alignment: Alignment.center,
             child: Text('Image $index'),
           );
-          return Container(
-            margin:const EdgeInsets.only(top: 8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Replace SizedBox with your image widget
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    // image: DecorationImage(
-                    //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
-                    //   fit: BoxFit.cover,
-                    // ),
-                  ),
-                  width: double.infinity, // Make image fill the width
-                  child: imageWidget,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 4.0),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(8),
-                      bottomRight: Radius.circular(8),
+          return InkWell(
+            onTap: () => {
+              // navigate to detail page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const IdeasDetail(
+                          index: 0,
+                        )),
+              )
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 8.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Replace SizedBox with your image widget
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      // image: DecorationImage(
+                      //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
+                    width: double.infinity, // Make image fill the width
+                    child: imageWidget,
                   ),
-                  child: Text(
-                      text
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 6.0, vertical: 4.0),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(8),
+                        bottomRight: Radius.circular(8),
+                      ),
                     ),
-                ),
-              ],
+                    child: Text(text),
+                  ),
+                ],
+              ),
             ),
           );
         },

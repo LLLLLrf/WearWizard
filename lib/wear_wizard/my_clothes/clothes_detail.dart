@@ -236,8 +236,10 @@ class _ClothesDetailState extends State<ClothesDetail> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 90.0,left:10,right:10),
+            Container(
+              color:WearWizardTheme.background,
+              margin: EdgeInsets.only(top: 90.0),
+              padding: EdgeInsets.only(left:10,right:10),
               child: ClothesItemList(),
             ),
           ],
@@ -254,6 +256,8 @@ class ClothesItemList extends StatelessWidget {
   final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
   ClothesItemList({Key? key}) : super(key: key);
 
+  List<int> clothesList = [1,2,3,4,5,6,7];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -262,56 +266,88 @@ class ClothesItemList extends StatelessWidget {
         gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
+          // mainAxisSpacing: 10.0,
         ),
 
         itemBuilder: (BuildContext context, int index) {
           // Replace this with your actual image widget
           Widget imageWidget = Container(
-            height: 100,
-            width: 100,
+            
             decoration: const BoxDecoration(
               // color: Colors.primaries[index % Colors.primaries.length],
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12),
+              borderRadius: BorderRadius.all(
+                Radius.circular(12.0),
               ),
             ),
             alignment: Alignment.center,
           );
-
-          return Container(
-            height: 100,
-            width: 100,
-            // margin: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-              boxShadow: const <BoxShadow>[
-                BoxShadow(
-                  color: Color.fromARGB(132, 190, 196, 196),
-                  offset: Offset(-2.0, 4.0),
-                  blurRadius: 6.0,
-                ),
-              ],
-              
-            ),
-            child: Container(
+          if(index==0){
+            return Container(
+              height: (screenWidth-40)/3,
+              margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                image: const DecorationImage(
-                  image: AssetImage('./assets/closet/outerwear.jpg'),
-                  fit: BoxFit.cover,
+                color: Colors.white,
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: Color.fromARGB(132, 190, 196, 196),
+                    offset: Offset(-2.0, 4.0),
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Material(
+                color: Colors.white,
+                child:InkWell(
+                  onTap: () => {
+                    print("add new clothes")
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: const Icon(
+                        Icons.add_circle_rounded,
+                        color: Color.fromARGB(255, 219, 219, 219),
+                        size: 50,
+                      ),
+                    ),
                 ),
               ),
-              // width: double.infinity, // Make image fill the width
-              child: imageWidget,
-            ),
-          );
+            );
+          }else{
+            return Container(
+              height: (screenWidth-40)/3,
+              margin: const EdgeInsets.only(top: 10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: Color.fromARGB(132, 190, 196, 196),
+                    offset: Offset(-2.0, 4.0),
+                    blurRadius: 6.0,
+                  ),
+                ],
+                
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: const DecorationImage(
+                    image: AssetImage('./assets/closet/outerwear.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // width: double.infinity, // Make image fill the width
+                child: imageWidget,
+              ),
+            );
+          }
         },
-        itemCount: 10, // Change this to your actual item count
+        itemCount: clothesList.length+1,
       ),
     );
   }
