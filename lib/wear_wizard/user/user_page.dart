@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wearwizard/login/login_page.dart';
 import '../wearwizard_theme.dart';
 
 // 动态项
@@ -157,7 +158,10 @@ class _UserScreenState extends State<UserScreen> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      // 编辑个人信息
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                                      );
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),

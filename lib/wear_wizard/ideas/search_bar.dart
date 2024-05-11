@@ -64,14 +64,7 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
             height: 34,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Color.fromARGB(255, 247, 247, 247),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(163, 203, 203, 203),
-                  blurRadius: 3,
-                  spreadRadius: 3,
-                ),
-              ],
+              color: Color.fromARGB(0, 247, 247, 247),
             ),
             child: const Icon(
               Icons.search,
