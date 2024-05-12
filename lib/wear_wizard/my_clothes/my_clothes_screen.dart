@@ -44,17 +44,17 @@ class MyCloset extends StatelessWidget {
                     )
                   },
                   child: CustomWidget(
-                    backgroundImagePath: 'assets/closet/base.webp',
-                    leftImagePath: 'assets/closet/Base.png',
+                    backgroundImagePath: 'assets/closet/BaseBG.png',
+                    leftImagePath: 'assets/closet/BaseIcon.png',
                     mainTitle: 'Base',
                     subTitle: '内搭',
                     clothesNum: 10,
                     clothesWidth: 114,
                     clothesHeight: 116,
                     gradientColor: const [
-                      Color.fromRGBO(91, 214, 97, 0.448),
-                      Color.fromARGB(114, 105, 230, 136),
-                      Color.fromARGB(44, 234, 222, 131)
+                      Color(0xDAAF9F),
+                      Color(0xDDA491),
+                      Color(0xEF4B05)
                     ],
                   ),
                 ),
@@ -68,8 +68,8 @@ class MyCloset extends StatelessWidget {
                     )
                   },
                   child: CustomWidget(
-                    backgroundImagePath: 'assets/closet/bottom.jpg',
-                    leftImagePath: 'assets/closet/Bottom.png',
+                    backgroundImagePath: 'assets/closet/BottomBG.jpg',
+                    leftImagePath: 'assets/closet/BottomIcon.png',
                     mainTitle: 'Bottom',
                     subTitle: '下装',
                     clothesNum: 15,
@@ -92,17 +92,16 @@ class MyCloset extends StatelessWidget {
                     )
                   },
                   child: CustomWidget(
-                    backgroundImagePath: 'assets/closet/outerwear.jpg',
-                    leftImagePath: 'assets/closet/Outerwear.png',
+                    backgroundImagePath: 'assets/closet/OuterwearBG.jpg',
+                    leftImagePath: 'assets/closet/OuterwearIcon.png',
                     mainTitle: 'Outerwear',
                     subTitle: '外套',
                     clothesNum: 20,
                     clothesWidth: 114,
                     clothesHeight: 114,
                     gradientColor: const [
-                      Color.fromRGBO(27, 137, 95, 0.337),
-                      Color.fromARGB(91, 114, 196, 113),
-                      Color.fromARGB(45, 147, 147, 147)
+                      Color.fromARGB(142, 209, 218, 213),
+                      Color.fromARGB(144, 58, 138, 94),
                     ],
                   ),
                 ),
@@ -116,8 +115,8 @@ class MyCloset extends StatelessWidget {
                     )
                   },
                   child: CustomWidget(
-                    backgroundImagePath: 'assets/closet/accessories.jpeg',
-                    leftImagePath: 'assets/closet/Accessories.png',
+                    backgroundImagePath: 'assets/closet/AccessoriesBG.jpeg',
+                    leftImagePath: 'assets/closet/AccessoriesIcon.png',
                     mainTitle: 'Accessories',
                     subTitle: '饰品',
                     clothesNum: 25,
