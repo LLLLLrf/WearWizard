@@ -175,6 +175,7 @@ class _ClothesFormState extends State<ClothesForm>
   ];
 
   List<int> seasonList = [0, 0, 0, 0];
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +190,7 @@ class _ClothesFormState extends State<ClothesForm>
             color: const Color.fromARGB(255, 245, 245, 245),
             borderRadius: BorderRadius.circular(40),
           ),
+          // height: 40,
           child: Stack(
             alignment: AlignmentDirectional.centerStart,
             children: [
@@ -218,6 +220,17 @@ class _ClothesFormState extends State<ClothesForm>
                             color: Colors.transparent,
                           ),
                         ],
+                        onPressed:(){
+                          setState(() {
+                            isExpanded = !isExpanded;
+                          });
+                          print("${isExpanded}");
+                          if (_animationController.isCompleted) {
+                            _animationController.reverse();
+                          } else {
+                            _animationController.forward();
+                          }
+                        },
                         clickable: Clickable.everywhere,
                         firstChild: Container(
                           margin: EdgeInsets.only(left: screenWidth - 140),
@@ -241,134 +254,137 @@ class _ClothesFormState extends State<ClothesForm>
                             ],
                           ),
                         ),
-                        secondChild: Container(
-                          width: screenWidth - 40,
-                          margin: const EdgeInsets.only(top: 8),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectSituation = 0;
-                                    });
-                                    if (_animationController.isCompleted) {
-                                      _animationController.reverse();
-                                    } else {
-                                      _animationController.forward();
-                                    }
-                                    print("点击${selectSituation}");
-                                  },
-                                  child: const Row(
-                                    children: [
-                                      Icon(
-                                        color: Colors.black,
-                                        Icons.work_outline,
-                                      ),
-                                      Text(
-                                        '工作',
-                                        style: TextStyle(
+                        secondChild: Visibility(
+                          visible: isExpanded,
+                          child: Container(
+                            width: screenWidth - 40,
+                            margin: const EdgeInsets.only(top: 8),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectSituation = 0;
+                                      });
+                                      if (_animationController.isCompleted) {
+                                        _animationController.reverse();
+                                      } else {
+                                        _animationController.forward();
+                                      }
+                                      print("点击${selectSituation}");
+                                    },
+                                    child: const Row(
+                                      children: [
+                                        Icon(
                                           color: Colors.black,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal,
-                                          decoration: TextDecoration.none,
+                                          Icons.work_outline,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          '工作',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectSituation = 1;
-                                    });
-                                    if (_animationController.isCompleted) {
-                                      _animationController.reverse();
-                                    } else {
-                                      _animationController.forward();
-                                    }
-                                    print("点击${selectSituation}");
-                                  },
-                                  child: const Row(
-                                    children: [
-                                      Icon(
-                                        color: Colors.black,
-                                        Icons.local_cafe_outlined,
-                                      ),
-                                      Text(
-                                        '休闲',
-                                        style: TextStyle(
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectSituation = 1;
+                                      });
+                                      if (_animationController.isCompleted) {
+                                        _animationController.reverse();
+                                      } else {
+                                        _animationController.forward();
+                                      }
+                                      print("点击${selectSituation}");
+                                    },
+                                    child: const Row(
+                                      children: [
+                                        Icon(
                                           color: Colors.black,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal,
-                                          decoration: TextDecoration.none,
+                                          Icons.local_cafe_outlined,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          '休闲',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectSituation = 2;
-                                    });
-                                    if (_animationController.isCompleted) {
-                                      _animationController.reverse();
-                                    } else {
-                                      _animationController.forward();
-                                    }
-                                    print("点击${selectSituation}");
-                                  },
-                                  child: const Row(
-                                    children: [
-                                      Icon(
-                                        color: Colors.black,
-                                        Icons.sports_basketball_outlined,
-                                      ),
-                                      Text(
-                                        '运动',
-                                        style: TextStyle(
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectSituation = 2;
+                                      });
+                                      if (_animationController.isCompleted) {
+                                        _animationController.reverse();
+                                      } else {
+                                        _animationController.forward();
+                                      }
+                                      print("点击${selectSituation}");
+                                    },
+                                    child: const Row(
+                                      children: [
+                                        Icon(
                                           color: Colors.black,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal,
-                                          decoration: TextDecoration.none,
+                                          Icons.sports_basketball_outlined,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          '运动',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectSituation = 3;
-                                    });
-                                    if (_animationController.isCompleted) {
-                                      _animationController.reverse();
-                                    } else {
-                                      _animationController.forward();
-                                    }
-                                    print("点击${selectSituation}");
-                                  },
-                                  child: const Row(
-                                    children: [
-                                      Icon(
-                                        color: Colors.black,
-                                        Icons.card_travel_outlined,
-                                      ),
-                                      Text(
-                                        '出行',
-                                        style: TextStyle(
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectSituation = 3;
+                                      });
+                                      if (_animationController.isCompleted) {
+                                        _animationController.reverse();
+                                      } else {
+                                        _animationController.forward();
+                                      }
+                                      print("点击${selectSituation}");
+                                    },
+                                    child: const Row(
+                                      children: [
+                                        Icon(
                                           color: Colors.black,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.normal,
-                                          decoration: TextDecoration.none,
+                                          Icons.card_travel_outlined,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          '出行',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                          
                                   ),
-
-                                ),
-                              ]),
+                                ]),
+                          ),
                         ),
                         animationController: _animationController,
                         arrowLocation: ArrowLocation.left,
@@ -388,7 +404,7 @@ class _ClothesFormState extends State<ClothesForm>
               const Positioned(
                 left: 20,
                 width: 60,
-                top: 0,
+                top: 2,
                 child: Text(
                   '适用场景',
                   style: TextStyle(
@@ -626,10 +642,10 @@ class ClothesList extends StatefulWidget {
 
 class _ClothesListState extends State<ClothesList> {
   List<String> images = [
-    "assets/closet/base.webp",
-    "assets/closet/outerwear.jpg",
-    "assets/closet/base.webp",
-    "assets/closet/outerwear.jpg",
+    "assets/closet/BaseBG.png",
+    "assets/closet/OuterwearBG.jpg",
+    "assets/closet/BaseBG.png",
+    "assets/closet/OuterwearBG.jpg",
   ];
 
   @override
@@ -763,7 +779,7 @@ class _ClothesCarouselState extends State<ClothesCarousel> {
                     // height: 440,
                     // width: 330,
                     child: Image.asset(
-                      "assets/closet/base.webp",
+                      "assets/closet/BaseBG.png",
                       fit: BoxFit.cover,
                     ),
                   ),
