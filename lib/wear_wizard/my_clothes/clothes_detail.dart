@@ -337,7 +337,7 @@ class ClothesItemList extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: const DecorationImage(
-                    image: AssetImage('./assets/closet/outerwear.jpg'),
+                    image: AssetImage('./assets/closet/OuterwearBG.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),

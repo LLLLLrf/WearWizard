@@ -160,7 +160,7 @@ packages:
       sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.8"
+    version: "1.0.6"
   dropdown_button2:
     dependency: "direct main"
     description:
@@ -245,7 +245,7 @@ packages:
       sha256: "8cf40eebf5dec866a6d1956ad7b4f7016e6c0cc69847ab946833b7d43743809f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.19"
+    version: "2.0.18"
   flutter_rating_bar:
     dependency: "direct dev"
     description:
@@ -572,7 +572,7 @@ packages:
       sha256: "360a6ed2027f18b73c8d98e159dda67a61b7f2e0f6ec26e86c3ada33b0621775"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.1"
+    version: "6.3.0"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -612,7 +612,7 @@ packages:
       sha256: "8d9e750d8c9338601e709cd0885f95825086bd8b642547f26bda435aade95d8a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.0"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -644,7 +644,7 @@ packages:
       sha256: "134e1ad410d67e18a19486ed9512c72dfc6d8ffb284d0e8f2e99e903d1ba8fa3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.14"
+    version: "2.4.12"
   video_player_avfoundation:
     dependency: transitive
     description:

@@ -70,7 +70,7 @@ class _IdeasDetailState extends State<IdeasDetail> {
                           child: const CircleAvatar(
                             radius: 18,
                             backgroundImage:
-                                AssetImage('assets/closet/outerwear.jpg'),
+                                AssetImage('assets/closet/OuterwearBG.jpg'),
                           ),
                         ),
                         Container(
@@ -209,7 +209,7 @@ class _BottomBarState extends State<BottomBar> {
                       child: const CircleAvatar(
                         radius: 16,
                         backgroundImage:
-                            AssetImage('assets/closet/outerwear.jpg'),
+                            AssetImage('assets/closet/OuterwearBG.jpg'),
                       ),
                     ),
                     Container(
@@ -360,12 +360,6 @@ class _CommendListState extends State<CommendList> {
     '1234',
     'aaaa',
     'hello',
-    '1234',
-    'aaaa',
-    'hello',
-    '1234',
-    'aaaa',
-    'hello',
   ];
   @override
   Widget build(BuildContext context) {
@@ -373,11 +367,70 @@ class _CommendListState extends State<CommendList> {
       width: screenWidth,
       height: screenHeight,
       child: ListView.builder(
-        itemCount: commends.length + 1,
+        itemCount: commends.length + 2,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
             return const ImageSwiper();
-          } else {
+          }else if(index == 1){
+            return Container(
+              padding: const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "标题部分。。。。",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    "正文部分。。。。123123 123 1231231231231 123123 123123 12123123123123123123123123123123123123123123123123",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Row(
+                    children: [
+                      Text(
+                        '2021-10-10 10:10',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'ip:GuangDong',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    height: 0.8,
+                    width: screenWidth - 28,
+                    color: Colors.grey.withOpacity(0.2),
+                  ),
+                  
+                ],
+              )
+            );
+          }else {
             return Container(
               margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
               child: Row(
@@ -387,7 +440,7 @@ class _CommendListState extends State<CommendList> {
                     child: const CircleAvatar(
                       radius: 16,
                       backgroundImage:
-                          AssetImage('assets/closet/outerwear.jpg'),
+                          AssetImage('assets/closet/OuterwearBG.jpg'),
                     ),
                   ),
                   Column(
@@ -444,8 +497,8 @@ class ImageSwiper extends StatefulWidget {
 
 class _ImageSwiperState extends State<ImageSwiper> {
   List<String> images = [
-    "assets/closet/outerwear.jpg",
-    "assets/closet/outerwear.jpg",
+    "assets/closet/OuterwearBG.jpg",
+    "assets/closet/OuterwearBG.jpg",
   ];
   final double screenWidth =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;

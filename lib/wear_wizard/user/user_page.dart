@@ -88,7 +88,7 @@ class _UserScreenState extends State<UserScreen> {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          "./assets/closet/bottom.jpg",
+                          "./assets/closet/BottomBG.jpg",
                           fit: BoxFit.cover,
                           height: 300,
                           width: double.infinity,
@@ -130,7 +130,7 @@ class _UserScreenState extends State<UserScreen> {
                                     CircleAvatar(
                                       radius: 30,
                                       backgroundImage: AssetImage(
-                                        "./assets/closet/outerwear.jpg",
+                                        "./assets/closet/OuterwearBG.jpg",
                                       ),
                                     ),
                                     SizedBox(width: 20),
@@ -235,14 +235,14 @@ class _UserScreenState extends State<UserScreen> {
                         SizedBox(height: 10),
                         MyPostItem(
                           imageUrlList: [
-                            "./assets/closet/outerwear.jpg",
-                            "./assets/closet/bottom.jpg",
-                            "./assets/closet/outerwear.jpg",
-                            "./assets/closet/bottom.jpg",
-                            "./assets/closet/bottom.jpg",
-                            "./assets/closet/outerwear.jpg",
-                            "./assets/closet/bottom.jpg",
-                            "./assets/closet/outerwear.jpg",
+                            "./assets/closet/OuterwearBG.jpg",
+                            "./assets/closet/BottomBG.jpg",
+                            "./assets/closet/OuterwearBG.jpg",
+                            "./assets/closet/BottomBG.jpg",
+                            "./assets/closet/BottomBG.jpg",
+                            "./assets/closet/OuterwearBG.jpg",
+                            "./assets/closet/BottomBG.jpg",
+                            "./assets/closet/OuterwearBG.jpg",
                           ],
                         ),
                       ],

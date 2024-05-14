@@ -268,7 +268,7 @@ class RecommendList extends StatelessWidget {
                     //   fit: BoxFit.cover,
                     // ),
                     image: const DecorationImage(
-                      image: AssetImage('./assets/closet/outerwear.jpg'),
+                      image: AssetImage('./assets/closet/OuterwearBG.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -308,7 +308,7 @@ class RecommendList extends StatelessWidget {
                               ),
                               child: const Image(
                                 image:
-                                    AssetImage('./assets/closet/outerwear.jpg'),
+                                    AssetImage('./assets/closet/OuterwearBG.jpg'),
                                 width: 46,
                                 height: 46,
                               ),
@@ -334,7 +334,7 @@ class RecommendList extends StatelessWidget {
                               ),
                               child: const Image(
                                 image:
-                                    AssetImage('./assets/closet/outerwear.jpg'),
+                                    AssetImage('./assets/closet/OuterwearBG.jpg'),
                                 width: 46,
                                 height: 46,
                               ),

@@ -17,8 +17,8 @@ Future<bool> getData() {
 }
 class _TodayRecommendState extends State<TodayRecommend> {
   final imageUrls= [
-    './assets/closet/outerwear.jpg',
-    './assets/closet/base.webp',
+    './assets/closet/OuterwearBG.jpg',
+    './assets/closet/BaseBG.png',
     // 'https://via.placeholder.com/400x500/FF0000/FFFFFF',
     // 'https://via.placeholder.com/400x500/00FF00/FFFFFF',
     // 'https://via.placeholder.com/400x500/0000FF/FFFFFF',
