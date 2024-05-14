@@ -53,6 +53,7 @@ dependencies:
   expandable_widgets: ^1.0.3+1
   tap_to_dismiss_keyboard: ^0.0.4
   animated_login: ^1.7.2
+  http: ^1.2.1
 
   # flutter_ncnn_yolov8_seg:
   #   path: ./plugins/flutter_ncnn_yolov8_seg

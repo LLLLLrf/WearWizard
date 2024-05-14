@@ -16,10 +16,12 @@ class LoginPage extends StatelessWidget {
       title: 'Animated Login',
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 242, 243, 248),
-        colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 148, 169, 255)),
+        colorScheme: const ColorScheme.light(
+            primary: Color.fromARGB(255, 148, 169, 255)),
         // useMaterial3: true,
-        textTheme: Theme.of(context).textTheme.apply(
-            decorationColor: Color.fromARGB(255, 148, 169, 255)),
+        textTheme: Theme.of(context)
+            .textTheme
+            .apply(decorationColor: Color.fromARGB(255, 148, 169, 255)),
         inputDecorationTheme: const InputDecorationTheme(
           prefixIconColor: Colors.black54,
           suffixIconColor: Colors.black54,
@@ -48,7 +50,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   /// Current auth mode, default is [AuthMode.login].
   AuthMode currentMode = AuthMode.login;
 
@@ -66,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
       signUpMode: SignUpModes.both,
       loginMobileTheme: _mobileTheme,
       loginTexts: _loginTexts,
-      emailValidator: ValidatorModel(
-          validatorCallback: (String? email) => '未找到此用户'),
+      emailValidator:
+          ValidatorModel(validatorCallback: (String? email) => '未找到此用户'),
       initialMode: currentMode,
       onAuthModeChange: (AuthMode newMode) async {
         currentMode = newMode;
@@ -96,16 +97,24 @@ class _LoginScreenState extends State<LoginScreen> {
   /// You can also set some additional display options such as [showLabelTexts].
   LoginViewTheme get _mobileTheme => LoginViewTheme(
         // showLabelTexts: false,
-        backgroundColor: Color.fromARGB(255, 148, 169, 255), 
+        backgroundColor: Color.fromARGB(255, 148, 169, 255),
         formFieldBackgroundColor: Colors.white,
-        logoSize: Size(MediaQuery.of(context).size.width * 0.5, MediaQuery.of(context).size.height * 0.3),
+        logoSize: Size(MediaQuery.of(context).size.width * 0.5,
+            MediaQuery.of(context).size.height * 0.3),
         formWidthRatio: 60,
         actionButtonStyle: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(Color.fromARGB(255, 148, 169, 255)),
-          textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 148, 169, 255))),
+          foregroundColor:
+              MaterialStateProperty.all(Color.fromARGB(255, 148, 169, 255)),
+          textStyle: MaterialStateProperty.all(const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 148, 169, 255))),
         ),
         changeActionButtonStyle: ButtonStyle(
-          textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 148, 169, 255))),
+          textStyle: MaterialStateProperty.all(const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 148, 169, 255))),
         ),
         animatedComponentOrder: const <AnimatedComponent>[
           AnimatedComponent(
@@ -122,11 +131,15 @@ class _LoginScreenState extends State<LoginScreen> {
           AnimatedComponent(component: LoginComponents.changeActionButton),
           AnimatedComponent(component: LoginComponents.actionButton),
         ],
-        textFormStyle: TextStyle(color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
-        welcomeTitleStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
-        welcomeDescriptionStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
-        forgotPasswordStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255), decorationColor: Color.fromARGB(255, 255, 255, 255)),        
-        
+        textFormStyle:
+            TextStyle(color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
+        welcomeTitleStyle:
+            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
+        welcomeDescriptionStyle:
+            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+        forgotPasswordStyle: TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255),
+            decorationColor: Color.fromARGB(255, 255, 255, 255)),
       );
 
   LoginTexts get _loginTexts => LoginTexts(
@@ -142,7 +155,6 @@ class _LoginScreenState extends State<LoginScreen> {
         notHaveAnAccount: "没有账号?",
         passwordMatchingError: "密码不匹配",
       );
-
 }
 
 /// Example forgot password screen

@@ -3,26 +3,33 @@ import 'package:flutter/material.dart';
 
 import 'dialog_builders.dart';
 
+import 'package:wearwizard/services/user_service.dart';
+
 class LoginFunctions {
   /// Collection of functions will be performed on login/signup.
   const LoginFunctions(this.context);
   final BuildContext context;
 
-  /// Login action that will be performed on click to action button in login mode.
-  Future<String?> onLogin(LoginData loginData) async {
-    await Future.delayed(const Duration(seconds: 2));
-    return null;
-  }
-
-  /// Sign up action that will be performed on click to action button in sign up mode.
-  Future<String?> onSignup(SignUpData signupData) async {
-    if (signupData.password != signupData.confirmPassword) {
-      return 'The passwords you entered do not match, check again.';
+  Future<String?> onLogin(LoginData data) async {
+    try {
+      User user = await User().login(data.email, data.password);
+      // TODO: process user info to person page
+    } catch (e) {
+      return 'Login failed';
     }
-    await Future.delayed(const Duration(seconds: 2));
-    return null;
+    return 'Login successful';
   }
 
+  Future<String?> onSignup(SignUpData data) async {
+    try {
+      User user = await User()
+          .signUp(data.name, data.email, data.password, data.confirmPassword);
+      // TODO: jump to login page
+    } catch (e) {
+      return 'Sign up failed';
+    }
+    return 'Sign up successful';
+  }
 
   /// Action that will be performed on click to "Forgot Password?" text/CTA.
   /// Probably you will navigate user to a page to create a new password after the verification.
