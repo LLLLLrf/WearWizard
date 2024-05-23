@@ -76,7 +76,8 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
             height: 46,
             width: screenWidth - 130,
             child: SearchBar(
-              hintText: '大家都在搜[减脂]',
+              // hintText: '大家都在搜[减脂]',
+              hintText: 'Click to Search',
               hintStyle: MaterialStateProperty.resolveWith<TextStyle?>(
                   (_) => const TextStyle(
                         color: Color.fromARGB(255, 170, 170, 170),

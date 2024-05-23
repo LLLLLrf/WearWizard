@@ -170,7 +170,8 @@ class _UserScreenState extends State<UserScreen> {
                                         borderRadius: BorderRadius.circular(20.0),
                                       ),
                                       child: const Text(
-                                        "编辑资料",
+                                        // "编辑资料",
+                                        "Edit",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12,
@@ -194,19 +195,22 @@ class _UserScreenState extends State<UserScreen> {
                               children: [
                                 Column(
                                   children: [
-                                    Text("发布",style: TextStyle(fontSize: 16,),),
+                                    // Text("发布",style: TextStyle(fontSize: 16,),),
+                                    Text("Moments",style: TextStyle(fontSize: 16,),),
                                     Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Text("关注",style: TextStyle(fontSize: 16,),),
+                                    // Text("关注",style: TextStyle(fontSize: 16,),),
+                                    Text("Follow",style: TextStyle(fontSize: 16,),),
                                     Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Text("粉丝",style: TextStyle(fontSize: 16,),),
+                                    // Text("粉丝",style: TextStyle(fontSize: 16,),),
+                                    Text("Follower",style: TextStyle(fontSize: 16,),),
                                     Text("0",style: TextStyle(fontSize: 16,),),
                                   ],
                                 ),
@@ -226,7 +230,8 @@ class _UserScreenState extends State<UserScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "我的动态",
+                          // "我的动态",
+                          "My Moments",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

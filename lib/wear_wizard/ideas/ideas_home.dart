@@ -31,13 +31,16 @@ class _IdeasHomeState extends State<IdeasHome> {
           const SearchBarScreen(),
           Container(
             margin: const EdgeInsets.only(top: 58.0),
-            child: ContainedTabBarView(
+            child: 
+            ContainedTabBarView(
               tabs: const [
                 Text(
-                  '关注',
+                  // '关注',
+                  'Follow',
                 ),
                 Text(
-                  '广场',
+                  // '广场',
+                  'Discover',
                 ),
               ],
               tabBarProperties: TabBarProperties(

@@ -125,7 +125,7 @@ class CustomWidget extends StatelessWidget {
               strokeColor:Colors.black,
               strokeWidth: 2,
               child: Text(
-                "$clothesNum 件",
+                "$clothesNum items",
                 style: const TextStyle(
                   letterSpacing: BorderSide.strokeAlignInside,
                   height: BorderSide.strokeAlignInside,

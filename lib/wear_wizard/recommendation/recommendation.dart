@@ -23,10 +23,12 @@ class RecommendScreen extends StatelessWidget {
             body: ContainedTabBarView(
               tabs: const [
                 Text(
-                  '今日搭配',
+                  // '今日搭配',
+                  'Daily Outfit',
                 ),
                 Text(
-                  '我的搭配',
+                  // '我的搭配',
+                  'My Outfit',
                 ),
               ],
               tabBarProperties: TabBarProperties(

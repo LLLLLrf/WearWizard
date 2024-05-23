@@ -22,10 +22,14 @@ class _ClothesDetailState extends State<ClothesDetail> {
   final DropDownController dropDownController = DropDownController();
   final DropDownDisposeController dropDownDisposeController = DropDownDisposeController();
   List<DropDownItem> items1 = [
-    DropDownItem(text: "内搭", data: 0),
-    DropDownItem(text: "下装", data: 1),
-    DropDownItem(text: "外套", data: 2),
-    DropDownItem(text: "饰品", data: 3)
+    // DropDownItem(text: "内搭", data: 0),
+    // DropDownItem(text: "下装", data: 1),
+    // DropDownItem(text: "外套", data: 2),
+    // DropDownItem(text: "饰品", data: 3)
+    DropDownItem(text: "Base", data: 0),
+    DropDownItem(text: "Bottom", data: 1),
+    DropDownItem(text: "Outerwear", data: 2),
+    DropDownItem(text: "Accessories", data: 3)
   ];
   List<DropDownItem> items2 = [];
   List<DropDownItem> items3 = [];
@@ -33,7 +37,8 @@ class _ClothesDetailState extends State<ClothesDetail> {
 
   bool _landscape = false;
 
-  final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
+  final List<String> ClothesList = ['Base', 'Bottom', 'Outerwear', 'Accessories'];
+  // final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
 
   @override
   void initState() {
@@ -92,7 +97,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  '我的${ClothesList[widget.index]}',
+                  'My ${ClothesList[widget.index]}',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
@@ -132,17 +137,20 @@ class _ClothesDetailState extends State<ClothesDetail> {
                         activeIcon: const Icon(Icons.arrow_drop_up),
                       ),
                       DropDownItem<Tab>(
-                        text: "类型",
+                        // text: "类型",
+                        text: "Category",
                         icon: const Icon(Icons.arrow_drop_down),
                         activeIcon: const Icon(Icons.arrow_drop_up),
                       ),
                       DropDownItem<Tab>(
-                        text: "季节",
+                        // text: "季节",
+                        text: "Seasons",
                         icon: const Icon(Icons.arrow_drop_down),
                         activeIcon: const Icon(Icons.arrow_drop_up),
                       ),
                       DropDownItem<Tab>(
-                        text: "颜色",
+                        // text: "颜色",
+                        text: "Colours",
                         icon: const Icon(Icons.arrow_drop_down),
                         activeIcon: const Icon(Icons.arrow_drop_up),
                       ),

@@ -51,7 +51,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       size: 30,
                     ),
                     Text(
-                      '全部',
+                      // '全部',
+                      'All',
                       style: TextStyle(
                         color: id == 0 ? Colors.blue : Colors.grey,
                         fontSize: 14.0,
@@ -75,7 +76,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       size: 30,
                     ),
                     Text(
-                      '工作',
+                      // '工作',
+                      'Work',
                       style: TextStyle(
                         color: id == 1 ? Colors.blue : Colors.grey,
                         fontSize: 14.0,
@@ -99,7 +101,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       size: 30,
                     ),
                     Text(
-                      '休闲',
+                      // '休闲',
+                      'Leisure',
                       style: TextStyle(
                         color: id == 2 ? Colors.blue : Colors.grey,
                         fontSize: 14.0,
@@ -123,7 +126,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       size: 30,
                     ),
                     Text(
-                      '运动',
+                      // '运动',
+                      'Sport',
                       style: TextStyle(
                         color: id == 3 ? Colors.blue : Colors.grey,
                         fontSize: 14.0,
@@ -147,7 +151,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       size: 30,
                     ),
                     Text(
-                      '出游',
+                      // '出游',
+                      'Vocation',
                       style: TextStyle(
                         color: id == 4 ? Colors.blue : Colors.grey,
                         fontSize: 14.0,
@@ -178,7 +183,8 @@ class _MyRecommendState extends State<MyRecommend> {
                       ),
                     ),
                     Text(
-                      '套搭配',
+                      // '套搭配',
+                      ' outfits in total',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 15.0,

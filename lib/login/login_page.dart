@@ -82,7 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _operation = CancelableOperation.fromFuture(func);
     final String? res = await _operation?.valueOrCancellation();
     if (_operation?.isCompleted == true) {
-      DialogBuilder(context).showResultDialog(res ?? '成功.');
+      // DialogBuilder(context).showResultDialog(res ?? '成功.');
+      DialogBuilder(context).showResultDialog(res ?? 'Success.');
     }
     return res;
   }
@@ -142,18 +143,32 @@ class _LoginScreenState extends State<LoginScreen> {
             decorationColor: Color.fromARGB(255, 255, 255, 255)),
       );
 
+//   LoginTexts get _loginTexts => LoginTexts(
+//         nameHint: "Name",
+//         login: "登录",
+//         signUp: "注册",
+//         forgotPassword: "忘记密码?",
+//         welcome: "WearWizard",
+//         welcomeDescription: "您的服装搭配助手",
+//         welcomeBack: "WearWizard",
+//         welcomeBackDescription: "您的服装搭配助手",
+//         alreadyHaveAnAccount: "已有账号?",
+//         notHaveAnAccount: "没有账号?",
+//         passwordMatchingError: "密码不匹配",
+//       );
+// }
   LoginTexts get _loginTexts => LoginTexts(
         nameHint: "Name",
-        login: "登录",
-        signUp: "注册",
-        forgotPassword: "忘记密码?",
+        login: "Login",
+        signUp: "Register",
+        forgotPassword: "Foget the password?",
         welcome: "WearWizard",
-        welcomeDescription: "您的服装搭配助手",
+        welcomeDescription: "Your Outfit Assistant",
         welcomeBack: "WearWizard",
-        welcomeBackDescription: "您的服装搭配助手",
-        alreadyHaveAnAccount: "已有账号?",
-        notHaveAnAccount: "没有账号?",
-        passwordMatchingError: "密码不匹配",
+        welcomeBackDescription: "Your Outfit Assistant",
+        alreadyHaveAnAccount: "Already have an account?",
+        notHaveAnAccount: "Don't have an account?",
+        passwordMatchingError: "Password is wrong",
       );
 }
 
@@ -167,7 +182,8 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('忘记密码'),
+        // child: Text('忘记密码'),
+        child: Text('Forget the password'),
       ),
     );
   }

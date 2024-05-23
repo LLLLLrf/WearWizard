@@ -52,7 +52,8 @@ class _EditPageState extends State<EditPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '编辑搭配',
+                      // '编辑搭配',
+                      'Create Outfit',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20.0,
@@ -97,7 +98,8 @@ class _EditPageState extends State<EditPage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      print('保存');
+                      // print('保存');
+                      print('Save');
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -105,7 +107,8 @@ class _EditPageState extends State<EditPage> {
                       color: Colors.blue,
                       child: const Center(
                         child: Text(
-                          '保存',
+                          // '保存',
+                          'Save',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14.0,
@@ -166,7 +169,8 @@ class _ClothesFormState extends State<ClothesForm>
     super.initState();
   }
 
-  List<String> situations = ['工作', '休闲', '运动', '出行'];
+  // List<String> situations = ['工作', '休闲', '运动', '出行'];
+  List<String> situations = ['Work', 'Leisure', 'Sport', 'Vocation'];
   List<IconData> situationIcons = [
     Icons.work_outline,
     Icons.local_cafe_outlined,
@@ -272,7 +276,8 @@ class _ClothesFormState extends State<ClothesForm>
                                       } else {
                                         _animationController.forward();
                                       }
-                                      print("点击${selectSituation}");
+                                      print("Click ${selectSituation}");
+                                      // print("点击${selectSituation}");
                                     },
                                     child: const Row(
                                       children: [
@@ -281,7 +286,8 @@ class _ClothesFormState extends State<ClothesForm>
                                           Icons.work_outline,
                                         ),
                                         Text(
-                                          '工作',
+                                          // '工作',
+                                          'Work',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 14.0,
@@ -302,7 +308,8 @@ class _ClothesFormState extends State<ClothesForm>
                                       } else {
                                         _animationController.forward();
                                       }
-                                      print("点击${selectSituation}");
+                                      print("Click ${selectSituation}");
+                                      // print("点击${selectSituation}");
                                     },
                                     child: const Row(
                                       children: [
@@ -311,7 +318,8 @@ class _ClothesFormState extends State<ClothesForm>
                                           Icons.local_cafe_outlined,
                                         ),
                                         Text(
-                                          '休闲',
+                                          // '休闲',
+                                          'Leisure',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 14.0,
@@ -332,7 +340,8 @@ class _ClothesFormState extends State<ClothesForm>
                                       } else {
                                         _animationController.forward();
                                       }
-                                      print("点击${selectSituation}");
+                                      // print("点击${selectSituation}");
+                                      print("Click ${selectSituation}");
                                     },
                                     child: const Row(
                                       children: [
@@ -341,7 +350,8 @@ class _ClothesFormState extends State<ClothesForm>
                                           Icons.sports_basketball_outlined,
                                         ),
                                         Text(
-                                          '运动',
+                                          // '运动',
+                                          'Sport',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 14.0,
@@ -362,7 +372,8 @@ class _ClothesFormState extends State<ClothesForm>
                                       } else {
                                         _animationController.forward();
                                       }
-                                      print("点击${selectSituation}");
+                                      print("Click ${selectSituation}");
+                                      // print("点击${selectSituation}");
                                     },
                                     child: const Row(
                                       children: [
@@ -371,7 +382,8 @@ class _ClothesFormState extends State<ClothesForm>
                                           Icons.card_travel_outlined,
                                         ),
                                         Text(
-                                          '出行',
+                                          // '出行',
+                                          'Vocation',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 14.0,
@@ -403,10 +415,11 @@ class _ClothesFormState extends State<ClothesForm>
               // SizedBox(height: 40,),
               const Positioned(
                 left: 20,
-                width: 60,
+                width: 80,
                 top: 2,
                 child: Text(
-                  '适用场景',
+                  // '适用场景',
+                  'Occasion',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
@@ -429,7 +442,8 @@ class _ClothesFormState extends State<ClothesForm>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
               const Text(
-                "适用季节",
+                // "适用季节",
+                "Seasons",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
@@ -439,7 +453,7 @@ class _ClothesFormState extends State<ClothesForm>
               ),
               Container(
                 height:34,
-                width: 150,
+                width: 230,
                 child: Material(
                   color: Colors.transparent,
                   child: Row(
@@ -449,7 +463,7 @@ class _ClothesFormState extends State<ClothesForm>
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           height: 30,
-                          width: 30,
+                          width: 50,
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: seasonList[0] == 1 ? Colors.blue : Colors.transparent,
@@ -457,7 +471,8 @@ class _ClothesFormState extends State<ClothesForm>
                           ),
                           child: Center(
                             child: Text(
-                              "春",
+                              // "春",
+                              "Spring",
                               style: TextStyle(
                                 color: seasonList[0] == 1 ? Colors.white : Colors.black,
                                 fontSize: 13.0,
@@ -477,7 +492,7 @@ class _ClothesFormState extends State<ClothesForm>
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           height: 30,
-                          width: 30,
+                          width: 60,
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: seasonList[1] == 1 ? Colors.blue : Colors.transparent,
@@ -485,7 +500,8 @@ class _ClothesFormState extends State<ClothesForm>
                           ),
                           child: Center(
                             child: Text(
-                              "夏",
+                              // "夏",
+                              "Summer",
                               style: TextStyle(
                                 color: seasonList[1] == 1 ? Colors.white : Colors.black,
                                 fontSize: 13.0,
@@ -505,7 +521,7 @@ class _ClothesFormState extends State<ClothesForm>
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           height: 30,
-                          width: 30,
+                          width: 60,
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: seasonList[2] == 1 ? Colors.blue : Colors.transparent,
@@ -513,7 +529,8 @@ class _ClothesFormState extends State<ClothesForm>
                           ),
                           child: Center(
                             child: Text(
-                              "秋",
+                              // "秋",
+                              "Autumn",
                               style: TextStyle(
                                 color: seasonList[2] == 1 ? Colors.white : Colors.black,
                                 fontSize: 13.0,
@@ -533,7 +550,7 @@ class _ClothesFormState extends State<ClothesForm>
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           height: 30,
-                          width: 30,
+                          width: 50,
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: seasonList[3] == 1 ? Colors.blue : Colors.transparent,
@@ -541,7 +558,8 @@ class _ClothesFormState extends State<ClothesForm>
                           ),
                           child: Center(
                             child: Text(
-                              "冬",
+                              // "冬",
+                              "Winter",
                               style: TextStyle(
                                 color: seasonList[3] == 1 ? Colors.white : Colors.black,
                                 fontSize: 13.0,
@@ -576,7 +594,8 @@ class _ClothesFormState extends State<ClothesForm>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
               const Text(
-                "搭配色系",
+                // "搭配色系",
+                "Colour",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
@@ -710,7 +729,8 @@ class _ClothesListState extends State<ClothesList> {
                   color: Colors.white,
                   child: InkWell(
                     onTap: () {
-                      print('添加');
+                      // print('添加');
+                      print('Add');
                     },
                     child: Container(
                       decoration: BoxDecoration(
