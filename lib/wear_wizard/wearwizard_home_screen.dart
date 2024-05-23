@@ -2,7 +2,6 @@
 
 import 'dart:math';
 import 'package:wearwizard/wear_wizard/models/tabIcon_data.dart';
-import 'package:wearwizard/wear_wizard/training/training_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:wearwizard/wear_wizard/user/user_page.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';

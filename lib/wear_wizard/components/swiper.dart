@@ -25,7 +25,7 @@ class MyCarousel extends StatelessWidget {
                 return 
                 Stack(
                   children: [
-                    Image.asset(
+                    Image.network(
                       imageUrls[index],
                       fit: BoxFit.cover,
                       height: (screenWidth-40)*5/4, // 设置轮播图高度

@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 top: 0, left: 12, right: 12),
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
+                            // ignore: sort_child_properties_last
                             children: List<Widget>.generate(
                               homeList.length,
                               (int index) {

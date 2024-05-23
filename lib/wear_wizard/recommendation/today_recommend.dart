@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:wearwizard/wear_wizard/components/camera_page.dart';
 import '../wearwizard_theme.dart';
 import '../components/swiper.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TodayRecommend extends StatefulWidget{
   TodayRecommend({Key? key}) : super(key: key);
@@ -16,12 +18,25 @@ Future<bool> getData() {
   return Future.value(true);
 }
 class _TodayRecommendState extends State<TodayRecommend> {
+//  Future<String> fetchImageUrl() async {
+//     final response = await http.get(Uri.parse('https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png'));
+    
+//     if (response.statusCode == 200) {
+//       // 假设返回的数据是 JSON 格式
+//       final data = json.decode(response.body);
+//       return data['imageUrl'];
+//     } else {
+//       throw Exception('Failed to load image URL');
+//     }
+//   }
+
+
   final imageUrls= [
-    './assets/closet/OuterwearBG.jpg',
-    './assets/closet/BaseBG.png',
-    // 'https://via.placeholder.com/400x500/FF0000/FFFFFF',
-    // 'https://via.placeholder.com/400x500/00FF00/FFFFFF',
-    // 'https://via.placeholder.com/400x500/0000FF/FFFFFF',
+    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
+    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
+    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
+    // './assets/closet/OuterwearBG.jpg',
+    // './assets/closet/BaseBG.png',
   ];
   final double sizeBox = (screenHeight-((screenWidth-40)*5/4+100+158+90))/3;
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:wearwizard/services/api_http.dart';
 
 class User {
@@ -24,78 +25,57 @@ class User {
   });
 
   factory User.signUp(Map<String, dynamic> json) {
-    switch (json) {
-      case {
-          'code': 0,
-          'data': int,
-          'message': String,
-          'desc': String,
-        }:
-        return User();
-      default:
-        throw Exception('Failed to sign up user for api structure error');
+    print(json);
+    if (json['code'] == 20000 &&
+        json['data'] is int &&
+        json['msg'] is String &&
+        json['desc'] is String) {
+      debugPrint('12');
+      return User();
+    } else {
+      debugPrint('ohno');
+      throw Exception('Failed to sign up user for API structure error');
     }
   }
 
   factory User.login(Map<String, dynamic> json) {
-    switch (json) {
-      case {
-          'code': 0,
-          'data': {
-            'uid': int,
-            'username': String,
-            'passwd': String,
-            'phoneNum': String,
-            'email': String,
-            'birthday': String,
-            'gender': int,
-            'selfIntro': String,
-            'height': double,
-            'weight': double,
-            'avatar': String,
-            'preference': int,
-            'imgPost': String,
-            'createdAt': String,
-            'updatedAt': String,
-            'deleted': int,
-            'permission': int,
-          },
-          'message': String,
-          'desc': String,
-        }:
-        return User(
-          userId: json['data']['uid'],
-          userName: json['data']['username'],
-          phoneNumber: json['data']['phoneNum'],
-          email: json['data']['email'],
-          birthday: json['data']['birthday'],
-          gender: json['data']['gender'],
-          selfIntroduction: json['data']['selfIntro'],
-          height: json['data']['height'],
-          weight: json['data']['weight'],
-          avatar: json['data']['avatar'],
-          preference: json['data']['preference'],
-          imagePost: json['data']['imgPost'],
-          createdAt: json['data']['createdAt'],
-          updatedAt: json['data']['updatedAt'],
-          deleted: json['data']['deleted'],
-          permission: json['data']['permission'],
-        );
-      default:
-        throw Exception('Failed to login user for api structure error');
+    if (json['code'] == 20000 && json['data'] is Map<String, dynamic>) {
+      var data = json['data'];
+      return User(
+        userId: data['uid'],
+        userName: data['username'],
+        phoneNumber: data['phoneNum'] ?? '',
+        email: data['email'],
+        birthday: data['birthday'] ?? '',
+        gender: data['gender'] ?? 0,
+        selfIntroduction: data['selfIntro'] ?? '',
+        height: (data['height']?.toDouble()) ?? 0.0,
+        weight: (data['weight']?.toDouble()) ?? 0.0,
+        avatar: data['avatar'] ?? '',
+        preference: data['preference'] ?? 0,
+        imagePost: data['imgPost'] ?? '',
+        createdAt: data['createdAt'] ?? '',
+        updatedAt: data['updatedAt'] ?? '',
+        deleted: data['deleted'] ?? 0,
+        permission: data['permission'],
+      );
+    } else {
+      throw Exception('Failed to login user for API structure error');
     }
   }
+  
 
   Future<User> signUp(String userName, String email, String password,
       String verifyPassword) async {
     final response = await ApiService.post('user/register', body: {
+      'userEmail': email,
       'userName': userName,
-      'email': email,
-      'password': password,
+      'userPassword': password,
       'verifyPassword': verifyPassword
     });
 
     if (response.statusCode == 200) {
+      debugPrint('12345');
       return User.signUp(jsonDecode(response.body));
     } else {
       throw Exception('Failed to sign up user');
@@ -104,13 +84,13 @@ class User {
 
   Future<User> login(String email, String password) async {
     final response = await ApiService.post('user/login', body: {
-      'email': email,
-      'password': password,
+      'userEmail': email,
+      'userPassword': password
     });
-
     if (response.statusCode == 200) {
-      return User.signUp(jsonDecode(response.body));
-    } else {
+      // return User.signUp(jsonDecode(response.body));
+      return User.login(jsonDecode(response.body));
+    } else {      
       throw Exception('Failed to login user');
     }
   }
