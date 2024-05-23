@@ -25,15 +25,11 @@ class User {
   });
 
   factory User.signUp(Map<String, dynamic> json) {
-    print(json);
     if (json['code'] == 20000 &&
-        json['data'] is int &&
         json['msg'] is String &&
         json['desc'] is String) {
-      debugPrint('12');
       return User();
     } else {
-      debugPrint('ohno');
       throw Exception('Failed to sign up user for API structure error');
     }
   }
