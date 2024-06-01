@@ -80,7 +80,7 @@ class _IdeasDetailState extends State<IdeasDetail> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '用户名',
+                                  'Author Name',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18.0,
@@ -102,7 +102,7 @@ class _IdeasDetailState extends State<IdeasDetail> {
                       child: Material(
                         child: InkWell(
                           onTap: () {
-                            print('分享');
+                            print('share');
                           },
                           child: Container(
                             width: 34,
@@ -229,7 +229,7 @@ class _BottomBarState extends State<BottomBar> {
                           },
                           decoration: const InputDecoration(
                             
-                            hintText: '评论',
+                            hintText: 'Comment Here',
                             hintStyle: TextStyle(
                               color: Colors.grey,
                               fontSize: 14.0,
@@ -253,7 +253,7 @@ class _BottomBarState extends State<BottomBar> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      print('赞');
+                      print('Liked');
                       setState(() {
                       liked = !liked;
                     });
@@ -378,7 +378,7 @@ class _CommendListState extends State<CommendList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "标题部分。。。。",
+                    "The Title",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18.0,
@@ -388,7 +388,7 @@ class _CommendListState extends State<CommendList> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "正文部分。。。。123123 123 1231231231231 123123 123123 12123123123123123123123123123123123123123123123123",
+                    "Main Content abcdefg abc aaaaa 123123 12123123123123123123123123123123123123123123123123",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14.0,
@@ -449,7 +449,7 @@ class _CommendListState extends State<CommendList> {
                     children: [
                       Container(
                         child: const Text(
-                          '用户名',
+                          'Username',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 14.0,
@@ -461,7 +461,7 @@ class _CommendListState extends State<CommendList> {
                       Container(
                         margin: const EdgeInsets.only(top: 0),
                         child: Text(
-                          commends[index - 1],
+                          commends[index - 2],
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 14.0,

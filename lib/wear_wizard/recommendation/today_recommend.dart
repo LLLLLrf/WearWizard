@@ -32,9 +32,9 @@ class _TodayRecommendState extends State<TodayRecommend> {
 
 
   final imageUrls= [
-    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
-    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
-    'https://ww-1301781137.cos.ap-guangzhou.myqcloud.com/test/test.png',
+    'assets/images/model.png',
+    'assets/images/model.png',
+    'assets/images/model.png',
     // './assets/closet/OuterwearBG.jpg',
     // './assets/closet/BaseBG.png',
   ];

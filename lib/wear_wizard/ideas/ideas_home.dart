@@ -127,10 +127,11 @@ class IdeasList extends StatelessWidget {
         ),
         itemBuilder: (BuildContext context, int index) {
           // Generate random text for demonstration
-          String text = 'Item $index aascdsa asdfasd asdf';
+          String text = 'The Test Data $index';
           // Replace this with your actual image widget
           Widget imageWidget = Container(
             height: 40 + 70 * (index % 3),
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.primaries[index % Colors.primaries.length],
               borderRadius: const BorderRadius.only(
@@ -174,7 +175,8 @@ class IdeasList extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 6.0, vertical: 4.0),
+                        horizontal: 6.0, vertical: 6.0),
+                    width: double.infinity,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(

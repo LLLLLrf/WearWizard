@@ -25,12 +25,18 @@ class MyCarousel extends StatelessWidget {
                 return 
                 Stack(
                   children: [
-                    Image.network(
+                    Image.asset(
                       imageUrls[index],
                       fit: BoxFit.cover,
                       height: (screenWidth-40)*5/4, // 设置轮播图高度
                       width: screenWidth-40, // 设置轮播图宽度
                     ),
+                    // Image.network(
+                    //   imageUrls[index],
+                    //   fit: BoxFit.cover,
+                    //   height: (screenWidth-40)*5/4, // 设置轮播图高度
+                    //   width: screenWidth-40, // 设置轮播图宽度
+                    // ),
                     Positioned.fill(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
@@ -79,8 +85,8 @@ class MyCarousel extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.white,
                       ),
-                      // child: Image.asset('assets/button_image.png', width: 24, height: 24),
-                      child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
+                      child: Image.asset('assets/images/clothes.jpg', width: 48, height: 48),
+                      // child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -94,8 +100,8 @@ class MyCarousel extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.white,
                       ),
-                      // child: Image.asset('assets/button_image.png', width: 24, height: 24),
-                      child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
+                      child: Image.asset('assets/images/pants.jpg', width: 48, height: 48),
+                      // child: Image.network('https://via.placeholder.com/48x48/0000FF/FFFFFF'),
                     ),
                   ),
                 ],
