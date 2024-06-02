@@ -54,6 +54,7 @@ dependencies:
   tap_to_dismiss_keyboard: ^0.0.4
   animated_login: ^1.7.2
   http: ^1.2.1
+  shared_preferences: ^2.2.3
 
   # flutter_ncnn_yolov8_seg:
   #   path: ./plugins/flutter_ncnn_yolov8_seg
@@ -67,6 +68,10 @@ dev_dependencies:
   flutter_rating_bar: ^4.0.1
   intl: ^0.17.0
   animations: ^2.0.3
+  dio: ^4.0.0 
+  dio_log: ^2.0.3
+  permission_handler: ^11.3.1
+  multi_image_picker_plus: ^0.0.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -88,8 +93,8 @@ flutter:
     - assets/design_course/
     - assets/fitness_app/
     - assets/hotel/
-    - assets/introduction_animation/
     - assets/closet/
+    - assets/outfit/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

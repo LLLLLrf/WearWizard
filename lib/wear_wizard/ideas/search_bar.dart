@@ -1,8 +1,7 @@
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:wearwizard/wear_wizard/ideas/edit_page.dart';
 import 'package:wearwizard/wear_wizard/wearwizard_theme.dart';
-import 'edit_page.dart';
+import 'package:wearwizard/wear_wizard/ideas/edit_idea.dart';
 
 class SearchBarScreen extends StatefulWidget {
   const SearchBarScreen({Key? key}) : super(key: key);
@@ -110,7 +109,9 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EditPage()),
+                  MaterialPageRoute(builder: (context) => const EditIdea(
+                    index: 0,
+                  )),
                 );
               },
               icon: const Icon(

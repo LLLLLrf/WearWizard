@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 import 'package:wearwizard/app_theme.dart';
-import 'package:wearwizard/navigation_home_screen.dart';
 import 'package:wearwizard/wear_wizard/wearwizard_home_screen.dart';
 // flutter emulator --launch Pixel_6_Pro_API_33
 void main() async {

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import '../wearwizard_theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
+import 'package:wearwizard/wear_wizard/ideas/outfit_detail.dart';
 
 class MyRecommend extends StatefulWidget {
   const MyRecommend({Key? key}) : super(key: key);
@@ -245,109 +246,121 @@ class RecommendList extends StatelessWidget {
             alignment: Alignment.center,
           );
 
-          return Container(
-            margin: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-              boxShadow: const <BoxShadow>[
-                BoxShadow(
-                  color: Color.fromARGB(132, 190, 196, 196),
-                  offset: Offset(-2.0, 4.0),
-                  blurRadius: 6.0,
-                ),
-              ],
-              // border:Border.all(
-              //   color: Colors.white,
-              //   width: 1,
-              // ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Replace SizedBox with your image widget
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    // image: DecorationImage(
-                    //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
-                    //   fit: BoxFit.cover,
-                    // ),
-                    image: const DecorationImage(
-                      image: AssetImage('./assets/closet/OuterwearBG.jpg'),
-                      fit: BoxFit.cover,
-                    ),
+          return InkWell(
+            onTap: () => {
+              // navigate to detail page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const OutfitDeatailPage(
+                          index: 0,
+                        )),
+              )
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+                boxShadow: const <BoxShadow>[
+                  BoxShadow(
+                    color: Color.fromARGB(132, 190, 196, 196),
+                    offset: Offset(-2.0, 4.0),
+                    blurRadius: 6.0,
                   ),
-                  width: double.infinity, // Make image fill the width
-                  child: imageWidget,
-                ),
-                Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 6.0, vertical: 8.0),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
+                ],
+                // border:Border.all(
+                //   color: Colors.white,
+                //   width: 1,
+                // ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Replace SizedBox with your image widget
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      // image: DecorationImage(
+                      //   image: AssetImage('assets/images/ideas/idea_$index.jpg'),
+                      //   fit: BoxFit.cover,
+                      // ),
+                      image: const DecorationImage(
+                        image: AssetImage('./assets/closet/OuterwearBG.jpg'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 232, 232, 232),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              clipBehavior: Clip.hardEdge,
+                    width: double.infinity, // Make image fill the width
+                    child: imageWidget,
+                  ),
+                  Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0, vertical: 8.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
                               decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(180, 250, 250, 250),
-                                    blurRadius: 8,
-                                    spreadRadius: 8,
-                                  ),
-                                ],
+                                color: Color.fromARGB(255, 232, 232, 232),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Image(
-                                image:
-                                    AssetImage('./assets/closet/OuterwearBG.jpg'),
-                                width: 46,
-                                height: 46,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color.fromARGB(180, 250, 250, 250),
+                                      blurRadius: 8,
+                                      spreadRadius: 8,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Image(
+                                  image:
+                                      AssetImage('./assets/closet/OuterwearBG.jpg'),
+                                  width: 46,
+                                  height: 46,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 232, 232, 232),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              clipBehavior: Clip.hardEdge,
+                            Container(
                               decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color.fromARGB(180, 250, 250, 250),
-                                    blurRadius: 8,
-                                    spreadRadius: 8,
-                                  ),
-                                ],
+                                color: Color.fromARGB(255, 232, 232, 232),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Image(
-                                image:
-                                    AssetImage('./assets/closet/OuterwearBG.jpg'),
-                                width: 46,
-                                height: 46,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color.fromARGB(180, 250, 250, 250),
+                                      blurRadius: 8,
+                                      spreadRadius: 8,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Image(
+                                  image:
+                                      AssetImage('./assets/closet/OuterwearBG.jpg'),
+                                  width: 46,
+                                  height: 46,
+                                ),
                               ),
                             ),
-                          ),
-                        ])),
-              ],
+                          ])),
+                ],
+              ),
             ),
           );
         },
