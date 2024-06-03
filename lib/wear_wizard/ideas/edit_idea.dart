@@ -158,7 +158,6 @@ class _ImagesListState extends State<ImagesList> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             if (index < images.length) {
-              // 衣服图片item
               Asset asset = images[index];
               return Container(
                 margin: const EdgeInsets.only(left: 14, bottom: 10),
@@ -186,10 +185,8 @@ class _ImagesListState extends State<ImagesList> {
                 ),
               );
             } else {
-              // 添加衣服按钮
               return Container(
                 margin: const EdgeInsets.only(left: 14, bottom: 10, right: 20),
-                // padding: const EdgeInsets.all(14),
                 height: 140,
                 width: 140,
                 decoration: BoxDecoration(
@@ -286,7 +283,6 @@ class _TitleTextState extends State<TitleText> {
     super.initState();
     _titlefocusNode.addListener(() {
       if (!_titlefocusNode.hasFocus) {
-        // 如果失去焦点，则收起键盘
         _titlefocusNode.unfocus();
         setState(() {
           editing = false;
@@ -296,7 +292,6 @@ class _TitleTextState extends State<TitleText> {
   }
   @override
   void dispose() {
-    // 在组件销毁时释放焦点
     _titlefocusNode.dispose();
     super.dispose();
   }
@@ -381,7 +376,6 @@ class _ContentTextState extends State<ContentText> {
     super.initState();
     _ContentfocusNode.addListener(() {
       if (!_ContentfocusNode.hasFocus) {
-        // 如果失去焦点，则收起键盘
         _ContentfocusNode.unfocus();
         setState(() {
           editing = false;
@@ -391,7 +385,6 @@ class _ContentTextState extends State<ContentText> {
   }
   @override
   void dispose() {
-    // 在组件销毁时释放焦点
     _ContentfocusNode.dispose();
     super.dispose();
   }
