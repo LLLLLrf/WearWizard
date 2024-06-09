@@ -1,6 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:wearwizard/login/login_page.dart';
 import '../wearwizard_theme.dart';
+import 'package:wearwizard/services/api_http.dart';
+import 'package:async/async.dart';
+import 'package:wearwizard/login/dialog_builders.dart';
+import 'package:wearwizard/services/user_service.dart';
+import 'package:wearwizard/services/socialStatistics_service.dart';
 
 // 动态项
 class MyPostItem extends StatelessWidget {
@@ -57,7 +65,25 @@ class _UserScreenState extends State<UserScreen> {
     return Future.value(true);
   }
 
+  Future<void> getUserInfo() async {
+    User user = await User().getCurrentUser();
+    socialStatistics socialNum = await socialStatistics().getsocialStatistics();
+    setState(() {
+      userName = user.userName;
+      selfIntro = user.selfIntro;
+      momentNum = socialNum.moment_num.toString();
+      followNum = socialNum.follow_num.toString();
+      followerNum = socialNum.follower_num.toString();
+    });
+  }
+
   final ScrollController scrollController = ScrollController();
+
+  String? userName;
+  String? selfIntro;
+  String? momentNum;
+  String? followNum;
+  String? followerNum;
 
   @override
   void initState() {
@@ -67,6 +93,7 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getUserInfo();
     // final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
     // final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
     return Container(
@@ -88,7 +115,7 @@ class _UserScreenState extends State<UserScreen> {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          "./assets/closet/BottomBG.jpg",
+                          "./assets/images/background.jpg",
                           fit: BoxFit.cover,
                           height: 300,
                           width: double.infinity,
@@ -125,43 +152,55 @@ class _UserScreenState extends State<UserScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children:[
-                                const Row(
+                                Row(
                                   children: [
-                                    CircleAvatar(
+                                    const CircleAvatar(
                                       radius: 30,
                                       backgroundImage: AssetImage(
-                                        "./assets/closet/OuterwearBG.jpg",
+                                        "./assets/images/avatar.jpg",
                                       ),
                                     ),
-                                    SizedBox(width: 20),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "User Name",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                    const SizedBox(width: 20),
+                                    Material(
+                                      child: InkWell(
+                                        onTap: () => {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => const LoginPage()),
+                                          )
+                                        },
+                                        child:Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              userName ?? "Login now",
+                                              style: userName == null
+                                                ? const TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xFF00B6F0),
+                                                  )
+                                                : const TextStyle(
+                                                    fontSize: 20,
+                                                  ),
+                                            ),
+                                            Text(
+                                              selfIntro ?? "user self intro",
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "用户签名",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
-                              ),
+                                ),
                               Row(
                                 children: [
                                   InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                                      );
+                                    onTap: () => {
+                                      print("edit"),
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
@@ -190,28 +229,28 @@ class _UserScreenState extends State<UserScreen> {
                               ],
                             ),
                             const SizedBox(height: 20),
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Column(
                                   children: [
                                     // Text("发布",style: TextStyle(fontSize: 16,),),
-                                    Text("Moments",style: TextStyle(fontSize: 16,),),
-                                    Text("0",style: TextStyle(fontSize: 16,),),
+                                    const Text("Moments",style: TextStyle(fontSize: 16,),),
+                                    Text(momentNum ?? "0",style: const TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
                                     // Text("关注",style: TextStyle(fontSize: 16,),),
-                                    Text("Follow",style: TextStyle(fontSize: 16,),),
-                                    Text("0",style: TextStyle(fontSize: 16,),),
+                                    const Text("Follow",style: TextStyle(fontSize: 16,),),
+                                    Text(followNum ?? "0",style: const TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                                 Column(
                                   children: [
                                     // Text("粉丝",style: TextStyle(fontSize: 16,),),
-                                    Text("Follower",style: TextStyle(fontSize: 16,),),
-                                    Text("0",style: TextStyle(fontSize: 16,),),
+                                    const Text("Follower",style: TextStyle(fontSize: 16,),),
+                                    Text(followerNum ?? "0",style: const TextStyle(fontSize: 16,),),
                                   ],
                                 ),
                               ],
@@ -240,14 +279,11 @@ class _UserScreenState extends State<UserScreen> {
                         SizedBox(height: 10),
                         MyPostItem(
                           imageUrlList: [
-                            "./assets/closet/OuterwearBG.jpg",
-                            "./assets/closet/BottomBG.jpg",
-                            "./assets/closet/OuterwearBG.jpg",
-                            "./assets/closet/BottomBG.jpg",
-                            "./assets/closet/BottomBG.jpg",
-                            "./assets/closet/OuterwearBG.jpg",
-                            "./assets/closet/BottomBG.jpg",
-                            "./assets/closet/OuterwearBG.jpg",
+                            "./assets/outfit/640.jpg",
+                            "./assets/outfit/641.jpg",
+                            "./assets/outfit/642.jpg",
+                            "./assets/outfit/643.jpg",
+                            "./assets/outfit/644.jpg",
                           ],
                         ),
                       ],
