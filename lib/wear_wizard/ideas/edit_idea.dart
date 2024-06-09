@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,7 +11,9 @@ import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:tap_to_dismiss_keyboard/tap_to_dismiss_keyboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
@@ -47,31 +51,48 @@ class _EditIdeaState extends State<EditIdea> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 4, right: 2),
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Center(
-                            child: IconButton(
-                              iconSize: 22,
-                              icon: const Icon(Icons.arrow_back_ios_new,
-                                  color: Colors.grey),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
+                    Container(
+                      margin: const EdgeInsets.only(left: 4, right: 2),
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Center(
+                        child: IconButton(
+                          iconSize: 22,
+                          icon: const Icon(Icons.arrow_back_ios_new,
+                              color: Colors.grey),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ),
+                    Material(
+                      child: Container(
+                        margin: EdgeInsets.only(right:16),
+                        padding: EdgeInsets.symmetric(horizontal:8,vertical:4),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child:InkWell(
+                          onTap: () {
+                            // Publish
+                          },
+                          child: const Text(
+                            'Publish',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        )
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -105,6 +126,7 @@ class ImagesList extends StatefulWidget {
 
 class _ImagesListState extends State<ImagesList> {
   List<Asset> images = <Asset>[];
+  List<String> imageUrls = <String>[];
   String _error = 'No Error Dectected';
 
   Future<void> _loadAssets() async {
@@ -136,17 +158,45 @@ class _ImagesListState extends State<ImagesList> {
     } on Exception catch (e) {
       error = e.toString();
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
       images = resultList;
       _error = error;
     });
+
+    for (var image in images) {
+      File file = await getFileFromAsset(image);
+      await uploadImage(file);
+    }
+    
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
   }
+
+  Future<File> getFileFromAsset(Asset asset) async {
+    ByteData byteData = await asset.getByteData();
+    List<int> imageData = byteData.buffer.asUint8List();
+
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    File file = File('$tempPath/${asset.name}');
+    
+    return await file.writeAsBytes(imageData);
+  }
+
+  // get image url
+  Future<void> uploadImage(File file) async {
+    var request = http.MultipartRequest('POST', Uri.parse('http://8.134.164.130:8080/api/file/upload'));
+    request.files.add(await http.MultipartFile.fromPath('image', file.path));
+    request.fields['biz']='moment_img';
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+    print(response.body);
+    imageUrls.add(response.body);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -398,53 +448,47 @@ class _ContentTextState extends State<ContentText> {
     return Container(
       
       margin: const EdgeInsets.only(left: 5,right: 5),
-      child: Container(
-        height: 500,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Material(
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: screenWidth-40,
-                      height: 500,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: Container(
-                        child: TextField(
-                          maxLines: null,
-                          focusNode: _ContentfocusNode,
-                          onTap:() => {
-                            setState(() {
-                              editing = true;
-                            })
-                          },
-                          decoration: const InputDecoration(
-                            
-                            hintText: 'Content',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.normal,
-                              decoration: TextDecoration.none,
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(left: 10, bottom:14),
-                          ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Material(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: screenWidth-40,
+                    height: screenHeight-500,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                    child: TextField(
+                      maxLines: null,
+                      focusNode: _ContentfocusNode,
+                      onTap:() => {
+                        setState(() {
+                          editing = true;
+                        })
+                      },
+                      decoration: const InputDecoration(
+                        
+                        hintText: 'Content',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.normal,
+                          decoration: TextDecoration.none,
                         ),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 10, bottom:14),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

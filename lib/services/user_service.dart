@@ -71,7 +71,6 @@ class User {
     });
 
     if (response.statusCode == 200) {
-      debugPrint('12345');
       return User.signUp(jsonDecode(response.body));
     } else {
       throw Exception('Failed to sign up user');

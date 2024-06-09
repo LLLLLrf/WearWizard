@@ -16,12 +16,12 @@ class LoginPage extends StatelessWidget {
       title: 'Animated Login',
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 242, 243, 248),
-        colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 148, 169, 255)),
+        colorScheme:
+            const ColorScheme.light(primary: Color.fromARGB(255, 0, 182, 240)),
         // useMaterial3: true,
         textTheme: Theme.of(context)
             .textTheme
-            .apply(decorationColor: Color.fromARGB(255, 148, 169, 255)),
+            .apply(decorationColor: const Color.fromARGB(255, 0, 182, 240)),
         inputDecorationTheme: const InputDecorationTheme(
           prefixIconColor: Colors.black54,
           suffixIconColor: Colors.black54,
@@ -67,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
       signUpMode: SignUpModes.both,
       loginMobileTheme: _mobileTheme,
       loginTexts: _loginTexts,
-      emailValidator:
-          ValidatorModel(validatorCallback: (String? email) => '未找到此用户'),
+      emailValidator: ValidatorModel(
+          validatorCallback: (String? email) => 'Email format error'),
       passwordValidator: ValidatorModel(
         validatorCallback: (String? password) => '密码错误',
         checkUpperCase: false,
@@ -102,24 +102,24 @@ class _LoginScreenState extends State<LoginScreen> {
   /// You can also set some additional display options such as [showLabelTexts].
   LoginViewTheme get _mobileTheme => LoginViewTheme(
         // showLabelTexts: false,
-        backgroundColor: Color.fromARGB(255, 148, 169, 255),
+        backgroundColor: const Color.fromARGB(255, 0, 182, 240),
         formFieldBackgroundColor: Colors.white,
         logoSize: Size(MediaQuery.of(context).size.width * 0.5,
             MediaQuery.of(context).size.height * 0.3),
         formWidthRatio: 60,
         actionButtonStyle: ButtonStyle(
           foregroundColor:
-              MaterialStateProperty.all(Color.fromARGB(255, 148, 169, 255)),
+              MaterialStateProperty.all(const Color.fromARGB(255, 0, 182, 240)),
           textStyle: MaterialStateProperty.all(const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 148, 169, 255))),
+              color: Color.fromARGB(255, 0, 182, 240))),
         ),
         changeActionButtonStyle: ButtonStyle(
           textStyle: MaterialStateProperty.all(const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 148, 169, 255))),
+              color: Color.fromARGB(255, 0, 182, 240))),
         ),
         animatedComponentOrder: const <AnimatedComponent>[
           AnimatedComponent(
@@ -136,13 +136,13 @@ class _LoginScreenState extends State<LoginScreen> {
           AnimatedComponent(component: LoginComponents.changeActionButton),
           AnimatedComponent(component: LoginComponents.actionButton),
         ],
-        textFormStyle:
-            TextStyle(color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
-        welcomeTitleStyle:
-            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
-        welcomeDescriptionStyle:
-            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
-        forgotPasswordStyle: TextStyle(
+        textFormStyle: const TextStyle(
+            color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
+        welcomeTitleStyle: const TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
+        welcomeDescriptionStyle: const TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+        forgotPasswordStyle: const TextStyle(
             color: Color.fromARGB(255, 255, 255, 255),
             decorationColor: Color.fromARGB(255, 255, 255, 255)),
       );

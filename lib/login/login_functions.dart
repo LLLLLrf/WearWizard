@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dialog_builders.dart';
 
 import 'package:wearwizard/services/user_service.dart';
+import 'package:wearwizard/wear_wizard/user/user_page.dart';
+import 'package:wearwizard/login/login_page.dart';
 
 class LoginFunctions {
   /// Collection of functions will be performed on login/signup.
@@ -12,9 +14,10 @@ class LoginFunctions {
 
   Future<String?> onLogin(LoginData data) async {
     try {
-      User user = User();
-      user = await user.login(data.email, data.password);
-      // TODO: process user info to person page
+      User user = await User().login(data.email, data.password);
+      UserScreen userScreen = UserScreen();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => userScreen));
     } catch (e) {
       return 'Login failed';
     }
@@ -25,7 +28,10 @@ class LoginFunctions {
     try {
       User user = await User()
           .signUp(data.name, data.email, data.password, data.confirmPassword);
-      // TODO: jump to login page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
     } catch (e) {
       return 'Sign up failed';
     }
