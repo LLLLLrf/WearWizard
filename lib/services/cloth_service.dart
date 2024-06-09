@@ -8,9 +8,20 @@ enum Season { spring, summer, autumn, winter }
 
 enum Style { casual, formal, sporty, elegant }
 
+enum CategoryType { base, bottom, outerwear, accessories }
+
+Map<CategoryType, String> categoryMap = {
+  CategoryType.base: 'base',
+  CategoryType.bottom: 'bottom',
+  CategoryType.outerwear: 'outerwear',
+  CategoryType.accessories: 'accessories',
+};
+
 class Cloth {
+  String picture;
   Cloth({
-    picture,
+    id,
+    this.picture = '',
     note,
     category,
     season,
@@ -47,6 +58,29 @@ class Cloth {
       return Cloth.add(jsonDecode(response.body));
     } else {
       throw Exception('Failed to add cloth for API error');
+    }
+  }
+
+  Future<List<Cloth>> getClothesByCategory(
+      CategoryType category, int page, int pageSize) async {
+    final response = await ApiService.get(
+        'clothes/getByCategory?category=${categoryMap[category]}&page=$page&pageSize=$pageSize');
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      try {
+        List<Cloth> clothes = [];
+        for (var item in json['data']) {
+          clothes.add(Cloth(
+            picture: item,
+          ));
+        }
+        return clothes;
+      } catch (e) {
+        throw Exception('Failed to get clothes for API structure error');
+      }
+    } else {
+      throw Exception('Failed to get clothes for API error');
     }
   }
 }

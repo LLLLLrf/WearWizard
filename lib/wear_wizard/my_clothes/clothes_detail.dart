@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +10,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import '../wearwizard_theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
+
+import 'package:wearwizard/services/cloth_service.dart';
 
 class ClothesDetail extends StatefulWidget {
   final int index;
@@ -46,16 +50,18 @@ class _ClothesDetailState extends State<ClothesDetail> {
   ];
   // final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
 
+  List<String> clothesPic = [];
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 0), () {
-      setupData();
+    Future.delayed(Duration.zero, () async {
+      await setupData();
       setState(() {});
     });
   }
 
-  void setupData() {
+  Future<void> setupData() async {
     // items1 = List.generate(
     //   6,
     //   (index) => DropDownItem(
@@ -86,6 +92,13 @@ class _ClothesDetailState extends State<ClothesDetail> {
         data: index,
       ),
     );
+
+    var clothes = await Cloth()
+        .getClothesByCategory(CategoryType.values[widget.index], 1, 10);
+
+    for (var cloth in clothes) {
+      clothesPic.add(cloth.picture);
+    }
   }
 
   @override
@@ -254,7 +267,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
               color: WearWizardTheme.background,
               margin: EdgeInsets.only(top: 90.0),
               padding: EdgeInsets.only(left: 10, right: 10),
-              child: ClothesItemList(),
+              child: ClothesItemList(clothesPic),
             ),
           ],
         ),
@@ -264,13 +277,12 @@ class _ClothesDetailState extends State<ClothesDetail> {
 }
 
 class ClothesItemList extends StatelessWidget {
+  final List<String> pictures;
   final double screenWidth =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
   final double screenHeight =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
-  ClothesItemList({Key? key}) : super(key: key);
-
-  List<int> clothesList = [1, 2, 3, 4, 5, 6, 7];
+  ClothesItemList(this.pictures, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -345,8 +357,8 @@ class ClothesItemList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  image: const DecorationImage(
-                    image: AssetImage('./assets/closet/OuterwearBG.jpg'),
+                  image: DecorationImage(
+                    image: NetworkImage(pictures[index - 1]),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -356,7 +368,7 @@ class ClothesItemList extends StatelessWidget {
             );
           }
         },
-        itemCount: clothesList.length + 1,
+        itemCount: pictures.length + 1,
       ),
     );
   }
