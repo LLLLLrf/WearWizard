@@ -5,7 +5,6 @@ import 'package:http/http.dart';
 import '../wearwizard_theme.dart';
 import 'package:wearwizard/services/api_http.dart';
 import 'package:async/async.dart';
-import 'package:wearwizard/login/dialog_builders.dart';
 import 'package:wearwizard/services/user_service.dart';
 import 'package:wearwizard/services/socialStatistics_service.dart';
 import 'package:wearwizard/wear_wizard/login/login_page.dart';
