@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:wearwizard/fitness_app/fitness_app_theme.dart';
@@ -17,6 +18,8 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
+import 'package:wearwizard/services/api_http.dart';
+
 
 class EditIdea extends StatefulWidget {
   final AnimationController? animationController;
@@ -34,7 +37,47 @@ class _EditIdeaState extends State<EditIdea> {
   final double screenHeight =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
-  @override
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController contentController = TextEditingController();
+  List<String> imageUrls = [];
+
+  // 发布时获取内容并整合的方法
+  void _handlePublish() {
+    // 获取TextField内容
+    String title = titleController.text;
+    String content = contentController.text;
+    // 打印整合后的内容
+    print('Title: $title');
+    print('Content: $content');
+    print('urls: $imageUrls');
+    
+    // 发布内容
+    ApiService.post(
+      'moment/publish',
+      body: {
+        'title': title,
+        'content': content,
+        'picList': imageUrls.join(','),
+      },
+    ).then((response) {
+      print(response.body);
+      if (response.statusCode == 200) {
+        // 发布成功
+        Navigator.pop(context);
+      } else {
+        // 发布失败
+        print('Failed to publish');
+      }
+    });
+  }
+
+  void _updateImageUrls(List<String> newUrls) {
+    setState(() {
+      imageUrls = newUrls;
+    });
+  }
+
+   @override
   Widget build(BuildContext context) {
     return TapToDissmissKeyboard(
       child: Container(
@@ -62,8 +105,7 @@ class _EditIdeaState extends State<EditIdea> {
                       child: Center(
                         child: IconButton(
                           iconSize: 22,
-                          icon: const Icon(Icons.arrow_back_ios_new,
-                              color: Colors.grey),
+                          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.grey),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -72,15 +114,16 @@ class _EditIdeaState extends State<EditIdea> {
                     ),
                     Material(
                       child: Container(
-                        margin: EdgeInsets.only(right:16),
-                        padding: EdgeInsets.symmetric(horizontal:8,vertical:4),
+                        margin: const EdgeInsets.only(right: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child:InkWell(
+                        child: InkWell(
                           onTap: () {
-                            // Publish
+                            // 获取内容并整合
+                            _handlePublish();
                           },
                           child: const Text(
                             'Publish',
@@ -90,21 +133,21 @@ class _EditIdeaState extends State<EditIdea> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        )
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 50.0),
+              Padding(
+                padding: const EdgeInsets.only(top: 50.0),
                 child: Column(
                   children: [
-                    ImagesList(),
-                    SizedBox(
+                    ImagesList(onImageUrlsChanged: _updateImageUrls),
+                    const SizedBox(
                       height: 6,
                     ),
-                    MomentContent()
+                    MomentContent(TitleController: titleController, ContentController: contentController,)
                   ],
                 ),
               ),
@@ -118,14 +161,16 @@ class _EditIdeaState extends State<EditIdea> {
 
 // 图片列表
 class ImagesList extends StatefulWidget {
-  const ImagesList({Key? key}) : super(key: key);
+  final Function(List<String>) onImageUrlsChanged;
+
+  const ImagesList({Key? key, required this.onImageUrlsChanged}) : super(key: key);
 
   @override
   State<ImagesList> createState() => _ImagesListState();
 }
 
 class _ImagesListState extends State<ImagesList> {
-  List<Asset> images = <Asset>[];
+  List<XFile> images = <XFile>[];
   List<String> imageUrls = <String>[];
   String _error = 'No Error Dectected';
 
@@ -138,63 +183,49 @@ class _ImagesListState extends State<ImagesList> {
       background: Colors.blue,
       onBackground: Colors.white,);
 
-    List<Asset> resultList = <Asset>[];
+    List<XFile> resultList = <XFile>[];
     String error = 'No Error Dectected';
 
     try {
-      resultList = await MultiImagePicker.pickImages(
-        selectedAssets: images,
-        androidOptions: AndroidOptions(
-          actionBarColor: colorScheme.surface,
-          actionBarTitleColor: colorScheme.onSurface,
-          statusBarColor: colorScheme.surface,
-          actionBarTitle: "Select Photo",
-          allViewTitle: "All Photos",
-          useDetailsView: false,
-          selectCircleStrokeColor: colorScheme.primary,
-          maxImages: 9,
-        ),
+      resultList = await ImagePicker().pickMultiImage(
+        maxWidth: 300,
+        maxHeight: 300,
+        imageQuality: 50,
+        limit:9,
       );
+      // resultList.add(result[0]);
     } on Exception catch (e) {
       error = e.toString();
     }
     if (!mounted) return;
 
     setState(() {
-      images = resultList;
+      // images = resultList;
+      images.add(resultList[0]);
       _error = error;
     });
 
     for (var image in images) {
-      File file = await getFileFromAsset(image);
-      await uploadImage(file);
+      await uploadImage(image);
     }
     
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-  }
-
-  Future<File> getFileFromAsset(Asset asset) async {
-    ByteData byteData = await asset.getByteData();
-    List<int> imageData = byteData.buffer.asUint8List();
-
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-    File file = File('$tempPath/${asset.name}');
-    
-    return await file.writeAsBytes(imageData);
   }
 
   // get image url
-  Future<void> uploadImage(File file) async {
-    var request = http.MultipartRequest('POST', Uri.parse('http://8.134.164.130:8080/api/file/upload'));
-    request.files.add(await http.MultipartFile.fromPath('image', file.path));
-    request.fields['biz']='moment_img';
-    var res = await request.send();
-    var response = await http.Response.fromStream(res);
+  Future<void> uploadImage(XFile file) async {
+    final response = await ApiService.postFile(
+      'file/upload',
+      body: {'biz': 'moment_img'},
+      file:{'file': file.path},
+    );
     print(response.body);
-    imageUrls.add(response.body);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      imageUrls.add(data['data']);
+      widget.onImageUrlsChanged(imageUrls);
+    } else {
+      throw Exception('Failed to upload file');
+    }
   }
 
 
@@ -208,7 +239,7 @@ class _ImagesListState extends State<ImagesList> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             if (index < images.length) {
-              Asset asset = images[index];
+              XFile asset = images[index];
               return Container(
                 margin: const EdgeInsets.only(left: 14, bottom: 10),
                 padding: const EdgeInsets.all(14),
@@ -227,12 +258,15 @@ class _ImagesListState extends State<ImagesList> {
                       offset: const Offset(2, 4),
                     ),
                   ],
-                  image: DecorationImage(
-                    image: AssetThumbImageProvider(asset, width: 140, height: 140),
-                    fit: BoxFit.cover,
-                  ),
-                  
+                  // image: DecorationImage(
+                    // image: AssetThumbImageProvider(asset, width: 140, height: 140),
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
+                  child:Image.file(
+                    File(asset.path),
+                    fit: BoxFit.cover,
+                  )
               );
             } else {
               return Container(
@@ -278,7 +312,10 @@ class _ImagesListState extends State<ImagesList> {
 }
 
 class MomentContent extends StatefulWidget {
-  const MomentContent({Key? key}) : super(key: key);
+  final TextEditingController TitleController; // 添加控制器
+  final TextEditingController ContentController; // 添加控制器
+
+  const MomentContent({Key? key, required this.TitleController, required this.ContentController}) : super(key: key);
 
   @override
   _MomentContentState createState() => _MomentContentState();
@@ -300,7 +337,7 @@ class _MomentContentState extends State<MomentContent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TitleText(),
+            TitleText(controller:widget.TitleController),
             Container(
               margin: const EdgeInsets.only(top: 10),
               height: 0.8,
@@ -308,7 +345,7 @@ class _MomentContentState extends State<MomentContent> {
               color: Colors.grey.withOpacity(0.2),
             ),
             const SizedBox(height: 8),
-            const ContentText(),
+            ContentText(controller: widget.ContentController,),
           ],
         )
       ),
@@ -317,8 +354,10 @@ class _MomentContentState extends State<MomentContent> {
 }
 
 class TitleText extends StatefulWidget {
-  const TitleText({Key? key}) : super(key: key);
-  
+  final TextEditingController controller; // 添加控制器
+
+  const TitleText({Key? key, required this.controller}) : super(key: key);
+
   @override
   _TitleTextState createState() => _TitleTextState();
 }
@@ -374,6 +413,7 @@ class _TitleTextState extends State<TitleText> {
                       ),
                       child: Container(
                         child: TextField(
+                          controller: widget.controller, // 绑定控制器
                           focusNode: _titlefocusNode,
                           onTap:() => {
                             setState(() {
@@ -410,7 +450,8 @@ class _TitleTextState extends State<TitleText> {
 }
 
 class ContentText extends StatefulWidget {
-  const ContentText({Key? key}) : super(key: key);
+  final TextEditingController controller; // 添加控制器
+  const ContentText({Key? key, required this.controller}) : super(key: key);
   
   @override
   _ContentTextState createState() => _ContentTextState();
@@ -463,6 +504,7 @@ class _ContentTextState extends State<ContentText> {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     child: TextField(
+                      controller: widget.controller, // 绑定控制器
                       maxLines: null,
                       focusNode: _ContentfocusNode,
                       onTap:() => {

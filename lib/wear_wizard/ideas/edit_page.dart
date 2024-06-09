@@ -100,6 +100,7 @@ class _EditPageState extends State<EditPage> {
                     onTap: () {
                       // print('保存');
                       print('Save');
+                      Navigator.pop(context);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -237,8 +238,8 @@ class _ClothesFormState extends State<ClothesForm>
                         },
                         clickable: Clickable.everywhere,
                         firstChild: Container(
-                          margin: EdgeInsets.only(left: screenWidth - 140),
-                          width: 60,
+                          margin: EdgeInsets.only(left: screenWidth - 158),
+                          width: 100,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -277,6 +278,10 @@ class _ClothesFormState extends State<ClothesForm>
                                         _animationController.forward();
                                       }
                                       print("Click ${selectSituation}");
+                                      setState(() {
+                                        isExpanded = false;
+                                      });
+                                      
                                       // print("点击${selectSituation}");
                                     },
                                     child: const Row(
@@ -309,6 +314,9 @@ class _ClothesFormState extends State<ClothesForm>
                                         _animationController.forward();
                                       }
                                       print("Click ${selectSituation}");
+                                      setState(() {
+                                        isExpanded = false;
+                                      });
                                       // print("点击${selectSituation}");
                                     },
                                     child: const Row(
@@ -342,6 +350,9 @@ class _ClothesFormState extends State<ClothesForm>
                                       }
                                       // print("点击${selectSituation}");
                                       print("Click ${selectSituation}");
+                                      setState(() {
+                                        isExpanded = false;
+                                      });
                                     },
                                     child: const Row(
                                       children: [
@@ -373,6 +384,9 @@ class _ClothesFormState extends State<ClothesForm>
                                         _animationController.forward();
                                       }
                                       print("Click ${selectSituation}");
+                                      setState(() {
+                                        isExpanded = false;
+                                      });
                                       // print("点击${selectSituation}");
                                     },
                                     child: const Row(
@@ -661,9 +675,9 @@ class ClothesList extends StatefulWidget {
 
 class _ClothesListState extends State<ClothesList> {
   List<String> images = [
-    "assets/closet/BaseBG.png",
     "assets/closet/OuterwearBG.jpg",
-    "assets/closet/BaseBG.png",
+    "assets/closet/OuterwearBG.jpg",
+    "assets/closet/OuterwearBG.jpg",
     "assets/closet/OuterwearBG.jpg",
   ];
 
@@ -799,7 +813,7 @@ class _ClothesCarouselState extends State<ClothesCarousel> {
                     // height: 440,
                     // width: 330,
                     child: Image.asset(
-                      "assets/closet/BaseBG.png",
+                      "assets/closet/OuterwearBG.jpg",
                       fit: BoxFit.cover,
                     ),
                   ),
