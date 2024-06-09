@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -5,7 +7,7 @@ import 'package:waterfall_flow/waterfall_flow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:wearwizard/fitness_app/fitness_app_theme.dart';
 import 'package:wearwizard/wear_wizard/ideas/ideas_detail.dart';
-
+import 'package:wearwizard/services/api_http.dart';
 import 'search_bar.dart';
 
 class IdeasHome extends StatefulWidget {
@@ -23,6 +25,21 @@ class _IdeasHomeState extends State<IdeasHome> {
   final double screenHeight =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
+  var reco_data;
+  void initState() {
+    super.initState();
+    ApiService.get(
+      'user/getRecommendation?pageSize=30&pageNum=1',
+    ).then((response){
+      if (response.statusCode == 200 ) {
+        reco_data=jsonDecode(response.body);
+        print('response: $reco_data');
+        print(reco_data['code']);
+      } else {
+        print('Failed to get data from server');
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,12 +52,12 @@ class _IdeasHomeState extends State<IdeasHome> {
             ContainedTabBarView(
               tabs: const [
                 Text(
-                  // '关注',
-                  'Follow',
-                ),
-                Text(
                   // '广场',
                   'Discover',
+                ),
+                Text(
+                  // '关注',
+                  'Follow',
                 ),
               ],
               tabBarProperties: TabBarProperties(
@@ -74,16 +91,13 @@ class _IdeasHomeState extends State<IdeasHome> {
                 ),
               ),
               views: [
-                const IdeasList(),
-                Container(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    child: const Center(child: Text("这页还没写"))),
+                IdeasList(data:0),
+                IdeasList(data:1),
               ],
               onChange: (index) => print(index),
             ),
           ),
           Container(
-            // color: WearWizardTheme.background,
             color: const Color.fromARGB(255, 255, 255, 255),
             margin: const EdgeInsets.only(top: 98.0),
             height: 2,
@@ -112,7 +126,8 @@ class _IdeasHomeState extends State<IdeasHome> {
 }
 
 class IdeasList extends StatelessWidget {
-  const IdeasList({Key? key}) : super(key: key);
+  var data;
+  IdeasList({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
