@@ -89,7 +89,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
   Future<void> setupData() async {
 
     var clothes = await Cloth()
-        .getClothesByCategory(CategoryType.values[widget.index], 1, 10);
+        .getClothesByCategory(CategoryType.values[widget.index], 1, 20);
 
     for (var cloth in clothes) {
       clothesPic.add(cloth.picture);

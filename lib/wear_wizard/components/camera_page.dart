@@ -10,6 +10,12 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:wearwizard/services/cloth_service.dart';
 
+enum ControlState {
+  stream,
+  capture,
+  waiting,
+}
+
 late List<CameraDescription> _cameras;
 final double screenWidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -30,6 +36,8 @@ class _CameraAppState extends State<CameraApp> {
   // bool _isCameraInitialized = true;
   bool _isCameraInitialized = false;
 
+  ControlState _controlState = ControlState.waiting;
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +54,7 @@ class _CameraAppState extends State<CameraApp> {
         // });
         setState(() {
           _isCameraInitialized = true;
+          _controlState = ControlState.stream;
         });
       }).catchError((Object e) {
         if (e is CameraException) {
@@ -93,95 +102,99 @@ class _CameraAppState extends State<CameraApp> {
         //   color: Colors.white.withOpacity(0.7),
         // ),
 
-        CustomPaint(
-          size: const Size(double.infinity, double.infinity),
-          painter: BackgroundPainter(),
-        ),
-        // 中间的内容
-        Center(
-          child: Container(
-            alignment: Alignment.center,
-            child: const Text(
-              "Scanner",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
+        if (_controlState == ControlState.capture)
+          CustomPaint(
+            size: const Size(double.infinity, double.infinity),
+            painter: BackgroundPainter(),
+          ),
+        if (_controlState == ControlState.capture)
+          // 中间的内容
+          Center(
+            child: Container(
+              alignment: Alignment.center,
+              child: const Text(
+                "Scanner",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
               ),
             ),
           ),
-        ),
-        // 半透明蓝色矩形
-        Positioned(
-          top: MediaQuery.of(context).size.height * 0.2 - 40, // 在挖空矩形上方40个像素
-          left: MediaQuery.of(context).size.width * 0.2, // 位置与挖空矩形左边对齐
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: 40, // 高度稍短一点
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 67, 170, 255)
-                  .withOpacity(0.5), // 半透明蓝色
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20), // 左上角圆角
-                topRight: Radius.circular(20), // 右上角圆角
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: const Text(
-                    "上衣-98%",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
+        if (_controlState == ControlState.capture)
+          // 半透明蓝色矩形
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.2 - 40, // 在挖空矩形上方40个像素
+            left: MediaQuery.of(context).size.width * 0.2, // 位置与挖空矩形左边对齐
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: 40, // 高度稍短一点
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 67, 170, 255)
+                    .withOpacity(0.5), // 半透明蓝色
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20), // 左上角圆角
+                  topRight: Radius.circular(20), // 右上角圆角
                 ),
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  width:
-                      MediaQuery.of(context).size.width * 0.6 * 0.52, // 宽度的20%
-                  height: 26,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20), // 右上角圆角
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: const Text(
+                      "上衣-98%",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 8),
-                        child: const Icon(
-                          Icons.add_circle,
-                          size: 24,
-                          color: Color.fromARGB(255, 106, 171, 225),
-                        ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: MediaQuery.of(context).size.width *
+                        0.6 *
+                        0.52, // 宽度的20%
+                    height: 26,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20), // 右上角圆角
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        height: 26,
-                        child: const Text(
-                          "添加到衣柜",
-                          style: TextStyle(
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => {print('Add to closet')},
+                          child: const Icon(
+                            Icons.add_circle,
+                            size: 24,
                             color: Color.fromARGB(255, 106, 171, 225),
-                            fontSize: 16.0,
-                            decoration: TextDecoration.none,
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          height: 26,
+                          child: const Text(
+                            "添加到衣柜",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 106, 171, 225),
+                              fontSize: 16.0,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -196,8 +209,15 @@ class _CameraAppState extends State<CameraApp> {
                   overlayColor: MaterialStateProperty.resolveWith(
                     (states) => Colors.transparent,
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
+                  onTap: () async {
+                    if (_controlState == ControlState.capture) {
+                      await _controller.resumePreview();
+                      setState(() {
+                        _controlState = ControlState.stream;
+                      });
+                    } else if (_controlState == ControlState.stream) {
+                      Navigator.pop(context);
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(10),
@@ -260,7 +280,6 @@ class _CameraAppState extends State<CameraApp> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    // TODO: Capture the image
                     try {
                       // Ensure that the camera is initialized.
                       await _initializeControllerFuture;
@@ -268,11 +287,19 @@ class _CameraAppState extends State<CameraApp> {
                       // Attempt to take a picture and then get the location
                       // where the image file is saved.
                       final image = await _controller.takePicture();
+                      await _controller.pausePreview();
                       await Cloth().add(image.path, 'note', 'base',
                           Season.spring, 'colorType', Style.casual);
+
+                      setState(() {
+                        _controlState = ControlState.capture;
+                      });
                     } catch (e) {
                       // If an error occurs, log the error to the console.
                       print(e);
+                      setState(() {
+                        _controlState = ControlState.stream;
+                      });
                     }
                   },
                   child: Stack(

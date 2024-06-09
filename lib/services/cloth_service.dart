@@ -68,11 +68,13 @@ class Cloth {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
+      print(json);
       try {
         List<Cloth> clothes = [];
         for (var item in json['data']) {
           clothes.add(Cloth(
-            picture: item,
+            id: item['clothesId'],
+            picture: item['pic'],
           ));
         }
         return clothes;
