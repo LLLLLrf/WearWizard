@@ -4,9 +4,14 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 import 'package:wearwizard/app_theme.dart';
 import 'package:wearwizard/wear_wizard/wearwizard_home_screen.dart';
+import 'package:localstorage/localstorage.dart';
+
 // flutter emulator --launch Pixel_6_Pro_API_33
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initLocalStorage();
+
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown

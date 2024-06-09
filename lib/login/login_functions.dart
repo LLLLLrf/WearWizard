@@ -12,7 +12,8 @@ class LoginFunctions {
 
   Future<String?> onLogin(LoginData data) async {
     try {
-      User user = await User().login(data.email, data.password);
+      User user = User();
+      user = await user.login(data.email, data.password);
       // TODO: process user info to person page
     } catch (e) {
       return 'Login failed';

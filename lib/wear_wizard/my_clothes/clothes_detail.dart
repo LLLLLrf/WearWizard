@@ -11,7 +11,7 @@ import 'package:waterfall_flow/waterfall_flow.dart';
 
 class ClothesDetail extends StatefulWidget {
   final int index;
-  
+
   const ClothesDetail({Key? key, required this.index}) : super(key: key);
 
   @override
@@ -20,7 +20,8 @@ class ClothesDetail extends StatefulWidget {
 
 class _ClothesDetailState extends State<ClothesDetail> {
   final DropDownController dropDownController = DropDownController();
-  final DropDownDisposeController dropDownDisposeController = DropDownDisposeController();
+  final DropDownDisposeController dropDownDisposeController =
+      DropDownDisposeController();
   List<DropDownItem> items1 = [
     // DropDownItem(text: "内搭", data: 0),
     // DropDownItem(text: "下装", data: 1),
@@ -37,7 +38,12 @@ class _ClothesDetailState extends State<ClothesDetail> {
 
   bool _landscape = false;
 
-  final List<String> ClothesList = ['Base', 'Bottom', 'Outerwear', 'Accessories'];
+  final List<String> ClothesList = [
+    'Base',
+    'Bottom',
+    'Outerwear',
+    'Accessories'
+  ];
   // final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
 
   @override
@@ -245,9 +251,9 @@ class _ClothesDetailState extends State<ClothesDetail> {
               ),
             ),
             Container(
-              color:WearWizardTheme.background,
+              color: WearWizardTheme.background,
               margin: EdgeInsets.only(top: 90.0),
-              padding: EdgeInsets.only(left:10,right:10),
+              padding: EdgeInsets.only(left: 10, right: 10),
               child: ClothesItemList(),
             ),
           ],
@@ -257,14 +263,14 @@ class _ClothesDetailState extends State<ClothesDetail> {
   }
 }
 
-
-
 class ClothesItemList extends StatelessWidget {
-  final double screenWidth =MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-  final double screenHeight =MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
+  final double screenWidth =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  final double screenHeight =
+      MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
   ClothesItemList({Key? key}) : super(key: key);
 
-  List<int> clothesList = [1,2,3,4,5,6,7];
+  List<int> clothesList = [1, 2, 3, 4, 5, 6, 7];
 
   @override
   Widget build(BuildContext context) {
@@ -276,11 +282,9 @@ class ClothesItemList extends StatelessWidget {
           crossAxisSpacing: 10.0,
           // mainAxisSpacing: 10.0,
         ),
-
         itemBuilder: (BuildContext context, int index) {
           // Replace this with your actual image widget
           Widget imageWidget = Container(
-            
             decoration: const BoxDecoration(
               // color: Colors.primaries[index % Colors.primaries.length],
               borderRadius: BorderRadius.all(
@@ -289,9 +293,9 @@ class ClothesItemList extends StatelessWidget {
             ),
             alignment: Alignment.center,
           );
-          if(index==0){
+          if (index == 0) {
             return Container(
-              height: (screenWidth-40)/3,
+              height: (screenWidth - 40) / 3,
               margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -307,27 +311,25 @@ class ClothesItemList extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: Material(
                 color: Colors.white,
-                child:InkWell(
-                  onTap: () => {
-                    print("add new clothes")
-                  },
+                child: InkWell(
+                  onTap: () => {print("add new clothes")},
                   child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: const Icon(
-                        Icons.add_circle_rounded,
-                        color: Color.fromARGB(255, 219, 219, 219),
-                        size: 50,
-                      ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
                     ),
+                    clipBehavior: Clip.antiAlias,
+                    child: const Icon(
+                      Icons.add_circle_rounded,
+                      color: Color.fromARGB(255, 219, 219, 219),
+                      size: 50,
+                    ),
+                  ),
                 ),
               ),
             );
-          }else{
+          } else {
             return Container(
-              height: (screenWidth-40)/3,
+              height: (screenWidth - 40) / 3,
               margin: const EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -339,7 +341,6 @@ class ClothesItemList extends StatelessWidget {
                     blurRadius: 6.0,
                   ),
                 ],
-                
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -355,7 +356,7 @@ class ClothesItemList extends StatelessWidget {
             );
           }
         },
-        itemCount: clothesList.length+1,
+        itemCount: clothesList.length + 1,
       ),
     );
   }

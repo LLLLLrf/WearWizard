@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:wearwizard/services/api_http.dart';
 
 class User {
@@ -59,7 +60,6 @@ class User {
       throw Exception('Failed to login user for API structure error');
     }
   }
-  
 
   Future<User> signUp(String userName, String email, String password,
       String verifyPassword) async {
@@ -79,14 +79,14 @@ class User {
   }
 
   Future<User> login(String email, String password) async {
-    final response = await ApiService.post('user/login', body: {
-      'userEmail': email,
-      'userPassword': password
-    });
+    final response = await ApiService.post('user/login',
+        body: {'userEmail': email, 'userPassword': password});
+
     if (response.statusCode == 200) {
-      // return User.signUp(jsonDecode(response.body));
+      localStorage.setItem('cookie', response.headers['set-cookie']!);
+
       return User.login(jsonDecode(response.body));
-    } else {      
+    } else {
       throw Exception('Failed to login user');
     }
   }

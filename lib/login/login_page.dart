@@ -69,6 +69,10 @@ class _LoginScreenState extends State<LoginScreen> {
       loginTexts: _loginTexts,
       emailValidator:
           ValidatorModel(validatorCallback: (String? email) => '未找到此用户'),
+      passwordValidator: ValidatorModel(
+        validatorCallback: (String? password) => '密码错误',
+        checkUpperCase: false,
+      ),
       initialMode: currentMode,
       onAuthModeChange: (AuthMode newMode) async {
         currentMode = newMode;

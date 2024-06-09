@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image/image.dart' as imglib;
+import 'package:image_picker/image_picker.dart';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:wearwizard/services/cloth_service.dart';
 
 late List<CameraDescription> _cameras;
 final double screenWidth =
@@ -23,7 +25,8 @@ class CameraApp extends StatefulWidget {
 }
 
 class _CameraAppState extends State<CameraApp> {
-  late CameraController controller;
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
   // bool _isCameraInitialized = true;
   bool _isCameraInitialized = false;
 
@@ -33,14 +36,14 @@ class _CameraAppState extends State<CameraApp> {
     // Initialize cameras
     _initializeCameras().then((_) {
       // Use the first camera from the list
-      controller = CameraController(_cameras[0], ResolutionPreset.max);
-      controller.initialize().then((_) {
+      _controller = CameraController(_cameras[0], ResolutionPreset.max);
+      _initializeControllerFuture = _controller.initialize().then((_) {
         if (!mounted) {
           return;
         }
-        controller.startImageStream((CameraImage image) {
-          debugPrint('Image Stream');
-        });
+        // _controller.startImageStream((CameraImage image) {
+        //   // debugPrint('Image Stream');
+        // });
         setState(() {
           _isCameraInitialized = true;
         });
@@ -66,7 +69,7 @@ class _CameraAppState extends State<CameraApp> {
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -80,12 +83,12 @@ class _CameraAppState extends State<CameraApp> {
         ),
       );
     }
-    // return CameraPreview(controller);
+    // return CameraPreview(_controller);
 
     return Stack(
       fit: StackFit.expand,
       children: [
-        CameraPreview(controller),
+        CameraPreview(_controller),
         // Container(
         //   color: Colors.white.withOpacity(0.7),
         // ),
@@ -219,7 +222,21 @@ class _CameraAppState extends State<CameraApp> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
-                  onTap: () => {},
+                  onTap: () async {
+                    try {
+                      await _initializeControllerFuture;
+
+                      final image = await ImagePicker().pickImage(
+                        source: ImageSource.gallery,
+                      );
+                      if (image != null) {
+                        await Cloth().add(image.path, 'note', 'base',
+                            Season.spring, 'colorType', Style.casual);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -242,7 +259,22 @@ class _CameraAppState extends State<CameraApp> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => {},
+                  onTap: () async {
+                    // TODO: Capture the image
+                    try {
+                      // Ensure that the camera is initialized.
+                      await _initializeControllerFuture;
+
+                      // Attempt to take a picture and then get the location
+                      // where the image file is saved.
+                      final image = await _controller.takePicture();
+                      await Cloth().add(image.path, 'note', 'base',
+                          Season.spring, 'colorType', Style.casual);
+                    } catch (e) {
+                      // If an error occurs, log the error to the console.
+                      print(e);
+                    }
+                  },
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
