@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wearwizard/login/login_page.dart';
 import '../wearwizard_theme.dart';
-
+import 'package:wearwizard/wear_wizard/login/login_page.dart';
 // 动态项
 class MyPostItem extends StatelessWidget {
   final List<String> imageUrlList;

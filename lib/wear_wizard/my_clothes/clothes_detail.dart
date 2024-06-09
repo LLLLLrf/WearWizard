@@ -36,9 +36,32 @@ class _ClothesDetailState extends State<ClothesDetail> {
     DropDownItem(text: "Outerwear", data: 2),
     DropDownItem(text: "Accessories", data: 3)
   ];
-  List<DropDownItem> items2 = [];
-  List<DropDownItem> items3 = [];
-  List<DropDownItem> items4 = [];
+  List<DropDownItem> items2 = [
+    DropDownItem(text:"T-shirt",data:0),
+    DropDownItem(text:"Shirt",data:1),
+    DropDownItem(text:"Sweater",data:2),
+    DropDownItem(text:"Coat",data:3),
+  ];
+  List<DropDownItem> items3 = [
+    DropDownItem(text: "Spring", data: 0),
+    DropDownItem(text: "Summer", data: 1),
+    DropDownItem(text: "Autumn", data: 2),
+    DropDownItem(text: "Winter", data: 3),
+  ];
+  List<DropDownItem> items4 = [
+    DropDownItem(text: "White", data: 0),
+    DropDownItem(text: "Black", data: 1),
+    DropDownItem(text: "Red", data: 2),
+    DropDownItem(text: "Blue", data: 3),
+    DropDownItem(text: "Yellow", data: 4),
+    DropDownItem(text: "Green", data: 5),
+    DropDownItem(text: "Purple", data: 6),
+    DropDownItem(text: "Pink", data: 7),
+    DropDownItem(text: "Orange", data: 8),
+    DropDownItem(text: "Brown", data: 9),
+    DropDownItem(text: "Grey", data: 10),
+    DropDownItem(text: "Others", data: 11),
+  ];
 
   bool _landscape = false;
 
@@ -49,49 +72,21 @@ class _ClothesDetailState extends State<ClothesDetail> {
     'Accessories'
   ];
   // final List<String> ClothesList = ['内搭', '下装', '外套', '饰品'];
-
   List<String> clothesPic = [];
+  String clothesType = 'Base';
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () async {
       await setupData();
-      setState(() {});
+      setState(() {
+        clothesType = ClothesList[widget.index];
+      });
     });
   }
 
   Future<void> setupData() async {
-    // items1 = List.generate(
-    //   6,
-    //   (index) => DropDownItem(
-    //     text: "Single Item $index",
-    //     data: index,
-    //   ),
-    // );
-    items2 = List.generate(
-      8,
-      (index) => DropDownItem(
-        text: "Multi Item $index",
-        data: index,
-      ),
-    );
-    items3 = List.generate(
-      10,
-      (index) => DropDownItem(
-        text: "Single Item $index",
-        icon: const Icon(Icons.ac_unit),
-        activeIcon: const Icon(Icons.ac_unit),
-        data: index,
-      ),
-    );
-    items4 = List.generate(
-      12,
-      (index) => DropDownItem(
-        text: "Multi Item $index",
-        data: index,
-      ),
-    );
 
     var clothes = await Cloth()
         .getClothesByCategory(CategoryType.values[widget.index], 1, 10);
@@ -103,6 +98,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -116,7 +112,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
-                  'My ${ClothesList[widget.index]}',
+                  'My ${clothesType}',
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
@@ -182,6 +178,10 @@ class _ClothesDetailState extends State<ClothesDetail> {
                         headerIndex: 0,
                         onDropDownHeaderUpdate:
                             (List<DropDownItem> checkedItems) {
+                            setState(() {
+                              clothesType = checkedItems[0].text.toString();
+                            });
+                            print(clothesType);
                           return DropDownHeaderStatus(
                             text: checkedItems
                                 .map((e) => e.text)
@@ -190,6 +190,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
                             highlight: checkedItems.isNotEmpty,
                           );
                         },
+                            
                       ),
                       DropDownListView(
                         controller: dropDownController,
@@ -209,7 +210,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
                       ),
                       DropDownGridView(
                         controller: dropDownController,
-                        crossAxisCount: 3,
+                        crossAxisCount: 2,
                         boxStyle: const DropDownBoxStyle(
                           padding: EdgeInsets.all(16),
                         ),
@@ -234,7 +235,7 @@ class _ClothesDetailState extends State<ClothesDetail> {
                       ),
                       DropDownGridView(
                         controller: dropDownController,
-                        crossAxisCount: 3,
+                        crossAxisCount: 4,
                         boxStyle: const DropDownBoxStyle(
                           padding: EdgeInsets.all(16),
                         ),

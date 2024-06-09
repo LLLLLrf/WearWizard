@@ -363,9 +363,9 @@ class ClothesList extends StatefulWidget {
 
 class _ClothesListState extends State<ClothesList> {
   List<String> images = [
-    "assets/closet/BaseBG.png",
     "assets/closet/OuterwearBG.jpg",
-    "assets/closet/BaseBG.png",
+    "assets/closet/OuterwearBG.jpg",
+    "assets/closet/OuterwearBG.jpg",
     "assets/closet/OuterwearBG.jpg",
   ];
 
@@ -502,7 +502,7 @@ class _ClothesCarouselState extends State<ClothesCarousel> {
                     // height: 440,
                     // width: 330,
                     child: Image.asset(
-                      "assets/closet/BaseBG.png",
+                      "assets/closet/OuterwearBG.jpg",
                       fit: BoxFit.cover,
                     ),
                   ),

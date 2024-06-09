@@ -6,7 +6,6 @@ import 'package:wearwizard/app_theme.dart';
 import 'package:wearwizard/wear_wizard/wearwizard_home_screen.dart';
 import 'package:localstorage/localstorage.dart';
 
-// flutter emulator --launch Pixel_6_Pro_API_33
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -41,9 +40,6 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       home: const WearWizardHomeScreen(),
-      // routes:{
-
-      // },
     );
   }
 }
@@ -59,3 +55,4 @@ class HexColor extends Color {
     return int.parse(hexColor, radix: 16);
   }
 }
+
