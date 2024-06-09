@@ -4,9 +4,12 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io';
 import 'package:wearwizard/app_theme.dart';
 import 'package:wearwizard/wear_wizard/wearwizard_home_screen.dart';
+import 'package:wearwizard/wear_wizard/localstorage.dart';
+
 // flutter emulator --launch Pixel_6_Pro_API_33
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.init();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
     return MaterialApp(
-      title: 'Flutter UI',
+      title: 'Wear Wizard',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

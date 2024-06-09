@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
         // useMaterial3: true,
         textTheme: Theme.of(context)
             .textTheme
-            .apply(decorationColor: Color.fromARGB(255, 148, 169, 255)),
+            .apply(decorationColor: const Color.fromARGB(255, 148, 169, 255)),
         inputDecorationTheme: const InputDecorationTheme(
           prefixIconColor: Colors.black54,
           suffixIconColor: Colors.black54,
@@ -98,14 +98,14 @@ class _LoginScreenState extends State<LoginScreen> {
   /// You can also set some additional display options such as [showLabelTexts].
   LoginViewTheme get _mobileTheme => LoginViewTheme(
         // showLabelTexts: false,
-        backgroundColor: Color.fromARGB(255, 148, 169, 255),
+        backgroundColor: const Color.fromARGB(255, 148, 169, 255),
         formFieldBackgroundColor: Colors.white,
         logoSize: Size(MediaQuery.of(context).size.width * 0.5,
             MediaQuery.of(context).size.height * 0.3),
         formWidthRatio: 60,
         actionButtonStyle: ButtonStyle(
           foregroundColor:
-              MaterialStateProperty.all(Color.fromARGB(255, 148, 169, 255)),
+              MaterialStateProperty.all(const Color.fromARGB(255, 148, 169, 255)),
           textStyle: MaterialStateProperty.all(const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -133,12 +133,12 @@ class _LoginScreenState extends State<LoginScreen> {
           AnimatedComponent(component: LoginComponents.actionButton),
         ],
         textFormStyle:
-            TextStyle(color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
+            const TextStyle(color: Color.fromARGB(255, 39, 39, 39), fontSize: 15),
         welcomeTitleStyle:
-            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
+            const TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 40),
         welcomeDescriptionStyle:
-            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
-        forgotPasswordStyle: TextStyle(
+            const TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+        forgotPasswordStyle: const TextStyle(
             color: Color.fromARGB(255, 255, 255, 255),
             decorationColor: Color.fromARGB(255, 255, 255, 255)),
       );
