@@ -29,12 +29,21 @@ class _IdeasHomeState extends State<IdeasHome> {
   void initState() {
     super.initState();
     ApiService.get(
-      'user/getRecommendation?pageSize=30&pageNum=1',
+      'user/getRecommendation?pageSize=30&page=1',
     ).then((response){
+      if (jsonDecode(response.body)['code']!=20000) {
+        print(response.body);
+        ApiService.get('moment/refresh');
+        print('Failed to get data from server');
+        return;
+      }
       if (response.statusCode == 200 ) {
         reco_data=jsonDecode(response.body);
+        setState(() {
+          reco_data = reco_data;
+        });
         print('response: $reco_data');
-        print(reco_data['code']);
+        print('responsedata: ${reco_data['data'][0]['picList'].split(',')[0]}');
       } else {
         print('Failed to get data from server');
       }
@@ -42,6 +51,11 @@ class _IdeasHomeState extends State<IdeasHome> {
   }
   @override
   Widget build(BuildContext context) {
+    if (reco_data == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return SafeArea(
       child: Stack(
         children: [
@@ -91,7 +105,7 @@ class _IdeasHomeState extends State<IdeasHome> {
                 ),
               ),
               views: [
-                IdeasList(data:0),
+                IdeasList(data:reco_data),
                 IdeasList(data:1),
               ],
               onChange: (index) => print(index),
@@ -131,6 +145,12 @@ class IdeasList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (data == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    print(data);
     return Container(
       color: WearWizardTheme.background,
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -138,24 +158,25 @@ class IdeasList extends StatelessWidget {
         gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
-          // mainAxisSpacing: 8.0,
         ),
         itemBuilder: (BuildContext context, int index) {
           // Generate random text for demonstration
-          String text = 'The Test Data $index';
+          String text = data['data'][index]['title'] ?? 'Title';
           // Replace this with your actual image widget
           Widget imageWidget = Container(
-            height: 40 + 70 * (index % 3),
+            // height: 40 + 70 * (index % 3),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.primaries[index % Colors.primaries.length],
+              // color: Colors.primaries[index % Colors.primaries.length],
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
             ),
             alignment: Alignment.center,
-            child: Text('Image $index'),
+            child: Image.network(
+              "https://ww-1301781137.cos.ap-guangzhou.myqcloud.com${data['data'][index]['picList'].split(',')[0]}",
+            )
           );
           return InkWell(
             onTap: () => {
@@ -163,8 +184,8 @@ class IdeasList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const IdeasDetail(
-                          index: 0,
+                    builder: (context) => IdeasDetail(
+                          index: index,
                         )),
               )
             },
@@ -206,7 +227,7 @@ class IdeasList extends StatelessWidget {
             ),
           );
         },
-        itemCount: 100, // Change this to your actual item count
+        itemCount: data['data'].length, // Change this to your actual item count
       ),
     );
   }

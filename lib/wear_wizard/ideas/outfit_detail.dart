@@ -333,7 +333,7 @@ class _ClothesInfoState extends State<ClothesInfo>
                         ),
                       const Text(
                         // '黑白色',
-                        '黑白灰',
+                        'black&white',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14.0,

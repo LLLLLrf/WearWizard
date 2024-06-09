@@ -378,7 +378,7 @@ class _CommendListState extends State<CommendList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "The Title",
+                    "This is the Title",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18.0,
@@ -388,7 +388,7 @@ class _CommendListState extends State<CommendList> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "Main Content abcdefg abc aaaaa 123123 12123123123123123123123123123123123123123123123123",
+                    "Main Content here, testing1 testing2 testing3 testing4",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14.0,

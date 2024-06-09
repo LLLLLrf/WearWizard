@@ -144,7 +144,7 @@ class _UserScreenState extends State<UserScreen> {
                                           ),
                                         ),
                                         Text(
-                                          "用户签名",
+                                          "user signature",
                                           style: TextStyle(
                                             fontSize: 16,
                                           ),

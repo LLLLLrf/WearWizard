@@ -130,7 +130,7 @@ class _TodayRecommendState extends State<TodayRecommend> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                 Row(children: [
-                                  Text("阴",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold),),
+                                  Text("Cloudy",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold),),
                                   Text("22°",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold),),
                                   Text("/",style: TextStyle(fontSize: 18,color:Color.fromARGB(255, 200, 197, 197)),),
                                   Text("16°",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold),)
@@ -141,12 +141,12 @@ class _TodayRecommendState extends State<TodayRecommend> {
                                   children: [
                                   Column(children: [
                                     Icon(Icons.wb_sunny, color: Colors.yellow),
-                                    Text("适宜薄外套",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+                                    Text("Light Jacket",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
                                   ],),
                                   SizedBox(width: 18,),
                                   Column(children: [
                                     Icon(Icons.wb_sunny, color: Colors.yellow),
-                                    Text("做好防晒",style:TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+                                    Text("Sun Protection",style:TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
                                   ],),
                                 ],)
                               ],)
@@ -189,8 +189,8 @@ class _TodayRecommendState extends State<TodayRecommend> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("添加搭配",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
-                            Text("记录今日穿搭",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color:Colors.grey[800]),),
+                            const Text("Add New Outfit",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
+                            Text("Record today's outfit",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color:Colors.grey[800]),),
                           ],
                         )
                       ],
@@ -229,8 +229,8 @@ class _TodayRecommendState extends State<TodayRecommend> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("社区热门",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
-                            Text("探索潮流趋势",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color:Colors.grey[800]),),
+                            const Text("Community",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
+                            Text("Explore fashion trends",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color:Colors.grey[800]),),
                           ],
                         )
                       ],
