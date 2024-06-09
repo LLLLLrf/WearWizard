@@ -106,7 +106,7 @@ class _IdeasHomeState extends State<IdeasHome> {
               ),
               views: [
                 IdeasList(data:reco_data),
-                IdeasList(data:1),
+                IdeasList(data:reco_data),
               ],
               onChange: (index) => print(index),
             ),
