@@ -17,11 +17,11 @@ class LoginPage extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 242, 243, 248),
         colorScheme: const ColorScheme.light(
-            primary: Color.fromARGB(255, 148, 169, 255)),
+            primary: Color.fromARGB(255, 0, 182, 240)),
         // useMaterial3: true,
         textTheme: Theme.of(context)
             .textTheme
-            .apply(decorationColor: const Color.fromARGB(255, 148, 169, 255)),
+            .apply(decorationColor: const Color.fromARGB(255, 0, 182, 240)),
         inputDecorationTheme: const InputDecorationTheme(
           prefixIconColor: Colors.black54,
           suffixIconColor: Colors.black54,
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
       loginMobileTheme: _mobileTheme,
       loginTexts: _loginTexts,
       emailValidator:
-          ValidatorModel(validatorCallback: (String? email) => '未找到此用户'),
+          ValidatorModel(validatorCallback: (String? email) => 'Email format error'),
       initialMode: currentMode,
       onAuthModeChange: (AuthMode newMode) async {
         currentMode = newMode;
@@ -98,24 +98,24 @@ class _LoginScreenState extends State<LoginScreen> {
   /// You can also set some additional display options such as [showLabelTexts].
   LoginViewTheme get _mobileTheme => LoginViewTheme(
         // showLabelTexts: false,
-        backgroundColor: const Color.fromARGB(255, 148, 169, 255),
+        backgroundColor: const Color.fromARGB(255, 0, 182, 240),
         formFieldBackgroundColor: Colors.white,
         logoSize: Size(MediaQuery.of(context).size.width * 0.5,
             MediaQuery.of(context).size.height * 0.3),
         formWidthRatio: 60,
         actionButtonStyle: ButtonStyle(
           foregroundColor:
-              MaterialStateProperty.all(const Color.fromARGB(255, 148, 169, 255)),
+              MaterialStateProperty.all(const Color.fromARGB(255, 0, 182, 240)),
           textStyle: MaterialStateProperty.all(const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 148, 169, 255))),
+              color: Color.fromARGB(255, 0, 182, 240))),
         ),
         changeActionButtonStyle: ButtonStyle(
           textStyle: MaterialStateProperty.all(const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 148, 169, 255))),
+              color: Color.fromARGB(255, 0, 182, 240))),
         ),
         animatedComponentOrder: const <AnimatedComponent>[
           AnimatedComponent(
