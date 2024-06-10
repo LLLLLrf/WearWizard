@@ -17,7 +17,8 @@ class ApiService {
   static Future<http.Response> post(String endpoint,
       {Map<String, dynamic>? body}) async {
     var cookie = localStorage.getItem('cookie');
-    cookie = endpoint == 'user/login' ? '' : cookie;
+    var whiteList = ['user/login', 'user/register'];
+    cookie = whiteList.contains(endpoint) ? '' : cookie;
     return http.post(
       Uri.parse('$_baseUrl$endpoint'),
       headers: <String, String>{

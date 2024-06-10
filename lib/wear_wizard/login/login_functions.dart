@@ -23,7 +23,7 @@ class LoginFunctions {
       print(Navigator.canPop(context));
       if (Navigator.canPop(context)) {
         Navigator.pop(context);
-      }else{
+      } else {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => WearWizardHomeScreen()),
           (Route<dynamic> route) => false,
@@ -43,8 +43,8 @@ class LoginFunctions {
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),
       );
-        
     } catch (e) {
+      print(e);
       return 'Sign up failed';
     }
     return 'Sign up successful';

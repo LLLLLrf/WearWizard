@@ -47,6 +47,8 @@ class User {
         json['msg'] is String &&
         json['desc'] is String) {
       return User();
+    } else if (json['msg'] is String && json['desc'] is String) {
+      throw Exception(json['msg'] + ' Description: ' + json['desc']);
     } else {
       throw Exception('Failed to sign up user for API structure error');
     }
@@ -77,9 +79,8 @@ class User {
       throw Exception('Failed to login user for API structure error');
     }
   }
-  
 
-   factory User.getCurrentUser(Map<String, dynamic> json) {
+  factory User.getCurrentUser(Map<String, dynamic> json) {
     if (json['code'] == 20000 && json['data'] is Map<String, dynamic>) {
       var data = json['data'];
       return User(
@@ -104,7 +105,6 @@ class User {
       throw Exception('Failed to get user for API structure error');
     }
   }
-
 
   Future<User> signUp(String userName, String email, String password,
       String verifyPassword) async {
@@ -143,5 +143,4 @@ class User {
       throw Exception('Failed to get current user');
     }
   }
-
 }
