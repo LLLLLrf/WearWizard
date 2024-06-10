@@ -168,28 +168,31 @@ class _UserScreenState extends State<UserScreen> {
                                             MaterialPageRoute(builder: (context) => const LoginPage()),
                                           )
                                         },
-                                        child:Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              userName ?? "Login now",
-                                              style: userName == null
-                                                ? const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xFF00B6F0),
-                                                  )
-                                                : const TextStyle(
-                                                    fontSize: 20,
-                                                  ),
-                                            ),
-                                            Text(
-                                              selfIntro ?? "user self intro",
-                                              style: const TextStyle(
-                                                fontSize: 16,
+                                        child:Container(
+                                          color:WearWizardTheme.nearlyWhite,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                userName ?? "Login now",
+                                                style: userName == null
+                                                  ? const TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color(0xFF00B6F0),
+                                                    )
+                                                  : const TextStyle(
+                                                      fontSize: 20,
+                                                    ),
                                               ),
-                                            ),
-                                          ],
+                                              Text(
+                                                selfIntro ?? "user self intro",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

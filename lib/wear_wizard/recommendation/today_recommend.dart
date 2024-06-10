@@ -189,7 +189,7 @@ class _TodayRecommendState extends State<TodayRecommend> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Add New Outfit",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
+                            const Text(" Outfit",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color:Color.fromARGB(255, 90, 90, 90)),),
                             Text("Record today's outfit",style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color:Colors.grey[800]),),
                           ],
                         )
