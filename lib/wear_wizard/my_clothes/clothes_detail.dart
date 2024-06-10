@@ -10,7 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import '../wearwizard_theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
-// import '../components/camera_page.dart';
+import '../components/camera_page.dart';
 
 import 'package:wearwizard/services/cloth_service.dart';
 
@@ -323,7 +323,14 @@ class ClothesItemList extends StatelessWidget {
                 color: Colors.white,
                 child: InkWell(
                   onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CameraApp(),
+                      ),
+                    ),
                     print("add new clothes"),
+
                   },
                   child: Container(
                     decoration: BoxDecoration(
