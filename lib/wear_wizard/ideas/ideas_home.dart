@@ -26,6 +26,7 @@ class _IdeasHomeState extends State<IdeasHome> {
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
   var reco_data;
+  var foll_data;
   void initState() {
     super.initState();
     ApiService.get(
@@ -35,15 +36,35 @@ class _IdeasHomeState extends State<IdeasHome> {
         print(response.body);
         ApiService.get('moment/refresh');
         print('Failed to get data from server');
-        return;
       }
       if (response.statusCode == 200 ) {
+        ApiService.get('moment/refresh');
         reco_data=jsonDecode(response.body);
         setState(() {
           reco_data = reco_data;
         });
         print('response: $reco_data');
         print('responsedata: ${reco_data['data'][0]['picList'].split(',')[0]}');
+      } else {
+        print('Failed to get data from server');
+      }
+    });
+    ApiService.get(
+      'moment/getFollowed?pageSize=30&page=1',
+    ).then((response){
+      if (jsonDecode(response.body)['code']!=20000) {
+        print(response.body);
+        ApiService.get('moment/refresh');
+        print('Failed to get data from server');
+      }
+      if (response.statusCode == 200 ) {
+        ApiService.get('moment/refresh');
+        foll_data=jsonDecode(response.body);
+        setState(() {
+          foll_data = foll_data;
+        });
+        print('response: $foll_data');
+        print('responsedata: ${foll_data['data'][0]['picList'].split(',')[0]}');
       } else {
         print('Failed to get data from server');
       }
@@ -75,7 +96,7 @@ class _IdeasHomeState extends State<IdeasHome> {
                 ),
               ],
               tabBarProperties: TabBarProperties(
-                width: screenWidth - 260,
+                width: screenWidth*0.4,
                 background: Container(
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(0, 255, 255, 255),
@@ -95,7 +116,7 @@ class _IdeasHomeState extends State<IdeasHome> {
                 ),
                 labelColor: Colors.black,
                 labelStyle: const TextStyle(
-                  fontSize: 17.0,
+                  fontSize: 15.0,
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedLabelColor: Colors.grey[400],
@@ -148,6 +169,16 @@ class IdeasList extends StatelessWidget {
     if (data == null) {
       return const Center(
         child: CircularProgressIndicator(),
+      );
+    }
+    if (data['data']==null){
+      return Center(
+        child:Text("No data yet")
+      );
+    }
+    if(data['code']==40001){
+      return Center(
+        child:Text('No data was found, maybe try again after login')
       );
     }
     print(data);

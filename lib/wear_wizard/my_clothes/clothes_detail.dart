@@ -10,6 +10,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import '../wearwizard_theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
+// import '../components/camera_page.dart';
 
 import 'package:wearwizard/services/cloth_service.dart';
 
@@ -321,7 +322,9 @@ class ClothesItemList extends StatelessWidget {
               child: Material(
                 color: Colors.white,
                 child: InkWell(
-                  onTap: () => {print("add new clothes")},
+                  onTap: () => {
+                    print("add new clothes"),
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
