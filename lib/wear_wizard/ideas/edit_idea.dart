@@ -19,6 +19,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
 import 'package:wearwizard/services/api_http.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class EditIdea extends StatefulWidget {
@@ -50,7 +51,12 @@ class _EditIdeaState extends State<EditIdea> {
     print('Title: $title');
     print('Content: $content');
     print('urls: $imageUrls');
-    
+    if(title.isEmpty || imageUrls.isEmpty || content.isEmpty) {
+      Fluttertoast.showToast(
+        msg:"Please fill in the title, content and upload at least one picture."
+      );
+      return;
+    }
     // 发布内容
     ApiService.post(
       'moment/publish',
