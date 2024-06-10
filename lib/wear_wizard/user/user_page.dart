@@ -139,7 +139,7 @@ class _UserScreenState extends State<UserScreen> {
                         margin: const EdgeInsets.only(top: 260.0),
                         padding: const EdgeInsets.all(20),
                         decoration: const BoxDecoration(
-                          color: WearWizardTheme.nearlyWhite,
+                          color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30.0),
                             topRight: Radius.circular(30.0),
@@ -160,6 +160,7 @@ class _UserScreenState extends State<UserScreen> {
                                     ),
                                     const SizedBox(width: 20),
                                     Material(
+                                      color: Colors.white,
                                       child: InkWell(
                                         onTap: () => {
                                           Navigator.push(
