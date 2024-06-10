@@ -217,6 +217,7 @@ class IdeasList extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => IdeasDetail(
                           index: index,
+                          data: data['data'][index],
                         )),
               )
             },

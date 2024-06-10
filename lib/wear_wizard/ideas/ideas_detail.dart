@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,7 +14,8 @@ import 'package:flutter/cupertino.dart';
 class IdeasDetail extends StatefulWidget {
   final AnimationController? animationController;
   final int index;
-  const IdeasDetail({Key? key, this.animationController, required this.index})
+  var data;
+  IdeasDetail({Key? key, this.animationController, required this.index, required this.data})
       : super(key: key);
 
   @override
@@ -134,11 +137,11 @@ class _IdeasDetailState extends State<IdeasDetail> {
                   color: Colors.grey.withOpacity(0.2),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 50,
                 left: 0,
                 right: 0,
-                child: CommendList(),
+                child: CommendList(data: widget.data,),
               ),
               const BottomBar(),
             ],
@@ -335,7 +338,8 @@ class _BottomBarState extends State<BottomBar> {
 }
 
 class CommendList extends StatefulWidget {
-  const CommendList({Key? key}) : super(key: key);
+  var data;
+  CommendList({Key? key, required this.data}) : super(key: key);
 
   @override
   _CommendListState createState() => _CommendListState();
@@ -370,16 +374,17 @@ class _CommendListState extends State<CommendList> {
         itemCount: commends.length + 2,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return const ImageSwiper();
+            print(widget.data['picList'].split(','));
+            return ImageSwiper(imgList: widget.data['picList'].split(','));
           }else if(index == 1){
             return Container(
               padding: const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "This is the Title",
-                    style: TextStyle(
+                  Text(
+                    "${widget.data['title']}" ,
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -387,9 +392,9 @@ class _CommendListState extends State<CommendList> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    "Main Content here, testing1 testing2 testing3 testing4",
-                    style: TextStyle(
+                  Text(
+                    "${widget.data['content']}",
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14.0,
                       fontWeight: FontWeight.normal,
@@ -489,17 +494,18 @@ class _CommendListState extends State<CommendList> {
 }
 
 class ImageSwiper extends StatefulWidget {
-  const ImageSwiper({Key? key}) : super(key: key);
-
+  List<String> imgList;
+  ImageSwiper({Key? key, required this.imgList}) : super(key: key);
+  
   @override
   _ImageSwiperState createState() => _ImageSwiperState();
 }
 
 class _ImageSwiperState extends State<ImageSwiper> {
-  List<String> images = [
-    "assets/closet/OuterwearBG.jpg",
-    "assets/closet/OuterwearBG.jpg",
-  ];
+  // List<String> images = [
+  //   "assets/closet/OuterwearBG.jpg",
+  //   "assets/closet/OuterwearBG.jpg",
+  // ];
   final double screenWidth =
       MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
   final double screenHeight =
@@ -510,13 +516,14 @@ class _ImageSwiperState extends State<ImageSwiper> {
       width: screenWidth,
       height: screenWidth * 1.2,
       child: Swiper(
+          loop:false,
           pagination: const SwiperPagination(builder: SwiperPagination.dots),
-          itemCount: images.length,
+          itemCount: widget.imgList.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(images[index]),
+                  image: NetworkImage("https://ww-1301781137.cos.ap-guangzhou.myqcloud.com${widget.imgList[index]}"),
                   fit: BoxFit.cover,
                 ),
               ),
