@@ -16,6 +16,22 @@ enum ControlState {
   waiting,
 }
 
+Map<String, String> clothCategoryMap = {
+  "short sleeve top": "base",
+  "long sleeve top": "base",
+  "short sleeve outwear": "outerwear",
+  "long sleeve outwear": "outerwear",
+  "vest": "base",
+  "sling": "base",
+  "shorts": "bottom",
+  "trousers": "bottom",
+  "skirt": "bottom",
+  "short sleeve dress": "base",
+  "long sleeve dress": "base",
+  "vest dress": "base",
+  "sling dress": "base",
+};
+
 late List<CameraDescription> _cameras;
 final double screenWidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -188,7 +204,7 @@ class _CameraAppState extends State<CameraApp> {
                               await Cloth().add(
                                   _clothSpiltImage,
                                   _clothType,
-                                  'base',
+                                  clothCategoryMap[_clothType]!,
                                   Season.spring,
                                   'colorType',
                                   Style.casual);
