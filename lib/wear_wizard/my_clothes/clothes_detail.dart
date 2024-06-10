@@ -37,10 +37,10 @@ class _ClothesDetailState extends State<ClothesDetail> {
     DropDownItem(text: "Accessories", data: 3)
   ];
   List<DropDownItem> items2 = [
-    DropDownItem(text:"T-shirt",data:0),
-    DropDownItem(text:"Shirt",data:1),
-    DropDownItem(text:"Sweater",data:2),
-    DropDownItem(text:"Coat",data:3),
+    DropDownItem(text: "T-shirt", data: 0),
+    DropDownItem(text: "Shirt", data: 1),
+    DropDownItem(text: "Sweater", data: 2),
+    DropDownItem(text: "Coat", data: 3),
   ];
   List<DropDownItem> items3 = [
     DropDownItem(text: "Spring", data: 0),
@@ -87,9 +87,8 @@ class _ClothesDetailState extends State<ClothesDetail> {
   }
 
   Future<void> setupData() async {
-
     var clothes = await Cloth()
-        .getClothesByCategory(CategoryType.values[widget.index], 1, 20);
+        .getClothesByCategory(CategoryType.values[widget.index], 1, 40);
 
     for (var cloth in clothes) {
       clothesPic.add(cloth.picture);
@@ -98,7 +97,6 @@ class _ClothesDetailState extends State<ClothesDetail> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -178,10 +176,9 @@ class _ClothesDetailState extends State<ClothesDetail> {
                         headerIndex: 0,
                         onDropDownHeaderUpdate:
                             (List<DropDownItem> checkedItems) {
-                            setState(() {
-                              clothesType = checkedItems[0].text.toString();
-                            });
-                            print(clothesType);
+                          setState(() {
+                            clothesType = checkedItems[0].text.toString();
+                          });
                           return DropDownHeaderStatus(
                             text: checkedItems
                                 .map((e) => e.text)
@@ -190,7 +187,6 @@ class _ClothesDetailState extends State<ClothesDetail> {
                             highlight: checkedItems.isNotEmpty,
                           );
                         },
-                            
                       ),
                       DropDownListView(
                         controller: dropDownController,

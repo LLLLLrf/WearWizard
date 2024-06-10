@@ -20,7 +20,7 @@ class MyCloset extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '我的衣橱',
+                'My Wardrobe',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -35,12 +35,13 @@ class MyCloset extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
-                  onTap:() => {
+                  onTap: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ClothesDetail(
-                        index:0,
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => const ClothesDetail(
+                                index: 0,
+                              )),
                     )
                   },
                   child: CustomWidget(
@@ -59,12 +60,13 @@ class MyCloset extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap:() => {
+                  onTap: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ClothesDetail(
-                        index:1,
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => const ClothesDetail(
+                                index: 1,
+                              )),
                     )
                   },
                   child: CustomWidget(
@@ -83,12 +85,13 @@ class MyCloset extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap:() => {
+                  onTap: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ClothesDetail(
-                        index:2,
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => const ClothesDetail(
+                                index: 2,
+                              )),
                     )
                   },
                   child: CustomWidget(
@@ -106,12 +109,13 @@ class MyCloset extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap:() => {
+                  onTap: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ClothesDetail(
-                        index:3,
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => const ClothesDetail(
+                                index: 3,
+                              )),
                     )
                   },
                   child: CustomWidget(

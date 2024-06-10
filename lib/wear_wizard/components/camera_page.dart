@@ -38,6 +38,14 @@ class _CameraAppState extends State<CameraApp> {
 
   ControlState _controlState = ControlState.waiting;
 
+  String _clothType = 'negative';
+
+  double _clothConfidence = 0.0;
+
+  Rect _clothRect = Rect.zero;
+
+  String _clothSpiltImage = '';
+
   @override
   void initState() {
     super.initState();
@@ -49,12 +57,13 @@ class _CameraAppState extends State<CameraApp> {
         if (!mounted) {
           return;
         }
-        // _controller.startImageStream((CameraImage image) {
-        //   // debugPrint('Image Stream');
-        // });
         setState(() {
           _isCameraInitialized = true;
           _controlState = ControlState.stream;
+          _clothType = 'negative';
+          _clothConfidence = 0.0;
+          _clothRect = Rect.zero;
+          _clothSpiltImage = '';
         });
       }).catchError((Object e) {
         if (e is CameraException) {
@@ -102,26 +111,34 @@ class _CameraAppState extends State<CameraApp> {
         //   color: Colors.white.withOpacity(0.7),
         // ),
 
-        if (_controlState == ControlState.capture)
+        if (_controlState == ControlState.capture ||
+            _controlState == ControlState.waiting)
           CustomPaint(
             size: const Size(double.infinity, double.infinity),
             painter: BackgroundPainter(),
           ),
-        if (_controlState == ControlState.capture)
-          // 中间的内容
+        if (_controlState == ControlState.capture && _clothSpiltImage != '')
+          // show spilt image
+          Positioned(
+            child: Image.network(
+              _clothSpiltImage,
+              fit: BoxFit.contain,
+            ),
+          ),
+        if (_controlState == ControlState.capture && _clothSpiltImage == '')
           Center(
             child: Container(
               alignment: Alignment.center,
               child: const Text(
-                "Scanner",
+                "No Cloth Detected",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: 30.0,
                 ),
               ),
             ),
           ),
-        if (_controlState == ControlState.capture)
+        if (_controlState == ControlState.capture && _clothSpiltImage != '')
           // 半透明蓝色矩形
           Positioned(
             top: MediaQuery.of(context).size.height * 0.2 - 40, // 在挖空矩形上方40个像素
@@ -141,22 +158,19 @@ class _CameraAppState extends State<CameraApp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: const Text(
-                      "上衣-98%",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ),
+                      margin: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        '$_clothType ${(_clothConfidence * 100).toStringAsFixed(0)}%',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                          decoration: TextDecoration.none,
+                        ),
+                      )),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
-                    width: MediaQuery.of(context).size.width *
-                        0.6 *
-                        0.52, // 宽度的20%
+                    width:
+                        MediaQuery.of(context).size.width * 0.6 * 0.1, // 宽度的20%
                     height: 26,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -169,25 +183,41 @@ class _CameraAppState extends State<CameraApp> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () => {print('Add to closet')},
+                          onTap: () async {
+                            try {
+                              await Cloth().add(
+                                  _clothSpiltImage,
+                                  _clothType,
+                                  'base',
+                                  Season.spring,
+                                  'colorType',
+                                  Style.casual);
+                              Navigator.pop(context);
+                            } catch (e) {
+                              print(e);
+                              setState(() {
+                                _controlState = ControlState.stream;
+                              });
+                            }
+                          },
                           child: const Icon(
                             Icons.add_circle,
                             size: 24,
                             color: Color.fromARGB(255, 106, 171, 225),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 8),
-                          height: 26,
-                          child: const Text(
-                            "添加到衣柜",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 106, 171, 225),
-                              fontSize: 16.0,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   margin: const EdgeInsets.only(right: 8),
+                        //   height: 26,
+                        //   child: const Text(
+                        //     "ADD",
+                        //     style: TextStyle(
+                        //       color: Color.fromARGB(255, 106, 171, 225),
+                        //       fontSize: 16.0,
+                        //       decoration: TextDecoration.none,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -250,11 +280,43 @@ class _CameraAppState extends State<CameraApp> {
                         source: ImageSource.gallery,
                       );
                       if (image != null) {
-                        await Cloth().add(image.path, 'note', 'base',
-                            Season.spring, 'colorType', Style.casual);
+                        // await Cloth().add(image.path, 'note', 'base',
+                        //     Season.spring, 'colorType', Style.casual);
+
+                        setState(() {
+                          _controlState = ControlState.waiting;
+                        });
+
+                        var result = await Cloth().spilt(image.path);
+
+                        await _controller.pausePreview();
+
+                        setState(() {
+                          _controlState = ControlState.capture;
+                          if (result['count'] == 0) {
+                            _clothType = 'negative';
+                            _clothConfidence = 0.0;
+                            _clothRect = Rect.zero;
+                            _clothSpiltImage = '';
+                          } else {
+                            _clothType = result['objects'][0]['label'];
+                            _clothConfidence = result['objects'][0]['prob'];
+                            _clothRect = Rect.fromLTWH(
+                              result['objects'][0]['rect']['x'],
+                              result['objects'][0]['rect']['y'],
+                              result['objects'][0]['rect']['width'],
+                              result['objects'][0]['rect']['height'],
+                            );
+                            _clothSpiltImage = result['objects'][0]['image'];
+                          }
+                        });
                       }
                     } catch (e) {
                       print(e);
+                      setState(() {
+                        _controlState = ControlState.stream;
+                      });
+                      _controller.resumePreview();
                     }
                   },
                   child: Stack(
@@ -288,11 +350,31 @@ class _CameraAppState extends State<CameraApp> {
                       // where the image file is saved.
                       final image = await _controller.takePicture();
                       await _controller.pausePreview();
-                      await Cloth().add(image.path, 'note', 'base',
-                          Season.spring, 'colorType', Style.casual);
+                      setState(() {
+                        _controlState = ControlState.waiting;
+                      });
+                      // await Cloth().add(image.path, 'note', 'base',
+                      //     Season.spring, 'colorType', Style.casual);
+                      var result = await Cloth().spilt(image.path);
 
                       setState(() {
                         _controlState = ControlState.capture;
+                        if (result['count'] == 0) {
+                          _clothType = 'negative';
+                          _clothConfidence = 0.0;
+                          _clothRect = Rect.zero;
+                          _clothSpiltImage = '';
+                        } else {
+                          _clothType = result['objects'][0]['label'];
+                          _clothConfidence = result['objects'][0]['prob'];
+                          _clothRect = Rect.fromLTWH(
+                            result['objects'][0]['rect']['x'],
+                            result['objects'][0]['rect']['y'],
+                            result['objects'][0]['rect']['width'],
+                            result['objects'][0]['rect']['height'],
+                          );
+                          _clothSpiltImage = result['objects'][0]['image'];
+                        }
                       });
                     } catch (e) {
                       // If an error occurs, log the error to the console.
@@ -300,6 +382,7 @@ class _CameraAppState extends State<CameraApp> {
                       setState(() {
                         _controlState = ControlState.stream;
                       });
+                      _controller.resumePreview();
                     }
                   },
                   child: Stack(
